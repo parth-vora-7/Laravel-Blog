@@ -4,8 +4,9 @@ namespace App;
 
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Jenssegers\Mongodb\Eloquent\Model as Moloquent;
 
-class User extends Authenticatable
+class User extends Authenticatable 
 {
     use Notifiable;
 
