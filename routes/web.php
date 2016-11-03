@@ -22,11 +22,11 @@ Route::get('/home', 'HomeController@index');
 Route::get('test', function() {
 	$carbonObj = Carbon\Carbon::now();
 
-	$blog = new App\Blog();
+	/*$blog = new App\Blog();
 	$blog->title = 'Tthis is title';
 	$blog->text = 'Tthis is text';
 	$blog->posted_on = $carbonObj->toDateString();
-	$blog->save();
+	$blog->save();*/
 
 	return $blogs = App\Blog::all();
 });

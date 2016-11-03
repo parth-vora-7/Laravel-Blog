@@ -83,10 +83,10 @@ return [
             'host'     => env('DB_HOST', 'localhost'),
             'port'     => env('DB_PORT', 27017),
             'database' => env('DB_DATABASE', 'blog'),
-           // 'username' => env('DB_USERNAME', 'root'),
-           // 'password' => env('DB_PASSWORD', 'root'),
+            'username' => env('DB_USERNAME', 'root'),
+            'password' => env('DB_PASSWORD', 'root'),
             'options' => [
-                'database' => 'admin' // sets the authentication database required by mongo 3
+                //'database' => 'admin' // sets the authentication database required by mongo 3
             ]
         ],
     ],
