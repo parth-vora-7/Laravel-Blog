@@ -1,6 +1,6 @@
 <!-- Navigation -->
 <?php $darkbg = NULL; ?>
-@if(Request::path() == 'login')
+@if(in_array(Request::path(), ['login', 'register']))
 <?php $darkbg = 'dark-bg'; ?>
 @endif
 

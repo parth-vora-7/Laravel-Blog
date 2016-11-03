@@ -1,6 +1,6 @@
 <!-- Navigation -->
 <?php $darkbg = NULL; ?>
-@if(Request::path() == 'login')
+@if(in_array(Request::path(), ['login', 'register']))
 <?php $darkbg = 'dark-bg'; ?>
 @endif
 
@@ -36,6 +36,21 @@
                     <li>
                         <a class="page-scroll" href="#contact">Contact</a>
                     </li>
+                    @if(auth::guest())
+                    <li>
+                        <a class="page-scroll" href="login">Login</a>
+                    </li>
+                    <li>
+                        <a class="page-scroll" href="register">Signup</a>
+                    </li>
+                    @else
+                    <li>
+                        <a href="{{ url('/logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Logout</a>
+                        <form id="logout-form" action="{{ url('/logout') }}" method="POST" style="display: none;">
+                            {{ csrf_field() }}
+                        </form>
+                    </li>
+                    @endif
                 </ul>
             </div>
             <!-- /.navbar-collapse -->
