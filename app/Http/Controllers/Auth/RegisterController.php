@@ -82,6 +82,7 @@ class RegisterController extends Controller
             'about_me' => $data['about_me'],
             'date_of_birth' => $data['date_of_birth'],
             'profile_pic' => $avtar_file,
+            'deleted_at' => NULL
         ]);
     }
 }

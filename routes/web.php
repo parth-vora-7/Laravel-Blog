@@ -26,7 +26,7 @@ Route::get('team', ['as' => 'team', 'uses' => 'BasicpageController@getTeam']);
 Route::get('contact', ['as' => 'contact', 'uses' => 'BasicpageController@getContact']);
 
 Route::get('test', function() {
-	dd(App\User::truncate());
+	dd(App\User::destroy('581c9366b3f3ba475d2c4c84'));
 
 	$carbonObj = Carbon\Carbon::now();
 
