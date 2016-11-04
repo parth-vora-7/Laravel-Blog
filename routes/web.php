@@ -25,7 +25,12 @@ Route::get('about', ['as' => 'about', 'uses' => 'BasicpageController@getAbout'])
 Route::get('team', ['as' => 'team', 'uses' => 'BasicpageController@getTeam']);
 Route::get('contact', ['as' => 'contact', 'uses' => 'BasicpageController@getContact']);
 
+Route::get('auth/facebook', ['as' => 'auth.facebook', 'uses' => 'SocialAuthController@redirectToFacebook']);
+Route::get('auth/facebook/callback', ['as' => 'auth.facebook.callback', 'uses' => 'SocialAuthController@returnFromFacebook']);
+
+
 Route::get('test', function() {
+	dd(URL::route('auth.facebook.callback'));
 	dd(App\User::truncate());
 
 	$carbonObj = Carbon\Carbon::now();

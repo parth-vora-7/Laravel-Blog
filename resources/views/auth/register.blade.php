@@ -81,9 +81,9 @@
                             <div class="form-group{{ $errors->has('gender') ? ' has-error' : '' }}">
                                 <label for="gender" class="col-md-4 control-label">Gender</label>
                                 <div class="col-md-6">
-                                    <label class="radio-inline">{!! Form::radio('gender', 'Male', TRUE) !!}Male</label>
+                                    <label class="radio-inline">{!! Form::radio('gender', 'male', TRUE) !!}Male</label>
 
-                                    <label class="radio-inline">{!! Form::radio('gender', 'Female', False) !!}
+                                    <label class="radio-inline">{!! Form::radio('gender', 'female', False) !!}
                                         Female</label>
 
                                     @if ($errors->has('gender'))
@@ -155,14 +155,14 @@
                                 </div>
                             </div>
 
-                            <div class="form-group{{ $errors->has('profile_pic') ? ' has-error' : '' }}">
-                                <label for="profile_pic" class="col-md-4 control-label">Profile pic</label>
+                            <div class="form-group{{ $errors->has('avatar') ? ' has-error' : '' }}">
+                                <label for="avatar" class="col-md-4 control-label">Profile pic</label>
                                 <div class="col-md-6">
-                                    {!! Form::file('profile_pic', ['class' => 'form-control']) !!}
+                                    {!! Form::file('avatar', ['class' => 'form-control']) !!}
 
-                                    @if ($errors->has('profile_pic'))
+                                    @if ($errors->has('avatar'))
                                         <span class="help-block">
-                                <strong>{{ $errors->first('profile_pic') }}</strong>
+                                <strong>{{ $errors->first('avatar') }}</strong>
                             </span>
                                     @endif
                                 </div>
@@ -171,8 +171,13 @@
                             <div class="form-group">
                                 <div class="col-md-6 col-md-offset-4">
                                     {!! Form::submit('Register', ['class' => 'btn btn-primary']) !!}
+                                    <a href="{{ url('password/reset') }}">Reset password</a>
                                 </div>
                             </div>
+
+                            <a href="{{ url('auth/facebook') }}">Facebook</a>
+
+
 
                             {!! Form::close() !!}
                         </div>

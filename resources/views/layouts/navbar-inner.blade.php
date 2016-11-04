@@ -31,10 +31,10 @@
             </li>
             @if(auth::guest())
             <li>
-                <a href="login">Login</a>
+                <a href="{{ url('login') }}">Login</a>
             </li>
             <li>
-                <a href="register">Signup</a>
+                <a href="{{ url('register') }}">Signup</a>
             </li>
             @else
             <li>

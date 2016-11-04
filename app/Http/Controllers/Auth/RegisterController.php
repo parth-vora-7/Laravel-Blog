@@ -52,12 +52,12 @@ class RegisterController extends Controller
             'email' => 'required|email|max:255|unique:users',
             'password' => 'required|min:6|confirmed',
             'contact_no' => 'required|digits:10',
-            'gender' => 'required|in:Male,Female',
+            'gender' => 'required|in:male,female',
             'country' => 'required',
             'hobbies' => 'required',
             'about_me' => 'required|min:6',
             'date_of_birth' => 'date',
-            'profile_pic' => 'required|image',
+            'avatar' => 'required|image',
         ]);
     }
 
@@ -69,10 +69,11 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-        $avtar_file = $data['profile_pic']->store('avatars');
+        $avtar_file = $data['avatar']->store('avatars');
 
         return User::create([
             'name' => $data['name'],
+            'username' => $data['name'],
             'email' => $data['email'],
             'password' => bcrypt($data['password']),
             'contact_no' => $data['contact_no'],
@@ -81,7 +82,9 @@ class RegisterController extends Controller
             'hobbies' => serialize($data['hobbies']),
             'about_me' => $data['about_me'],
             'date_of_birth' => $data['date_of_birth'],
-            'profile_pic' => $avtar_file,
+            'avatar' => $avtar_file,
+            'user_type' => 'blogger',
+            'registration_type' => 'conventional'
         ]);
     }
 }
