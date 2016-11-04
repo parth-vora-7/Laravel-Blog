@@ -15,16 +15,19 @@
                 <a href="#page-top"></a>
             </li>
             <li>
-                <a href="#portfolio">Portfolio</a>
+                <a href="{{ URL::route('services') }}">Services</a>
             </li>
             <li>
-                <a href="#about">About</a>
+                <a href="{{ URL::route('portfolio') }}">Portfolio</a>
             </li>
             <li>
-                <a href="#team">Team</a>
+                <a href="{{ URL::route('about') }}">About</a>
             </li>
             <li>
-                <a href="#contact">Contact</a>
+                <a href="{{ URL::route('team') }}">Team</a>
+            </li>
+            <li>
+                <a href="{{ URL::route('contact') }}">Contact</a>
             </li>
             @if(auth::guest())
             <li>

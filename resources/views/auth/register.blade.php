@@ -110,16 +110,16 @@
                             <div class="form-group{{ $errors->has('hobbies') ? ' has-error' : '' }}">
                                 <label for="hobbies" class="col-md-4 control-label">Hobbies</label>
                                 <div class="col-md-6">
-                                    <label class="checkbox-inline">{!! Form::checkbox('hobbies', 'Playing cricket', NULL, ['class' => '']) !!}
+                                    <label class="checkbox-inline">{!! Form::checkbox('hobbies[]', 'Playing cricket', NULL, ['class' => '']) !!}
                                         Playing cricket</label>
-                                    <label class="checkbox-inline">{!! Form::checkbox('hobbies', 'Playing chess', NULL, ['class' => '']) !!}
+                                    <label class="checkbox-inline">{!! Form::checkbox('hobbies[]', 'Playing chess', NULL, ['class' => '']) !!}
                                         Playing chess</label>
                                     <br>
-                                    <label class="checkbox-inline">{!! Form::checkbox('hobbies', 'Internet surfing', NULL, ['class' => '']) !!}
+                                    <label class="checkbox-inline">{!! Form::checkbox('hobbies[]', 'Internet surfing', NULL, ['class' => '']) !!}
                                         Internet surfing</label>
-                                    <label class="checkbox-inline">{!! Form::checkbox('hobbies', 'Outing', NULL, ['class' => '']) !!}
+                                    <label class="checkbox-inline">{!! Form::checkbox('hobbies[]', 'Outing', NULL, ['class' => '']) !!}
                                         Outing</label>
-                                    <label class="checkbox-inline">{!! Form::checkbox('hobbies', 'Reading', NULL, ['class' => '']) !!}
+                                    <label class="checkbox-inline">{!! Form::checkbox('hobbies[]', 'Reading', NULL, ['class' => '']) !!}
                                         Reading</label>
                                     @if ($errors->has('hobbies'))
                                         <span class="help-block">

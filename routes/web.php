@@ -19,7 +19,15 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index');
 
+Route::get('services', ['as' => 'services', 'uses' => 'BasicpageController@getServices']);
+Route::get('portfolio', ['as' => 'portfolio', 'uses' => 'BasicpageController@getPortfolio']);
+Route::get('about', ['as' => 'about', 'uses' => 'BasicpageController@getAbout']);
+Route::get('team', ['as' => 'team', 'uses' => 'BasicpageController@getTeam']);
+Route::get('contact', ['as' => 'contact', 'uses' => 'BasicpageController@getContact']);
+
 Route::get('test', function() {
+	dd(App\User::truncate());
+
 	$carbonObj = Carbon\Carbon::now();
 
 	/*$blog = new App\Blog();
@@ -30,3 +38,5 @@ Route::get('test', function() {
 
 	return $blogs = App\Blog::all();
 });
+
+

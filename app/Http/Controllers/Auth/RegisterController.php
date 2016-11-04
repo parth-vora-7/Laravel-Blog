@@ -56,8 +56,8 @@ class RegisterController extends Controller
             'country' => 'required',
             'hobbies' => 'required',
             'about_me' => 'required|min:6',
+            'date_of_birth' => 'date',
             'profile_pic' => 'required|image',
-            'date_of_birth' => 'date'
         ]);
     }
 
@@ -69,10 +69,19 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
+        $avtar_file = $data['profile_pic']->store('avatars');
+
         return User::create([
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => bcrypt($data['password']),
+            'contact_no' => $data['contact_no'],
+            'gender' => $data['gender'],
+            'country' => $data['country'],
+            'hobbies' => serialize($data['hobbies']),
+            'about_me' => $data['about_me'],
+            'date_of_birth' => $data['date_of_birth'],
+            'profile_pic' => $avtar_file,
         ]);
     }
 }

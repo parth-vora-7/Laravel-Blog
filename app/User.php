@@ -11,7 +11,7 @@ use Illuminate\Foundation\Auth\Access\Authorizable;
 use Illuminate\Contracts\Auth\Authenticatable as AuthenticatableContract;
 use Illuminate\Contracts\Auth\Access\Authorizable as AuthorizableContract;
 use Illuminate\Contracts\Auth\CanResetPassword as CanResetPasswordContract;
-
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 use Jenssegers\Mongodb\Eloquent\Model as Eloquent;
 
@@ -20,7 +20,7 @@ class User extends Eloquent implements
     AuthorizableContract,
     CanResetPasswordContract
 {
-    use Notifiable, Authenticatable, Authorizable, CanResetPassword;
+    use Notifiable, Authenticatable, Authorizable, CanResetPassword, SoftDeletes;
 
     /**
      * The attributes that are mass assignable.
@@ -28,7 +28,7 @@ class User extends Eloquent implements
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password',
+        'name', 'email', 'password', 'contact_no', 'gender', 'country', 'hobbies', 'about_me', 'date_of_birth', 'profile_pic'
     ];
 
     /**
@@ -38,5 +38,23 @@ class User extends Eloquent implements
      */
     protected $hidden = [
         'password', 'remember_token',
+    ];
+
+    /**
+     * The attributes that should be casted to native types.
+     *
+     * @var array
+     */
+    protected $casts = [
+        'hobbies' => 'JSON',
+    ];
+
+    /**
+     * The attributes that should be mutated to dates.
+     *
+     * @var array
+     */
+    protected $dates = [
+        'date_of_birth', 'deleted_at'
     ];
 }
