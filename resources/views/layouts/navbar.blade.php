@@ -1,9 +1,14 @@
 <!-- Navigation -->
-<?php $darkbg = NULL; ?>
+<?php
+$darkbg = NULL;
+$isHome = NULL;
+?>
 @if(in_array(Request::path(), ['login', 'register']))
 <?php $darkbg = 'dark-bg'; ?>
 @endif
-
+@if(Request::path() == '/')
+<?php $isHome = TRUE; ?>
+@endif
 
     <nav id="mainNav" class="navbar navbar-default navbar-custom navbar-fixed-top {{$darkbg}}">
         <div class="container">
@@ -22,7 +27,7 @@
                         <a href="#page-top"></a>
                     </li>
                     <li>
-                        <a class="page-scroll" href="#services">Services</a>
+
                     </li>
                     <li>
                         <a class="page-scroll" href="#portfolio">Portfolio</a>
