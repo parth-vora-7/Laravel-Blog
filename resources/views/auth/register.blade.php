@@ -6,7 +6,7 @@
     <div class="row">
         <div class="col-md-8 col-md-offset-2">
             <div class="panel panel-default">
-                <div class="panel-heading">Register</div>
+                <div class="panel-heading">Registration</div>
                 <div class="panel-body">
 
                     {!! Form::open(['url' => 'register', 'method' => 'POST', 'files' => TRUE, 
@@ -65,6 +65,110 @@
                                 <strong>{{ $errors->first('password_confirmation') }}</strong>
                             </span>
                         @endif
+                        </div>
+                    </div>
+
+                    <div class="form-group{{ $errors->has('contact_no') ? ' has-error' : '' }}">
+                        <label for="contact_no" class="col-md-4 control-label">Contact no</label>
+
+                        <div class="col-md-6">
+                            {!! Form::number('contact_no', NULL, ['class' => 'form-control']) !!}
+
+                            @if ($errors->has('contact_no'))
+                                <span class="help-block">
+                                <strong>{{ $errors->first('contact_no') }}</strong>
+                            </span>
+                            @endif
+                        </div>
+                    </div>
+
+                    <div class="form-group{{ $errors->has('gender') ? ' has-error' : '' }}">
+                        <label for="gender" class="col-md-4 control-label">Gender</label>
+
+                        <div class="col-md-6">
+                            <label class="radio-inline">{!! Form::radio('gender', 'Male', TRUE) !!}Male</label>
+
+                            <label class="radio-inline">{!! Form::radio('gender', 'Female', False) !!}Female</label>
+
+                            @if ($errors->has('gender'))
+                                <span class="help-block">
+                                <strong>{{ $errors->first('gender') }}</strong>
+                            </span>
+                            @endif
+                        </div>
+                    </div>
+
+                    <div class="form-group{{ $errors->has('country') ? ' has-error' : '' }}">
+                        <label for="country" class="col-md-4 control-label">Country</label>
+
+                        <div class="col-md-6">
+                            {!! Form::select('country', ['India' => 'India', 'USA' => 'USA'], 1, ['class' => 'form-control']) !!}
+
+                            @if ($errors->has('country'))
+                                <span class="help-block">
+                                <strong>{{ $errors->first('country') }}</strong>
+                            </span>
+                            @endif
+                        </div>
+                    </div>
+
+                    <div class="form-group{{ $errors->has('hobbies') ? ' has-error' : '' }}">
+                        <label for="hobbies" class="col-md-4 control-label">Hobbies</label>
+
+                        <div class="col-md-6">
+                            <label class="checkbox-inline">{!! Form::checkbox('hobbies', 'Playing cricket', NULL, ['class' => '']) !!}Playing cricket</label>
+                            <label class="checkbox-inline">{!! Form::checkbox('hobbies', 'Playing chess', NULL, ['class' => '']) !!}Playing chess</label>
+                            <br>
+                            <label class="checkbox-inline">{!! Form::checkbox('hobbies', 'Internet surfing', NULL, ['class' => '']) !!}Internet surfing</label>
+                            <label class="checkbox-inline">{!! Form::checkbox('hobbies', 'Outing', NULL, ['class' => '']) !!}Outing</label>
+                            <label class="checkbox-inline">{!! Form::checkbox('hobbies', 'Reading', NULL, ['class' => '']) !!}Reading</label>
+                            @if ($errors->has('hobbies'))
+                                <span class="help-block">
+                                <strong>{{ $errors->first('hobbies') }}</strong>
+                            </span>
+                            @endif
+                        </div>
+                    </div>
+
+                    <div class="form-group{{ $errors->has('about_me') ? ' has-error' : '' }}">
+                        <label for="about_me" class="col-md-4 control-label">About me</label>
+
+                        <div class="col-md-6">
+                            {!! Form::textarea('about_me', NULL, ['class' => 'form-control']) !!}
+
+                            @if ($errors->has('about_me'))
+                                <span class="help-block">
+                                <strong>{{ $errors->first('about_me') }}</strong>
+                            </span>
+                            @endif
+                        </div>
+                    </div>
+
+                    <div class="form-group{{ $errors->has('date_of_birth') ? ' has-error' : '' }}">
+                        <label for="date_of_birth" class="col-md-4 control-label">Date of birth</label>
+
+                        <div class="col-md-6">
+                            {!! Form::date('date_of_birth', \Carbon\Carbon::now()) !!}
+
+                            @if ($errors->has('date_of_birth'))
+                                <span class="help-block">
+                                <strong>{{ $errors->first('date_of_birth') }}</strong>
+                            </span>
+                            @endif
+                        </div>
+                    </div>
+
+                    <div class="form-group{{ $errors->has('profile_pic') ? ' has-error' : '' }}">
+                        <label for="profile_pic" class="col-md-4 control-label">Profile pic</label>
+
+                        <div class="col-md-6">
+                            {!! Form::file('profile_pic', ['class' => 'form-control']) !!}
+
+                            @if ($errors->has('profile_pic'))
+                                <span class="help-block">
+                                <strong>{{ $errors->first('profile_pic') }}</strong>
+                            </span>
+                            @endif
                         </div>
                     </div>
 
