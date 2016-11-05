@@ -34,5 +34,9 @@ return [
         'key' => env('STRIPE_KEY'),
         'secret' => env('STRIPE_SECRET'),
     ],
-
+    'facebook' => [
+        'client_id' => '1820574464892682',
+        'client_secret' => 'e30504fd57f8b5f570fc39cd352dab5c',
+        'redirect' => 'http://blog.local/auth/facebook/callback', //URL::route('auth.facebook.callback')
+    ]
 ];

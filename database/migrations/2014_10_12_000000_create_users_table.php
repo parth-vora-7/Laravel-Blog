@@ -20,12 +20,12 @@ class CreateUsersTable extends Migration
             $table->string('email')->unique();
             $table->string('password');
             $table->string('contact_no');
-            $table->enum('gender', ['Male', 'Female']);
+            $table->enum('gender', ['male', 'female']);
             $table->string('country');
             $table->string('hobbies');
             $table->text('about_me');
             $table->date('date_of_birth');
-            $table->string('profile_pic');
+            $table->string('avatar');
             $table->rememberToken();
             $table->timestamps();
             $table->softDeletes();

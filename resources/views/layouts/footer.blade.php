@@ -33,17 +33,17 @@
     </footer>
     
     <!-- jQuery -->
-    <script src="js/jquery.min.js"></script>
+    <script src="{{ asset('js/jquery.min.js') }}"></script>
 
     <!-- Bootstrap Core JavaScript -->
-    <script src="js/bootstrap.min.js"></script>
+    <script src="{{ asset('js/bootstrap.min.js') }}"></script>
 
     <!-- Plugin JavaScript -->
-    <script src="js/jquery.easing.min.js"></script>
+    <script src="{{ asset('js/jquery.easing.min.js') }}"></script>
 
     <!-- Contact Form JavaScript -->
-    <script src="js/jqBootstrapValidation.js"></script>
-    <script src="js/contact_me.js"></script>
+    <script src="{{ asset('js/jqBootstrapValidation.js') }}"></script>
+    <script src="{{ asset('js/contact_me.js') }}"></script>
 
     <!-- Theme JavaScript -->
-    <script src="js/agency.min.js"></script>
+    <script src="{{ asset('js/agency.min.js') }}"></script>
