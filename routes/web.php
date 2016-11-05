@@ -44,6 +44,9 @@ Route::get('auth/bitbucket', ['as' => 'auth.bitbucket', 'uses' => 'SocialAuthCon
 Route::get('auth/bitbucket/callback', ['as' => 'auth.bitbucket.callback', 'uses' => 'SocialAuthController@returnFromBitbucket']);
 
 Route::get('test', function() {
+	dd(file_get_contents('https://avatars.githubusercontent.com/u/4241851?v=3'));
+
+	return;
 	dd(App\User::destroy('581c9366b3f3ba475d2c4c84'));
 
 	$carbonObj = Carbon\Carbon::now();

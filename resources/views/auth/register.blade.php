@@ -115,7 +115,7 @@
                                         <label class="checkbox-inline">{!! Form::checkbox('hobbies[]', 'Playing chess', NULL, ['class' => '']) !!} Playing chess</label>
                                                 <br>
                                         <label class="checkbox-inline">{!! Form::checkbox('hobbies[]', 'Internet surfing', NULL, ['class' => '']) !!}Internet surfing</label>
-                                        <label class="checkbox-inline">{!! Form::checkbox('hobbies[]', 'Outing', NULL, ['class' => '']) !!}</label>
+                                        <label class="checkbox-inline">{!! Form::checkbox('hobbies[]', 'Outing', NULL, ['class' => '']) !!}Outing</label>
                                         <label class="checkbox-inline">{!! Form::checkbox('hobbies[]', 'Reading', NULL, ['class' => '']) !!}Reading</label>
                             
                                         @if ($errors->has('hobbies'))

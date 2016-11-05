@@ -6,6 +6,8 @@ use App\User;
 use Validator;
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\RegistersUsers;
+use Image;
+use Storage;
 
 class RegisterController extends Controller
 {
@@ -69,7 +71,18 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-        $avtar_file = $data['avatar']->store('avatars');
+        $avatars_org_dir = 'public/avatars/origional';
+        $avatars_thumb_dir = 'public/avatars/300x600';
+
+        Storage::makeDirectory($avatars_org_dir);
+        Storage::makeDirectory($avatars_thumb_dir);
+
+        $avatar_file = $data['avatar']->store($avatars_org_dir);
+        
+        $avatar_file_to_crop = ltrim($avatar_file, 'public/');
+        $avatar_file_to_store = str_replace('origional', '300x600',$avatar_file_to_crop);
+
+        Image::make('storage/' . $avatar_file_to_crop)->resize(300, 600)->save('storage/' . $avatar_file_to_store);
 
         return User::create([
             'name' => $data['name'],
@@ -82,8 +95,9 @@ class RegisterController extends Controller
             'hobbies' => serialize($data['hobbies']),
             'about_me' => $data['about_me'],
             'date_of_birth' => $data['date_of_birth'],
-            'avatar' => $avtar_file,
+            'avatar' => $avatar_file_to_store,
             'user_type' => 'blogger',
+            'social_id' => NULL,
             'registration_type' => 'conventional',
             'deleted_at' => NULL
         ]);
