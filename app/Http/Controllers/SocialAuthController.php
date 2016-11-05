@@ -22,7 +22,6 @@ class SocialAuthController extends Controller
  		$user['email'] = $fb_user->user['email'];
  		$user['gender'] = $fb_user->user['gender'];
  		$user['avatar'] = $fb_user->avatar_original;
-
  		dd($user);
     }
 
@@ -67,7 +66,11 @@ class SocialAuthController extends Controller
     public function returnFromGithub()
     {
     	$github_user = Socialite::driver('github')->user();
-		dd($github_user);
+    	$user['id'] = $github_user->user['id'];
+ 		$user['name'] = $github_user->user['name'];
+ 		$user['email'] = $github_user->user['email'];
+ 		$user['avatar'] = $github_user->user['avatar_url'];
+ 		dd($user);
     }
 
     public function redirectToBitbucket()

@@ -55,8 +55,8 @@ return [
         'redirect' => 'http://blog.local/auth/linkedin/callback', //URL::route('auth.linkedin.callback')
     ],
     'github' => [
-        'client_id' => '',
-        'client_secret' => '',
+        'client_id' => 'a7aefed72342cce2d766',
+        'client_secret' => 'c062c16fa5f9db6b6e2cf744770935a1ec835083',
         'redirect' => 'http://blog.local/auth/github/callback', //URL::route('auth.github.callback')
     ],
     'bitbucket' => [
