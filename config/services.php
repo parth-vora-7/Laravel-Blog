@@ -60,8 +60,8 @@ return [
         'redirect' => 'http://blog.local/auth/github/callback', //URL::route('auth.github.callback')
     ],
     'bitbucket' => [
-        'client_id' => '',
-        'client_secret' => '',
+        'client_id' => 'wN3RJZeyDtnnSPStry',
+        'client_secret' => 'Fc93WEJCmeBhPkHnsYPdYSp8RSHtf3Ts',
         'redirect' => 'http://blog.local/auth/bitbucket/callback', //URL::route('auth.bitbucket.callback')
-    ]
+    ],
 ];

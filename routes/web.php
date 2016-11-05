@@ -44,7 +44,11 @@ Route::get('auth/bitbucket', ['as' => 'auth.bitbucket', 'uses' => 'SocialAuthCon
 Route::get('auth/bitbucket/callback', ['as' => 'auth.bitbucket.callback', 'uses' => 'SocialAuthController@returnFromBitbucket']);
 
 Route::get('test', function() {
-	dd(file_get_contents('https://avatars.githubusercontent.com/u/4241851?v=3'));
+	$file = 'https://avatars.githubusercontent.com/u/4241851?v=3';
+	$image_info = getimagesize($file);
+	echo $extension = image_type_to_extension($image_info[2]);
+
+	file_put_contents('storage/avatars/origional/'.rand() . $extension, file_get_contents($file));
 
 	return;
 	dd(App\User::destroy('581c9366b3f3ba475d2c4c84'));
