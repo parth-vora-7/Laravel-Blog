@@ -38,5 +38,30 @@ return [
         'client_id' => '1820574464892682',
         'client_secret' => 'e30504fd57f8b5f570fc39cd352dab5c',
         'redirect' => 'http://blog.local/auth/facebook/callback', //URL::route('auth.facebook.callback')
+    ],
+    'twitter' => [
+        'client_id' => '',
+        'client_secret' => '',
+        'redirect' => 'http://blog.local/auth/twitter/callback', //URL::route('auth.twitter.callback')
+    ],
+    'google' => [
+        'client_id' => '',
+        'client_secret' => '',
+        'redirect' => 'http://blog.local/auth/google/callback', //URL::route('auth.google.callback')
+    ],
+    'linkedin' => [
+        'client_id' => '',
+        'client_secret' => '',
+        'redirect' => 'http://blog.local/auth/linkedin/callback', //URL::route('auth.linkedin.callback')
+    ],
+    'github' => [
+        'client_id' => '',
+        'client_secret' => '',
+        'redirect' => 'http://blog.local/auth/github/callback', //URL::route('auth.github.callback')
+    ],
+    'bitbucket' => [
+        'client_id' => '',
+        'client_secret' => '',
+        'redirect' => 'http://blog.local/auth/bitbucket/callback', //URL::route('auth.bitbucket.callback')
     ]
 ];

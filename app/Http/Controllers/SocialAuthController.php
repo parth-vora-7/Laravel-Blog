@@ -25,4 +25,59 @@ class SocialAuthController extends Controller
 
  		dd($user);
     }
+
+    public function redirectToTwitter()
+    {
+    	 return Socialite::driver('twitter')->redirect();
+    }
+
+    public function returnFromTwitter()
+    {
+		$twitter_user = Socialite::driver('twitter')->user();
+		dd($twitter_user);
+    }
+
+    public function redirectToGoogle()
+    {
+    	 return Socialite::driver('google')->redirect();
+    }
+
+    public function returnFromGoogle()
+    {
+		$google_user = Socialite::driver('google')->user();
+		dd($google_user);
+    }
+
+    public function redirectToLinkedin()
+    {
+    	 return Socialite::driver('linkedin')->redirect();
+    }
+
+    public function returnFromLinkedin()
+    {
+		$linkedin_user = Socialite::driver('linkedin')->user();
+		dd($linkedin_user);
+    }
+
+    public function redirectToGithub()
+    {
+    	 return Socialite::driver('github')->redirect();
+    }
+
+    public function returnFromGithub()
+    {
+    	$github_user = Socialite::driver('github')->user();
+		dd($github_user);
+    }
+
+    public function redirectToBitbucket()
+    {
+    	 return Socialite::driver('bitbucket')->redirect();
+    }
+
+    public function returnFromBitbucket()
+    {
+    	$bitbucket_user = Socialite::driver('bitbucket')->user();
+		dd($bitbucket_user);
+    }
 }
