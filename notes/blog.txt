@@ -1,0 +1,43 @@
+1) Theme integration --
+2) User types
+- admin --
+- author (signup user) --
+3) Login, signup and reset password --
+4) Edit profile, change password pages
+4) Blog add page (RTE)
+- My blog page (edit and delete(soft delete))
+5) Blog listing page
+- Pagination
+- Lazy loading
+6) Tags for blog
+7) Comments on blogs
+8) Notifications for new blogs(email and realtime message)
+9) Social media login/singup --
+
+Admin panel:
+1) Admin theme integration
+2) Manage user (add/block/edit/remove)
+3) Manage blog (add/edit/remove)
+4) Manage comment (add/edit/remove)
+5) Manage tags (add/edit/remove)
+6) Basic pages (about us, contact us, our team)
+7) Bulk email sending
+8) Manage country
+
+Collections
+users:
+- id, email, password, gender, contact_no, country, profile_pic, signup_type
+blogs:
+- id, uid, title, text, publish_date,
+tags: 
+- id, tag
+comments:
+- id, comment
+
+
+login with username or email
+
+
+
+http://packalyst.com/packages/package/cviebrock/eloquent-sluggable
+https://github.com/Intervention/image

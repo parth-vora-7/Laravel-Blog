@@ -8,6 +8,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Image;
 use Storage;
+use App\Http\Controllers\SocialAuthController;
 
 class RegisterController extends Controller
 {
@@ -60,7 +61,7 @@ class RegisterController extends Controller
             'about_me' => 'required|min:6',
             'date_of_birth' => 'date',
             'avatar' => 'required|image',
-        ]);
+            ]);
     }
 
     /**
@@ -72,34 +73,36 @@ class RegisterController extends Controller
     protected function create(array $data)
     {
         $avatars_org_dir = 'public/avatars/origional';
-        $avatars_thumb_dir = 'public/avatars/300x600';
-
         Storage::makeDirectory($avatars_org_dir);
-        Storage::makeDirectory($avatars_thumb_dir);
 
-        $avatar_file = $data['avatar']->store($avatars_org_dir);
-        
-        $avatar_file_to_crop = ltrim($avatar_file, 'public/');
-        $avatar_file_to_store = str_replace('origional', '300x600',$avatar_file_to_crop);
+        if($avatar_file = $data['avatar']->store($avatars_org_dir)) // Upload avatar
+        {
+            $org_avatar_source = ltrim($avatar_file, 'public/');
 
-        Image::make('storage/' . $avatar_file_to_crop)->resize(300, 600)->save('storage/' . $avatar_file_to_store);
-
-        return User::create([
-            'name' => $data['name'],
-            'username' => $data['name'],
-            'email' => $data['email'],
-            'password' => bcrypt($data['password']),
-            'contact_no' => $data['contact_no'],
-            'gender' => $data['gender'],
-            'country' => $data['country'],
-            'hobbies' => serialize($data['hobbies']),
-            'about_me' => $data['about_me'],
-            'date_of_birth' => $data['date_of_birth'],
-            'avatar' => $avatar_file_to_store,
-            'user_type' => 'blogger',
-            'social_id' => NULL,
-            'registration_type' => 'conventional',
-            'deleted_at' => NULL
-        ]);
+            if((new SocialAuthController())->createImageThumb($data['avatar']->getClientOriginalName(), $org_avatar_source, 'avatar', 450, 550)) // Create and upload avatar thumbnail
+            {
+                return User::create([
+                    'name' => $data['name'],
+                    'username' => $data['name'],
+                    'email' => $data['email'],
+                    'password' => bcrypt($data['password']),
+                    'contact_no' => $data['contact_no'],
+                    'gender' => $data['gender'],
+                    'country' => $data['country'],
+                    'hobbies' => serialize($data['hobbies']),
+                    'about_me' => $data['about_me'],
+                    'date_of_birth' => $data['date_of_birth'],
+                    'avatar' => $org_avatar_source,
+                    'user_type' => 'blogger',
+                    'social_id' => NULL,
+                    'registration_type' => 'conventional',
+                    'deleted_at' => NULL
+                    ]);    
+            } 
+            else
+            {
+                return false;
+            }
+        }
     }
 }

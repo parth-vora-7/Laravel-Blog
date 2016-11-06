@@ -40,18 +40,19 @@ return [
         'redirect' => 'http://blog.local/auth/facebook/callback', //URL::route('auth.facebook.callback')
     ],
     'twitter' => [
-        'client_id' => '',
-        'client_secret' => '',
+        'client_id' => 'u6ZdU3Z8w1kbMz3VGyUXRIL4f',
+        'client_secret' => 'FziTe5gbEMyMhPj7xSYK3ojFZlnDRQu1ChghSvQcPic6MRP8QV',
         'redirect' => 'http://blog.local/auth/twitter/callback', //URL::route('auth.twitter.callback')
     ],
     'google' => [
-        'client_id' => '',
-        'client_secret' => '',
-        'redirect' => 'http://blog.local/auth/google/callback', //URL::route('auth.google.callback')
+        'client_id' => '234500376709-s3tcao9no45v2s32er83rscs0qse8i60.apps.googleusercontent.com',
+        'client_secret' => 'hPs7_a-K1xi_Vwl2FHBjedvO',
+        'redirect' => 'http://127.0.0.1/blog/public/auth/google/callback'
+        //'http://blog.local/auth/google/callback', //URL::route('auth.google.callback')
     ],
     'linkedin' => [
-        'client_id' => '',
-        'client_secret' => '',
+        'client_id' => '81z5kl5q82wmqr',
+        'client_secret' => 'yFL27TKgFaInYrqK',
         'redirect' => 'http://blog.local/auth/linkedin/callback', //URL::route('auth.linkedin.callback')
     ],
     'github' => [
