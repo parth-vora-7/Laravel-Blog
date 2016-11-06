@@ -20,6 +20,12 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index');
 
+Route::get('profile/edit', ['as' => 'profile.edit', 'uses' => 'ProfileController@editProfile']);
+Route::post('profile/update', ['as' => 'profile.udpate', 'uses' => 'ProfileController@updateProfile']);
+
+Route::get('profile/change-password', ['as' => 'password.change', 'uses' => 'ProfileController@changePassword']);
+Route::post('profile/update-password', ['as' => 'password.udpate', 'uses' => 'ProfileController@udpatePassword']);
+
 Route::get('services', ['as' => 'services', 'uses' => 'BasicpageController@getServices']);
 Route::get('portfolio', ['as' => 'portfolio', 'uses' => 'BasicpageController@getPortfolio']);
 Route::get('about', ['as' => 'about', 'uses' => 'BasicpageController@getAbout']);
@@ -45,7 +51,9 @@ Route::get('auth/bitbucket', ['as' => 'auth.bitbucket', 'uses' => 'SocialAuthCon
 Route::get('auth/bitbucket/callback', ['as' => 'auth.bitbucket.callback', 'uses' => 'SocialAuthController@returnFromBitbucket']);
 
 Route::get('test', function() {
-	dd((new SocialAuthController())->createImageThumb('1','1','1','1'));
+	$source = 'header-bg.jpg';
+	$thumb = (new SocialAuthController())->getImageThumb($source, 500, 600);
+	dd(asset($thumb));
 });
 
 
