@@ -1,3 +1,16 @@
+body {
+	position: relative;
+    padding-bottom: 90px;
+    overflow-x: hidden;
+    height: auto;
+    min-height: 100vh;
+}
+footer {
+	position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+}
 .dark-bg {
 	background-color: #222;
 }
