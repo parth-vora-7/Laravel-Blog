@@ -7,9 +7,9 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use Socialite;
 use App\User;
-use Image;
 use Storage;
 use Auth;
+use App\Http\Controllers\ImageThumbController;
 
 class SocialAuthController extends Controller
 {
@@ -177,49 +177,11 @@ class SocialAuthController extends Controller
 		$avatar_file_name = time() . '_' . rand() . '.jpg';
 
 		if(file_put_contents($avatars_upload . $avatar_file_name, file_get_contents($avatar_url, false, stream_context_create($arrContextOptions)))) {
-			$avatar = 'avatars/origional' . '/' . $avatar_file_name; 
-			$this->createImageThumb($avatar_file_name, $avatar, 'avatar', 450, 550);
-			return $avatar;
+			$org_avatar_source = 'avatars/origional/'. $avatar_file_name; 
+			$thumbObj = new ImageThumbController();
+			$thumbpath = $thumbObj->getImageThumb($org_avatar_source, 500, 600);
+			return $thumbpath;
 		}
 		return false;
-	}
-
-	public function createImageThumb($storeas, $source, $dirname = NULL, $width, $height) 
-	{
-		$dirname = ($dirname) ? $dirname.'/' : '';
-		$thumb_dir = 'public/thumb/' . $dirname . $width . 'x' . $height;
-		Storage::makeDirectory($thumb_dir);
-    	if(Image::make('storage/' . $source)->resize($width, $height)->save('storage/' . ltrim($thumb_dir, 'public/') . '/'. $storeas))
-    	{
-			return true;
-    	}
-    	else
-    	{
-    		return false;
-    	}
-	}
-
-	public function getImageThumb($image_source, $width, $height)
-	{
-		$thumb_dir = 'public/thumb/' . $width . 'x' . $height;
-		$thumb_store_at = ltrim($thumb_dir, 'public/');
-		Storage::makeDirectory($thumb_dir);
-
-		$pathArr = explode('/', $image_source);
-		$filename = end($pathArr);
-
-		if(Storage::exists($thumb_dir.'/'.$filename))
-		{
-			return 'storage/'.$thumb_store_at .'/'.$filename;
-		}
-
-    	if(Image::make('storage/'.$image_source)->resize($width, $height)->save('storage/'.$thumb_store_at .'/'. $filename))
-    	{
-			return 'storage/'.$thumb_store_at .'/'.$filename;;
-    	}
-    	else
-    	{
-    		return false;
-    	}
 	}
 }

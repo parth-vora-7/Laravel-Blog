@@ -6,9 +6,8 @@ use App\User;
 use Validator;
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\RegistersUsers;
-use Image;
 use Storage;
-use App\Http\Controllers\SocialAuthController;
+use App\Http\Controllers\ImageThumbController;
 
 class RegisterController extends Controller
 {
@@ -79,7 +78,8 @@ class RegisterController extends Controller
         {
             $org_avatar_source = ltrim($avatar_file, 'public/');
 
-            if((new SocialAuthController())->createImageThumb($data['avatar']->getClientOriginalName(), $org_avatar_source, 'avatar', 450, 550)) // Create and upload avatar thumbnail
+            $thumbObj = new ImageThumbController();
+            if($thumbpath = $thumbObj->getImageThumb($org_avatar_source, 500, 600)) // Create and upload avatar thumbnail
             {
                 return User::create([
                     'name' => $data['name'],
@@ -92,7 +92,7 @@ class RegisterController extends Controller
                     'hobbies' => serialize($data['hobbies']),
                     'about_me' => $data['about_me'],
                     'date_of_birth' => $data['date_of_birth'],
-                    'avatar' => $org_avatar_source,
+                    'avatar' => $thumbpath,
                     'user_type' => 'blogger',
                     'social_id' => NULL,
                     'registration_type' => 'conventional',
