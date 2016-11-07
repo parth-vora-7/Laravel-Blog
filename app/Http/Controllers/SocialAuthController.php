@@ -10,6 +10,7 @@ use App\User;
 use Storage;
 use Auth;
 use App\Http\Controllers\ImageThumbController;
+use Redirect;
 
 class SocialAuthController extends Controller
 {
@@ -139,6 +140,10 @@ class SocialAuthController extends Controller
 		}
 		else {
 			$auth_user = $this->createUserFromSocialMdia($user);
+			if(!$auth_user)
+			{
+				return Redirect::back()->withErrors('This email has been already used.');
+			}
 			$userid = $auth_user->id;
 		}
 
@@ -156,6 +161,15 @@ class SocialAuthController extends Controller
 		{
 			$user['user_type'] = 'blogger';
 			$user['deleted_at'] = NULL;
+			if(isset($user['email']))
+			{
+				$user_email = User::select('email')->where('email', '=', $user['email'])->first();
+				if(isset($user_email->email))
+				{
+					return false;
+				}
+			}
+			
 			return User::create($user);    
 		}
 

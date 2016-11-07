@@ -9,6 +9,8 @@
                     <div class="panel-heading">Registration</div>
                     <div class="panel-body">
 
+                        @include('errors.error')
+
                         {!! Form::open(['url' => 'register', 'method' => 'POST', 'files' => TRUE,
                         'class' => 'form-horizontal', 'role' => "form"]) !!}
 
