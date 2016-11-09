@@ -7,6 +7,7 @@ use App\User;
 use App\Http\Requests\UserProfileFieldsRequest;
 use App\Http\Requests\ChangePasswordRequest;
 use Illuminate\Support\Facades\Hash;
+use Storage;
 
 class ProfileController extends Controller
 {
@@ -17,7 +18,16 @@ class ProfileController extends Controller
 
     public function updateProfile(UserProfileFieldsRequest $request, User $user)
     {
-        $user->update($request->all());
+        $avatars_org_dir = 'public/avatars/origional';
+        Storage::makeDirectory($avatars_org_dir);
+
+        if($request->avatar && $avatar_file = $request->avatar->store($avatars_org_dir)) // Upload avatar
+        {
+            $org_avatar_source = str_replace ('public', 'storage', $avatar_file);
+            $user->avatar = $org_avatar_source;
+        }
+        $user->update([$request->all(), $user->avatar]);
+
         return redirect()->route('profile.edit', $user->id)->with(['message' => 'Your profile has been successfully updated.']);
     }
 

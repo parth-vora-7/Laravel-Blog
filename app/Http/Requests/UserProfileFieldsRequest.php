@@ -42,7 +42,7 @@ class UserProfileFieldsRequest extends FormRequest
         'hobbies' => 'required',
         'about_me' => 'required|min:6',
         'date_of_birth' => 'date',
-        'avatar' => 'required|image',
+       // 'avatar' => 'required|image',
         ];
     }
 

@@ -49,9 +49,9 @@ Route::get('auth/bitbucket', ['as' => 'auth.bitbucket', 'uses' => 'SocialAuthCon
 Route::get('auth/bitbucket/callback', ['as' => 'auth.bitbucket.callback', 'uses' => 'SocialAuthController@returnFromBitbucket']);
 
 Route::get('test', function() {
-	$source = 'header-bg.jpg';
+	/*$source = 'header-bg.jpg';
 	$thumb = (new SocialAuthController())->getImageThumb($source, 500, 600);
-	dd(asset($thumb));
+	dd(asset($thumb));*/
 });
 
 

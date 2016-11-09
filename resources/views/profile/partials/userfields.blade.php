@@ -135,7 +135,7 @@
 
                 <div class="col-md-6">
                     <div class="input-group date" id="dob">
-                    {!! Form::text('date_of_birth', NULL, ['class' => 'form-control']) !!}
+                        {!! Form::text('date_of_birth', NULL, ['class' => 'form-control']) !!}
                         <span class="input-group-addon">
                             <span class="glyphicon glyphicon-calendar"></span>
                         </span>
@@ -148,12 +148,17 @@
                 </div>
             </div>
 
-@if(isset($user))
-<img src="" />
-@endif
+            @if(isset($user))
+            <div class="form-group">
+                <label for="avatar" class="col-md-4 control-label">Current profile pic</label>
+                <div class="col-md-6">
+                    <img src="{{ asset(Helper::getImageThumb($user->avatar, 70, 70)) }}" />  
+                </div>
+            </div>
+            @endif
 
             <div class="form-group{{ $errors->has('avatar') ? ' has-error' : '' }}">
-                <label for="avatar" class="col-md-4 control-label">Profile pic</label>
+                <label for="avatar" class="col-md-4 control-label">Select new profile pic</label>
                 <div class="col-md-6">
                     {!! Form::file('avatar', ['class' => 'form-control']) !!}
 

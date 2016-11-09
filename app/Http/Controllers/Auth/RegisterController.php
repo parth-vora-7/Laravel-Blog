@@ -77,33 +77,25 @@ class RegisterController extends Controller
 
         if($avatar_file = $data['avatar']->store($avatars_org_dir)) // Upload avatar
         {
-            $org_avatar_source = ltrim($avatar_file, 'public/');
+            $org_avatar_source = str_replace ('public', 'storage', $avatar_file);
 
-            $thumbObj = new ImageThumbController();
-            if($thumbpath = $thumbObj->getImageThumb($org_avatar_source, 500, 600)) // Create and upload avatar thumbnail
-            {
-                return User::create([
-                    'name' => $data['name'],
-                    'username' => $data['name'],
-                    'email' => $data['email'],
-                    'password' => bcrypt($data['password']),
-                    'contact_no' => $data['contact_no'],
-                    'gender' => $data['gender'],
-                    'country' => $data['country'],
-                    'hobbies' => $data['hobbies'],
-                    'about_me' => $data['about_me'],
-                    'date_of_birth' => $data['date_of_birth'],
-                    'avatar' => $thumbpath,
-                    'user_type' => 'blogger',
-                    'social_id' => NULL,
-                    'registration_type' => 'conventional',
-                    'deleted_at' => NULL
-                    ]);    
-            } 
-            else
-            {
-                return false;
-            }
+            return User::create([
+                'name' => $data['name'],
+                'username' => $data['name'],
+                'email' => $data['email'],
+                'password' => bcrypt($data['password']),
+                'contact_no' => $data['contact_no'],
+                'gender' => $data['gender'],
+                'country' => $data['country'],
+                'hobbies' => $data['hobbies'],
+                'about_me' => $data['about_me'],
+                'date_of_birth' => $data['date_of_birth'],
+                'avatar' => $org_avatar_source,
+                'user_type' => 'blogger',
+                'social_id' => NULL,
+                'registration_type' => 'conventional',
+                'deleted_at' => NULL
+            ]);    
         }
     }
 }

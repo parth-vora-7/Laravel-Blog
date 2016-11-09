@@ -133,7 +133,6 @@ class SocialAuthController extends Controller
 	public function authenticateSocialUser($user)
 	{
 		$auth_user = User::select('_id')->where('social_id', '=', $user['social_id'])->get()->toArray();
-		// Need to check email existance
 		if(!empty($auth_user[0]))
 		{
 			$userid = $auth_user[0]['_id'];
@@ -186,15 +185,11 @@ class SocialAuthController extends Controller
 		$avatars_org_dir = 'public/avatars/origional';
 		Storage::makeDirectory($avatars_org_dir);
 
-		$avatars_upload = 'storage/avatars/origional/';
-
 		$avatar_file_name = time() . '_' . rand() . '.jpg';
+		$avatar_filepath = 'storage/avatars/origional/' . $avatar_file_name;
 
-		if(file_put_contents($avatars_upload . $avatar_file_name, file_get_contents($avatar_url, false, stream_context_create($arrContextOptions)))) {
-			$org_avatar_source = 'avatars/origional/'. $avatar_file_name; 
-			$thumbObj = new ImageThumbController();
-			$thumbpath = $thumbObj->getImageThumb($org_avatar_source, 500, 600);
-			return $thumbpath;
+		if(file_put_contents($avatar_filepath, file_get_contents($avatar_url, false, stream_context_create($arrContextOptions)))) {
+			return $avatar_filepath;
 		}
 		return false;
 	}
