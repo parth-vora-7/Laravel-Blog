@@ -64,7 +64,6 @@ class User extends Eloquent implements
 
     public function isAdmin()
     {
-        dd($this->user_type);
         return ($this->user_type == 'admin') ? true : false;
     }
 }

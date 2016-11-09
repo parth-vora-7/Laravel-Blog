@@ -6,7 +6,7 @@
         <div class="row">
             <div class="col-md-8 col-md-offset-2">
                 <div class="panel panel-default">
-                    <div class="panel-heading">Registration</div>
+                    <div class="panel-heading"><h5>Registration</h5></div>
                     <div class="panel-body">
 
                         {!! Form::open(['url' => 'register', 'method' => 'POST', 'files' => TRUE,

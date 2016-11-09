@@ -3,10 +3,9 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Validation\Rule;
 use Auth;
 
-class UserProfileFieldsRequest extends FormRequest
+class ChangePasswordRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -30,18 +29,10 @@ class UserProfileFieldsRequest extends FormRequest
      */
     public function rules()
     {
-        $user = $this->route('user');
-        
         return [
-            'name' => 'required|max:255',
-            'email' => ['required', 'email', 'max:255', Rule::unique('users')->ignore($user->id, '_id')],
-            'contact_no' => 'required|digits:10',
-            'gender' => 'required|in:male,female',
-            'country' => 'required',
-            'hobbies' => 'required',
-            'about_me' => 'required|min:6',
-            'date_of_birth' => 'date',
-            'avatar' => 'required|image',
+            'current_password' => 'required',
+            'password' => 'required|min:6|confirmed',
+            'password_confirmation' => 'required'
         ];
     }
 }

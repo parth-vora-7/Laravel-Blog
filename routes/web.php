@@ -19,10 +19,10 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('profile/edit/{user}', ['as' => 'profile.edit', 'uses' => 'ProfileController@editProfile'])->middleware('can:update,user');
-Route::put('profile/update/{user}', ['as' => 'profile.udpate', 'uses' => 'ProfileController@updateProfile'])->middleware('can:update,user');
+Route::put('profile/update/{user}', ['as' => 'profile.udpate', 'uses' => 'ProfileController@updateProfile']);
 
-Route::get('profile/change-password', ['as' => 'password.change', 'uses' => 'ProfileController@changePassword']);
-Route::post('profile/update-password', ['as' => 'password.udpate', 'uses' => 'ProfileController@udpatePassword']);
+Route::get('profile/change-password/{user}', ['as' => 'password.change', 'uses' => 'ProfileController@changePassword'])->middleware('can:update,user');
+Route::put('profile/update-password/{user}', ['as' => 'password.udpate', 'uses' => 'ProfileController@udpatePassword']);
 
 Route::get('services', ['as' => 'services', 'uses' => 'BasicpageController@getServices']);
 Route::get('portfolio', ['as' => 'portfolio', 'uses' => 'BasicpageController@getPortfolio']);

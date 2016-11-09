@@ -1,3 +1,4 @@
+@include('message.message')
 @include('errors.error')
 
 <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">
@@ -26,6 +27,7 @@
     </div>
 </div>
 
+@unless($user)
 <div class="form-group{{ $errors->has('password') ? ' has-error' : '' }}">
     <label for="password" class="col-md-4 control-label">Password</label>
     <div class="col-md-6">
@@ -52,6 +54,7 @@
             @endif
         </div>
     </div>
+@endunless
 
     <div class="form-group{{ $errors->has('contact_no') ? ' has-error' : '' }}">
         <label for="contact_no" class="col-md-4 control-label">Contact no</label>
