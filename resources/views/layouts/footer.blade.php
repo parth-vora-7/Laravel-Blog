@@ -46,3 +46,9 @@
 
     <!-- Theme JavaScript -->
     <script src="{{ asset('js/agency.min.js') }}"></script>
+
+    <script type="text/javascript" src="{{ asset('js/moment.js') }}"></script>
+  
+    <script type="text/javascript" src="{{ asset('js/bootstrap-datetimepicker.min.js') }}"></script>
+
+    <script type="text/javascript" src="{{ asset('js/custom.js') }}"></script>

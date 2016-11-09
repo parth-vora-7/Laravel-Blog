@@ -1,5 +1,5 @@
 @include('message.message')
-@include('errors.error')
+{{-- @include('errors.error') --}}
 
 <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">
     <label for="name" class="col-md-4 control-label">Name</label>
@@ -27,7 +27,7 @@
     </div>
 </div>
 
-@unless($user)
+@if(!isset($user))
 <div class="form-group{{ $errors->has('password') ? ' has-error' : '' }}">
     <label for="password" class="col-md-4 control-label">Password</label>
     <div class="col-md-6">
@@ -54,7 +54,7 @@
             @endif
         </div>
     </div>
-@endunless
+    @endif
 
     <div class="form-group{{ $errors->has('contact_no') ? ' has-error' : '' }}">
         <label for="contact_no" class="col-md-4 control-label">Contact no</label>
@@ -88,7 +88,7 @@
         <div class="form-group{{ $errors->has('country') ? ' has-error' : '' }}">
             <label for="country" class="col-md-4 control-label">Country</label>
             <div class="col-md-6">
-                {!! Form::select('country', ['India' => 'India', 'USA' => 'USA'], 1, ['class' => 'form-control']) !!}
+                {!! Form::select('country', ['India' => 'India', 'USA' => 'USA'], NULL, ['class' => 'form-control']) !!}
 
                 @if ($errors->has('country'))
                 <span class="help-block">
@@ -134,7 +134,12 @@
                 <label for="date_of_birth" class="col-md-4 control-label">Date of birth</label>
 
                 <div class="col-md-6">
-                    {!! Form::date('date_of_birth', \Carbon\Carbon::now()) !!}
+                    <div class="input-group date" id="dob">
+                    {!! Form::text('date_of_birth', NULL, ['class' => 'form-control']) !!}
+                        <span class="input-group-addon">
+                            <span class="glyphicon glyphicon-calendar"></span>
+                        </span>
+                    </div>
                     @if ($errors->has('date_of_birth'))
                     <span class="help-block">
                         <strong>{{ $errors->first('date_of_birth') }}</strong>
@@ -142,6 +147,10 @@
                     @endif
                 </div>
             </div>
+
+@if(isset($user))
+<img src="" />
+@endif
 
             <div class="form-group{{ $errors->has('avatar') ? ' has-error' : '' }}">
                 <label for="avatar" class="col-md-4 control-label">Profile pic</label>

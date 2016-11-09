@@ -13,6 +13,7 @@ class UserProfileFieldsRequest extends FormRequest
      *
      * @return bool
      */
+
     public function authorize()
     {
         $updating_user = $this->route('user');
@@ -33,15 +34,22 @@ class UserProfileFieldsRequest extends FormRequest
         $user = $this->route('user');
         
         return [
-            'name' => 'required|max:255',
-            'email' => ['required', 'email', 'max:255', Rule::unique('users')->ignore($user->id, '_id')],
-            'contact_no' => 'required|digits:10',
-            'gender' => 'required|in:male,female',
-            'country' => 'required',
-            'hobbies' => 'required',
-            'about_me' => 'required|min:6',
-            'date_of_birth' => 'date',
-            'avatar' => 'required|image',
+        'name' => 'required|max:255|regex:/^[a-zA-Z\s]*$/',
+        'email' => ['required', 'email', 'max:255', Rule::unique('users')->ignore($user->id, '_id')],
+        'contact_no' => 'required|digits:10',
+        'gender' => 'required|in:male,female',
+        'country' => 'required',
+        'hobbies' => 'required',
+        'about_me' => 'required|min:6',
+        'date_of_birth' => 'date',
+        'avatar' => 'required|image',
+        ];
+    }
+
+    public function messages()
+    {
+        return [
+        'name.regex' => 'Please enter a valid name',
         ];
     }
 }

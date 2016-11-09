@@ -12,6 +12,8 @@ use Illuminate\Contracts\Auth\Authenticatable as AuthenticatableContract;
 use Illuminate\Contracts\Auth\Access\Authorizable as AuthorizableContract;
 use Illuminate\Contracts\Auth\CanResetPassword as CanResetPasswordContract;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Collective\Html\Eloquent\FormAccessible;
+use Carbon\Carbon;
 
 use Jenssegers\Mongodb\Eloquent\Model as Eloquent;
 
@@ -20,7 +22,7 @@ class User extends Eloquent implements
     AuthorizableContract,
     CanResetPasswordContract
 {
-    use Notifiable, Authenticatable, Authorizable, CanResetPassword, SoftDeletes;
+    use Notifiable, Authenticatable, Authorizable, CanResetPassword, SoftDeletes, FormAccessible;
 
     /**
      * The attributes that are mass assignable.
@@ -46,7 +48,7 @@ class User extends Eloquent implements
      * @var array
      */
     protected $casts = [
-        'hobbies' => 'JSON',
+        'hobbies' => 'array',
     ];
 
     /**
@@ -55,8 +57,16 @@ class User extends Eloquent implements
      * @var array
      */
     protected $dates = [
-        'date_of_birth', 'deleted_at'
+        'date_of_birth',
+        'deleted_at'
     ];
+
+     /**
+     * The storage format of the model's date columns.
+     *
+     * @var string
+     */
+    protected $dateFormat = 'd-m-Y H:i:s';
 
     /**
      * To ckeck whether passed user is admin or not
@@ -66,4 +76,27 @@ class User extends Eloquent implements
     {
         return ($this->user_type == 'admin') ? true : false;
     }
+    
+    /**
+     * Accessor for date_of_birth field
+     * To change the the format of date_of_birth field while accessing it
+     * @var $value string
+     * @return Carbon
+     */
+
+    public function getDateOfBirthAttribute($value)
+    {
+        return Carbon::parse($value)->format('d-m-Y H:i:s');
+    }
+
+    /**
+     * Mutator for date_of_birth field
+     * To change the the format of date_of_birth field while storing it
+     * @var $value string
+     */
+
+    public function setDateOfBirthAttribute($value)
+    {
+        $this->attributes['date_of_birth'] = Carbon::parse($value)->format('d-m-Y H:i:s');
+    } 
 }

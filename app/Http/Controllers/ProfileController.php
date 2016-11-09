@@ -11,6 +11,7 @@ class ProfileController extends Controller
 {
     public function editProfile(User $user)
     {
+        dd($user->avatar);
 		return view('profile.profile', compact('user'));
     }
 
