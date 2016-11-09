@@ -14,6 +14,19 @@ footer {
 .dark-bg {
 	background-color: #222;
 }
+.dark-bg .copyright {
+    color: white;
+}
 .dropdown.open .dropdown-menu a {
 	color: black;
+}
+.alert {
+    padding: 5px;
+    margin-bottom: 10px;
+}
+.alert-dismissable .close, .alert-dismissible .close {
+    position: relative;
+    top: -2px;
+    right: 0px;
+    color: inherit;
 }

@@ -1,6 +1,0 @@
-.dark-bg {
-	background-color: #222;
-}
-.dropdown.open .dropdown-menu a {
-	color: black;
-}
