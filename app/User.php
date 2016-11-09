@@ -57,4 +57,14 @@ class User extends Eloquent implements
     protected $dates = [
         'date_of_birth', 'deleted_at'
     ];
+
+    /**
+     * To ckeck whether passed user is admin or not
+     */
+
+    public function isAdmin()
+    {
+        dd($this->user_type);
+        return ($this->user_type == 'admin') ? true : false;
+    }
 }
