@@ -10,7 +10,8 @@
                     <div class="panel-body">
                         {!! Form::open(['route' => ['password.udpate', $user], 'method' => 'POST', 'files' => TRUE,
                         'class' => 'form-horizontal', 'role' => "form"]) !!}
-                        
+                        @include('message.message')
+                        @include('errors.error')
                         {{ method_field('PUT') }}
                         <div class="form-group{{ $errors->has('current_password') ? ' has-error' : '' }}">
                             <label for="current_password" class="col-md-4 control-label">Current password</label>
