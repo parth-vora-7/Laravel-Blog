@@ -1,9 +1,14 @@
+Changes:
+If user is signuped using social media, then change password => choose password
+New field username in register
+Allow login using username
+
 1) Theme integration --
 2) User types
 - admin --
 - author (signup user) --
 3) Login, signup and reset password --
-4) Edit profile, change password pages
+4) Edit profile, change password pages --- 
 4) Blog add page (RTE)
 - My blog page (edit and delete(soft delete))
 5) Blog listing page
