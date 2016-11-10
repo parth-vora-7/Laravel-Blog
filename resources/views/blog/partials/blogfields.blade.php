@@ -54,7 +54,7 @@
 @endif
 
 <div class="form-group{{ $errors->has('blog_image') ? ' has-error' : '' }}">
-    <label for="avatar" class="col-md-2 col-md-offset-1 control-label">Select new blog image</label>
+    <label for="avatar" class="col-md-2 col-md-offset-1 control-label">Select new blog pic</label>
     <div class="col-md-8">
         @if(isset($blog->blog_image))
             {!! Form::file('blog_image', ['class' => 'form-control']) !!}

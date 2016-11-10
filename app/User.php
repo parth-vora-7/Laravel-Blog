@@ -11,6 +11,7 @@ use Illuminate\Contracts\Auth\Authenticatable as AuthenticatableContract;
 use Illuminate\Contracts\Auth\Access\Authorizable as AuthorizableContract;
 use Illuminate\Contracts\Auth\CanResetPassword as CanResetPasswordContract;
 use Jenssegers\Mongodb\Eloquent\SoftDeletes;
+use Laravel\Cashier\Billable;
 use Carbon\Carbon;
 
 use Jenssegers\Mongodb\Eloquent\Model as Eloquent;
@@ -20,7 +21,7 @@ class User extends Eloquent implements
     AuthorizableContract,
     CanResetPasswordContract
 {
-    use Notifiable, Authenticatable, Authorizable, CanResetPassword, SoftDeletes;
+    use Notifiable, Authenticatable, Authorizable, CanResetPassword, SoftDeletes, Billable;
 
     /**
      * The attributes that are mass assignable.
