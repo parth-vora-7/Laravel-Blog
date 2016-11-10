@@ -48,6 +48,9 @@ Route::get('auth/github/callback', ['as' => 'auth.github.callback', 'uses' => 'S
 Route::get('auth/bitbucket', ['as' => 'auth.bitbucket', 'uses' => 'SocialAuthController@redirectToBitbucket']);
 Route::get('auth/bitbucket/callback', ['as' => 'auth.bitbucket.callback', 'uses' => 'SocialAuthController@returnFromBitbucket']);
 
+Route::resource('blog', 'BlogController');
+Route::get('myblogs', ['as' => 'myblogs', 'uses' => 'BlogController@myBlogs']);
+
 Route::get('test', function() {
 	/*$source = 'header-bg.jpg';
 	$thumb = (new SocialAuthController())->getImageThumb($source, 500, 600);

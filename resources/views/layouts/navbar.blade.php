@@ -32,6 +32,16 @@ $isHome = FALSE;
                 <li>
                     <a class="page-scroll" href="{{ ($isHome) ? '#contact' : URL::route('contact') }}">Contact</a>
                 </li>
+                @if(auth::user())
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">Blogs<b class="caret"></b></a>
+                    <ul class="dropdown-menu">
+                      <li><a href="{{ URL::route('blog.index') }}">All blogs</a></li>
+                      <li><a href="{{ URL::route('myblogs') }}">My blogs</a></li>
+                      <li><a href="{{ URL::route('blog.create') }}">Add new blog</a></li>
+                    </ul>
+                </li>
+                @endif
                 @if(auth::guest())
                 <li>
                     <a href="{{ url('login') }}">Login</a>

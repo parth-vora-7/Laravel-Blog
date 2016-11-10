@@ -3,7 +3,6 @@
 namespace App;
 
 use Illuminate\Notifications\Notifiable;
-//use Illuminate\Foundation\Auth\User as Authenticatable;
 
 use Illuminate\Auth\Authenticatable;
 use Illuminate\Auth\Passwords\CanResetPassword;
@@ -12,7 +11,6 @@ use Illuminate\Contracts\Auth\Authenticatable as AuthenticatableContract;
 use Illuminate\Contracts\Auth\Access\Authorizable as AuthorizableContract;
 use Illuminate\Contracts\Auth\CanResetPassword as CanResetPasswordContract;
 use Illuminate\Database\Eloquent\SoftDeletes;
-use Collective\Html\Eloquent\FormAccessible;
 use Carbon\Carbon;
 
 use Jenssegers\Mongodb\Eloquent\Model as Eloquent;
@@ -22,7 +20,7 @@ class User extends Eloquent implements
     AuthorizableContract,
     CanResetPasswordContract
 {
-    use Notifiable, Authenticatable, Authorizable, CanResetPassword, SoftDeletes, FormAccessible;
+    use Notifiable, Authenticatable, Authorizable, CanResetPassword, SoftDeletes;
 
     /**
      * The attributes that are mass assignable.
@@ -30,7 +28,9 @@ class User extends Eloquent implements
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password', 'contact_no', 'gender', 'country', 'hobbies', 'about_me', 'date_of_birth', 'avatar', 'user_type', 'social_id', 'registration_type', 'deleted_at'
+        'name', 'email', 'password', 'contact_no', 'gender', 'country', 
+        'hobbies', 'about_me', 'date_of_birth', 'avatar', 'user_type', 
+        'social_id', 'registration_type', 'deleted_at'
     ];
 
     /**
@@ -99,4 +99,14 @@ class User extends Eloquent implements
     {
         $this->attributes['date_of_birth'] = Carbon::parse($value)->format('d-m-Y H:i:s');
     } 
+
+    /**
+     * Get blogs of a user
+     * 
+     * @return mix
+     */
+    
+    public function blogs() {
+        return $this->hasMany('App\Blog');
+    }
 }
