@@ -51,4 +51,6 @@
   
     <script type="text/javascript" src="{{ asset('js/bootstrap-datetimepicker.min.js') }}"></script>
 
+    <script src="{{ asset('ckeditor/ckeditor.js') }}"></script>
+
     <script type="text/javascript" src="{{ asset('js/custom.js') }}"></script>

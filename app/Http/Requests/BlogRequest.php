@@ -16,11 +16,14 @@ class BlogRequest extends FormRequest
     public function authorize()
     {
         $blog = $this->route('blog');
-        if (Auth::user()->can('update', $blog)) {
-            return true;
-        }
 
-        return false;
+        if(!$blog) return true;
+
+        if(Auth::user()->can('update', $blog)) {
+            return true;
+        } else {
+            return false;
+        }
     }
 
     /**
