@@ -34,7 +34,6 @@ class Blog extends Model
      * @var array
      */
 	protected $fillable = [
-		'uid',
 	 	'title', 
 	 	'text', 
         'published_on',

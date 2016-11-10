@@ -12,7 +12,7 @@
                         'class' => 'form-horizontal', 'role' => "form"]) !!}
                         
                         {{ method_field('PUT') }}
-                        @include('profile.partials.userfields', ['btntitle' => 'Update blog'])
+                        @include('blog.partials.blogfields', ['btntitle' => 'Update blog'])
 
                         {!! Form::close() !!}
                     </div>

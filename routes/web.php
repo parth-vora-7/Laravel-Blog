@@ -52,9 +52,6 @@ Route::resource('blog', 'BlogController');
 Route::get('myblogs', ['as' => 'myblogs', 'uses' => 'BlogController@myBlogs']);
 
 Route::get('test', function() {
-	/*$source = 'header-bg.jpg';
-	$thumb = (new SocialAuthController())->getImageThumb($source, 500, 600);
-	dd(asset($thumb));*/
+	$blog = App\Blog::find('582424b4b3f3ba21f238c072')->user->name;
+	dd($blog);
 });
-
-
