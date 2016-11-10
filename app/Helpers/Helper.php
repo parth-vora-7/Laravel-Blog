@@ -1,10 +1,9 @@
 <?php
-
 namespace App\Helpers;
 use Image;
 use Storage;
 
-class Helper 
+class Helper
 {
 	public static function getImageThumb($image_source, $width, $height)
 	{
