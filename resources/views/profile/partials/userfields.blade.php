@@ -160,8 +160,11 @@
             <div class="form-group{{ $errors->has('avatar') ? ' has-error' : '' }}">
                 <label for="avatar" class="col-md-4 control-label">Select new profile pic</label>
                 <div class="col-md-6">
-                    {!! Form::file('avatar', ['class' => 'form-control', 'required' => 'required']) !!}
-
+                    @if(isset($user->avatar))
+                        {!! Form::file('avatar', ['class' => 'form-control']) !!}
+                    @else
+                        {!! Form::file('avatar', ['class' => 'form-control', 'required' => 'required']) !!}
+                    @endif
                     @if ($errors->has('avatar'))
                     <span class="help-block">
                         <strong>{{ $errors->first('avatar') }}</strong>

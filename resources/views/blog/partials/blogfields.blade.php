@@ -56,8 +56,12 @@
 <div class="form-group{{ $errors->has('blog_image') ? ' has-error' : '' }}">
     <label for="avatar" class="col-md-4 control-label">Select new blog image</label>
     <div class="col-md-6">
-        {!! Form::file('blog_image', ['class' => 'form-control', 'required' => 'required']) !!}
-
+        @if(isset($blog->blog_image))
+            {!! Form::file('blog_image', ['class' => 'form-control']) !!}
+        @else
+            {!! Form::file('blog_image', ['class' => 'form-control', 'required' => 'required']) !!}
+        @endif
+        
         @if ($errors->has('blog_image'))
         <span class="help-block">
             <strong>{{ $errors->first('blog_image') }}</strong>

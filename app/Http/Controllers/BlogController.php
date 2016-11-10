@@ -17,7 +17,7 @@ class BlogController extends Controller
      */
     public function index()
     {
-        $blogs = Blog::paginate(10);
+        $blogs = Blog::orderBy('published_on', 'desc')->published()->paginate(3);
         return view('blog.index', compact('blogs'));
     }
 
@@ -57,7 +57,7 @@ class BlogController extends Controller
         }
 
         if($blog) {
-            return redirect()->route('blog.index', ['message' => 'Your blog has been successfully posted.']);
+            return redirect()->route('blog.index')->with(['message' => 'Your blog has been successfully posted.']);
         }
     }
 
@@ -69,7 +69,7 @@ class BlogController extends Controller
      */
     public function show(Blog $blog)
     {
-        return view('blog.add', compact('blog'));
+        return view('blog.show', compact('blog'));
     }
 
     /**
@@ -78,9 +78,13 @@ class BlogController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(Blog $blog)
+    public function edit(Request $request, Blog $blog)
     {
-        return view('blog.edit', compact('blog'));
+        if ($request->user()->can('update', $blog)) {
+            return view('blog.edit', compact('blog'));
+        } else {
+            abort(403);
+        }
     }
 
     /**
@@ -92,21 +96,23 @@ class BlogController extends Controller
      */
     public function update(BlogRequest $request, Blog $blog)
     {
-        $blogs_org_dir = 'public/blogs/origional';
-        Storage::makeDirectory($blogs_org_dir);
+        if ($request->user()->can('update', $blog)) {
+            $blogs_org_dir = 'public/blogs/origional';
+            Storage::makeDirectory($blogs_org_dir);
 
-        $blog->title = $request->title;
-        $blog->text = $request->text;
-        $blog->published_on = $request->published_on;
-        
-        if($request->blog_image && $blog_img_file = $request->blog_image->store($blogs_org_dir)) // Upload avatar
-        {
-            $blog_image_source = str_replace ('public', 'storage', $blog_img_file);
-            $blog->blog_image = $blog_image_source;
-        }
-        $blog->save();
+            $blog->title = $request->title;
+            $blog->text = $request->text;
+            $blog->published_on = $request->published_on;
 
-        return redirect()->route('blog.edit', $blog->id)->with(['message' => 'Your blog has been successfully updated.']);
+            if($request->blog_image && $blog_img_file = $request->blog_image->store($blogs_org_dir)) // Upload avatar
+            {
+                $blog_image_source = str_replace ('public', 'storage', $blog_img_file);
+                $blog->blog_image = $blog_image_source;
+            }
+            $blog->save();
+
+            return redirect()->route('blog.edit', $blog->id)->with(['message' => 'Your blog has been successfully updated.']);
+        } 
     }
 
     /**
@@ -115,9 +121,15 @@ class BlogController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Request $request, Blog $blog)
     {
-        //
+        if ($request->user()->can('delete', $blog)) {
+            if($blog->delete()) {
+                return redirect()->route('blog.index')->with(['message' => 'Your blog has been successfully deleted.']);
+            }else {
+                abort(403);
+            }
+        }
     }
 
     /**
@@ -127,6 +139,7 @@ class BlogController extends Controller
      */
     public function myBlogs()
     {
-        //
+        $blogs = Blog::where('user_id', '=', Auth::user()->id)->orderBy('published_on', 'desc')->paginate(3);
+        return view('blog.index', compact('blogs'));
     }
 }

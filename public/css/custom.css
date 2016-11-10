@@ -30,3 +30,77 @@ footer {
     right: 0px;
     color: inherit;
 }
+article {
+    float: left;
+    display: inline-block;
+    clear: both;
+    margin-bottom: 20px;
+    background-color: #fbfbfb;
+    border-bottom: 1px solid;
+    border-radius: 20px;
+    width: 100%;
+}
+article h2 {
+    margin-left: 15px;
+}
+article img {
+    float: left;
+    display: inline-block;
+    margin: 15px;
+}
+article blockquote {
+    padding: 10px 7px;
+    text-align: justify;
+    margin-bottom: 5px;
+}
+article form {
+    float: right;
+}
+article form input[type="submit"] {
+    border: 0;
+    padding: 0;
+    color: #fed136;
+}
+article form input[type="submit"]:hover {
+    color: #fed136;
+}
+.blog-footer {
+    margin: 0 15px;
+}
+.blog-info {
+    float: left;
+}
+.blog-actions {
+    float: right;
+}
+.blog-actions em {
+    margin: 5px;
+}
+.blog-info em {
+    color:  #fed136;
+}
+.blog-info span {
+    margin: 0 5px; 
+}
+section#blog-list {
+    padding: 100px 0;
+}
+.pagination>.active>a, 
+.pagination>.active>a:focus, 
+.pagination>.active>a:hover, 
+.pagination>.active>span, 
+.pagination>.active>span:focus, 
+.pagination>.active>span:hover {
+    background-color: #fed136;
+    border-color: #fed136;
+}
+.pagination>li>a, .pagination>li>span {
+    color: #fed136;
+}
+.pagination>li>a:focus, .pagination>li>a:hover, .pagination>li>span:focus, .pagination>li>span:hover {
+    color: #fed136;
+}
+.sidebar {
+    background-color: #fbfbfb;
+    border-radius: 20px;
+}

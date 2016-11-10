@@ -9,7 +9,7 @@
                     <div class="panel-heading"><h5>Add blog</h5></div>
                     <div class="panel-body">
                         {!! Form::open(['route' => 'blog.store', 'method' => 'POST', 'files' => TRUE,
-                        'class' => 'form-horizontal', 'role' => "form", 'novalidate' => 'novalidate']) !!}
+                        'class' => 'form-horizontal', 'role' => "form"]) !!}
 
                         @include('blog.partials.blogfields', ['btntitle' => 'Add blog'])
 

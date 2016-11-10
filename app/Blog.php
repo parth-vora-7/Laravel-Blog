@@ -3,7 +3,7 @@
 namespace App;
 
 use Jenssegers\Mongodb\Eloquent\Model as Model;
-use Illuminate\Database\Eloquent\SoftDeletes;
+use Jenssegers\Mongodb\Eloquent\SoftDeletes;
 use Carbon\Carbon;
 
 class Blog extends Model
@@ -77,9 +77,7 @@ class Blog extends Model
      * To ckeck whether a blog has been published yet or not
      */
 
-    public function isPublished()
-    {
-        //return ($this->user_type == 'admin') ? true : false;
+    public function scopePublished($query) {
+        $query->where('published_on', '<=', Carbon::now()->format('d-m-Y H:i:s'));
     }
-
 }

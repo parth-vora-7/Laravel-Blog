@@ -18,6 +18,15 @@ class ProfileController extends Controller
 
     public function updateProfile(UserProfileFieldsRequest $request, User $user)
     {
+        $user->name = $request->name;
+        $user->email = $request->email;
+        $user->contact_no = $request->contact_no;
+        $user->gender = $request->gender;
+        $user->country = $request->country;
+        $user->hobbies = $request->hobbies;
+        $user->about_me = $request->about_me;
+        $user->date_of_birth = $request->date_of_birth;
+
         $avatars_org_dir = 'public/avatars/origional';
         Storage::makeDirectory($avatars_org_dir);
 
@@ -26,8 +35,8 @@ class ProfileController extends Controller
             $org_avatar_source = str_replace ('public', 'storage', $avatar_file);
             $user->avatar = $org_avatar_source;
         }
-        $user->update([$request->all(), $user->avatar]);
 
+        $user->save();
         return redirect()->route('profile.edit', $user->id)->with(['message' => 'Your profile has been successfully updated.']);
     }
 
