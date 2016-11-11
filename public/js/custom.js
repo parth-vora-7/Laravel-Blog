@@ -21,10 +21,8 @@ $(function () {
 	}).on("select2:select", function(e) {
 		if(e.params.data.isNew) {
 			var newTagName = e.params.data.text;
-			var newEleSelector = $('[name="new_tags[]"]');
-			if(newEleSelector.length) {
-				$(newEleSelector).append('<option value="' + newTagName + '">' + newTagName + '</option>')
-			}
+			var hiddenInput = $('<input/>',{type:'hidden', value:newTagName, name: 'new_tags[]'});
+			hiddenInput.appendTo('.tags-container');
 		}
 	});
 });

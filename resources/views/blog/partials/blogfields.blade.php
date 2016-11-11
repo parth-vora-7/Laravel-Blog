@@ -27,9 +27,8 @@
     </div>
 </div>
 
-<div class="form-group{{ $errors->has('tags') ? ' has-error' : '' }}">
+<div class="form-group{{ $errors->has('tags') ? ' has-error' : '' }} tags-container">
     <label for="tags" class="col-md-2 col-md-offset-1 control-label">Tags</label>
-    {!! Form::select('new_tags[]', [], NULL, ['class' => 'hidden', 'multiple' => 'multiple']) !!}
     <div class="col-md-8">
         {!! Form::select('tag_list[]', $tags, NULL, ['class' => 'form-control', 'required' => 'required', 'id' => 'tags', 'multiple' => 'multiple']) !!}
         @if ($errors->has('tags'))
