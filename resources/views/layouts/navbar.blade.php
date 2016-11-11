@@ -37,7 +37,7 @@ $isHome = FALSE;
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">Blogs<b class="caret"></b></a>
                     <ul class="dropdown-menu">
                       <li><a href="{{ URL::route('blog.index') }}">All blogs</a></li>
-                      <li><a href="{{ URL::route('myblogs') }}">My blogs</a></li>
+                      <li><a href="{{ URL::route('user.blog', auth::user()) }}">My blogs</a></li>
                       <li><a href="{{ URL::route('blog.create') }}">Add new blog</a></li>
                     </ul>
                 </li>

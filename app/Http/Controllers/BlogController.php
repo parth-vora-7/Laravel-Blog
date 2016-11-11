@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests\BlogRequest;
 use App\Blog;
 use App\Tag;
+use App\User;
 use Auth;
 use Storage;
 
@@ -142,9 +143,9 @@ class BlogController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function myBlogs()
+    public function userBlogs(User $user)
     {
-        $blogs = Blog::where('user_id', '=', Auth::user()->id)->orderBy('published_on', 'desc')->paginate(3);
+        $blogs = $user->blogs()->orderBy('published_on', 'desc')->paginate(3);
         return view('blog.index', compact('blogs'));
     }
 }
