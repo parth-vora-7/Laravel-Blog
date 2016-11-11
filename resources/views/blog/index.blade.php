@@ -6,7 +6,7 @@
             <div class="page-title"><h2>All blogs</h2></div>
         </div>
         <div class="row">
-            @include('message.message')
+            @include('flash::message')
             <div class="col-sm-9">
              @if($blogs->all())
              @foreach($blogs as $blog)

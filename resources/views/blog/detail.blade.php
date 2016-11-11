@@ -7,7 +7,7 @@
 			<div class="page-title"><h2>All blogs</h2></div>
 		</div>
 		<div class="row">
-			@include('message.message')
+			@include('flash::message')
 			<div class="col-sm-9">
 				<article>
 					<h2><a href="{{ route('blog.show', $blog) }}">{{ $blog->title }}</a></h2>
