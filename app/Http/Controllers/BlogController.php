@@ -115,6 +115,7 @@ class BlogController extends Controller
                 $blog->blog_image = $blog_image_source;
             }
             $blog->tags()->sync($request->tag_list);
+            $blog->tags()->attach($request->new_tags);
             $blog->save();
 
             return redirect()->route('blog.edit', $blog->id)->with(['message' => 'Your blog has been successfully updated.']);
