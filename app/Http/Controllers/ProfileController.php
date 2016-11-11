@@ -19,6 +19,7 @@ class ProfileController extends Controller
     public function updateProfile(UserProfileFieldsRequest $request, User $user)
     {
         $user->name = $request->name;
+        $user->username = $request->username;
         $user->email = $request->email;
         $user->contact_no = $request->contact_no;
         $user->gender = $request->gender;
