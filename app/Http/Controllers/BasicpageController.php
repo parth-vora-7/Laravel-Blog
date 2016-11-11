@@ -10,26 +10,26 @@ class BasicpageController extends Controller
 {
     public function getServices()
     {
-    	return 'Services';
+    	return view('pages.services');
     }
 
 	public function getPortfolio()
     {
-    	return 'Portfolio';
+    	return view('pages.portfolio');
     }
 
     public function getAbout()
     {
-    	return 'About';
+    	return view('pages.about');
     }
 
     public function getTeam()
     {
-    	return 'Team';
+    	return view('pages.team');
     }
 
     public function getContact()
     {
-    	return 'Contact';
+    	return view('pages.contact');
     }    
 }
