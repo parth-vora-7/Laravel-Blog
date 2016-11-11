@@ -30,7 +30,7 @@
 <div class="form-group{{ $errors->has('tags') ? ' has-error' : '' }}">
     <label for="tags" class="col-md-2 col-md-offset-1 control-label">Tags</label>
     <div class="col-md-8">
-        {!! Form::select('tags[]', $tags, NULL, ['class' => 'form-control', 'required' => 'required', 'id' => 'tags', 'multiple' => 'multiple']) !!}
+        {!! Form::select('tag_list[]', $tags, NULL, ['class' => 'form-control', 'required' => 'required', 'id' => 'tags', 'multiple' => 'multiple']) !!}
         @if ($errors->has('tags'))
         <span class="help-block">
             <strong>{{ $errors->first('tags') }}</strong>

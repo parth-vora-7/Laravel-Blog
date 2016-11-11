@@ -52,6 +52,7 @@ Route::resource('blog', 'BlogController');
 Route::get('myblogs', ['as' => 'myblogs', 'uses' => 'BlogController@myBlogs']);
 
 Route::get('test', function() {
-	$blog = App\Blog::find('582424b4b3f3ba21f238c072')->user->name;
-	dd($blog);
+	$blog = App\Blog::first()->tags()->get()->toArray();
+	$tag = App\Tag::find('58256a2bb3f3ba1abc1fb202')->blogs()->get()->toArray();
+	dd($tag);
 });

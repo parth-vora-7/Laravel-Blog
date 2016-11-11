@@ -80,4 +80,22 @@ class Blog extends Model
     public function scopePublished($query) {
         $query->where('published_on', '<=', Carbon::now()->format('d-m-Y H:i:s'));
     }
+
+    /**
+     * Get all the tags of a blog
+     * 
+     * @return mix
+     */
+    public function tags() {
+        return $this->belongsToMany('App\Tag');
+    }
+
+    /**
+     * Get all the tags of a blog to prepolulate the tag field on edit form
+     * 
+     * @return mix
+     */
+    public function getTagListAttribute() {
+        return $this->tags->pluck('id')->toArray();
+    }
 }

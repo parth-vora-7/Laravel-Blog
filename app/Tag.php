@@ -14,4 +14,13 @@ class Tag extends Eloquent
     protected $fillable = [
         'name'
     ];
+
+    /**
+     * Get al blogs which are tagged with a specific tag
+     * 
+     * @return mix
+     */
+    public function blogs() {
+        return $this->belongsToMany('App\Blog');
+    }
 }

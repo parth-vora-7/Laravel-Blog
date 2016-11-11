@@ -29,7 +29,7 @@ class BlogController extends Controller
      */
     public function create()
     {
-        $tags = Tag::pluck('name', '_id')->toArray();
+        $tags = Tag::pluck('name', '_id');
         return view('blog.add', compact('tags'));
     }
 
@@ -41,7 +41,6 @@ class BlogController extends Controller
      */
     public function store(BlogRequest $request)
     {
-        //dd($request->all());
         $blogs_org_dir = 'public/blogs/origional';
         Storage::makeDirectory($blogs_org_dir);
 
@@ -57,6 +56,7 @@ class BlogController extends Controller
                 'deleted_at' => NULL
                 ]
                 );
+            $blog->tags()->sync($request->tag_list);
         }
 
         if($blog) {
@@ -83,8 +83,9 @@ class BlogController extends Controller
      */
     public function edit(Request $request, Blog $blog)
     {
+        $tags = Tag::pluck('name', '_id');
         if ($request->user()->can('update', $blog)) {
-            return view('blog.edit', compact('blog'));
+            return view('blog.edit', compact('blog', 'tags'));
         } else {
             abort(403);
         }
@@ -112,6 +113,7 @@ class BlogController extends Controller
                 $blog_image_source = str_replace ('public', 'storage', $blog_img_file);
                 $blog->blog_image = $blog_image_source;
             }
+            $blog->tags()->sync($request->tag_list);
             $blog->save();
 
             return redirect()->route('blog.edit', $blog->id)->with(['message' => 'Your blog has been successfully updated.']);
