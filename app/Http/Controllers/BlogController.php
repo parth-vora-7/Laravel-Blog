@@ -58,6 +58,15 @@ class BlogController extends Controller
                 ]
                 );
             $blog->tags()->sync($request->tag_list);
+
+            if($request->new_tags) {
+                foreach($request->new_tags as $new_tag) {
+                    $tag = Tag::create(['name' => $new_tag]);
+                    if($tag) {
+                        $blog->tags()->attach($tag->id);        
+                    }
+                }
+            }
         }
 
         if($blog) {
@@ -115,7 +124,16 @@ class BlogController extends Controller
                 $blog->blog_image = $blog_image_source;
             }
             $blog->tags()->sync($request->tag_list);
-            $blog->tags()->attach($request->new_tags);
+
+            if($request->new_tags) {
+                foreach($request->new_tags as $new_tag) {
+                    $tag = Tag::create(['name' => $new_tag]);
+                    if($tag) {
+                        $blog->tags()->attach($tag->id);        
+                    }
+                }
+            }
+            
             $blog->save();
 
             return redirect()->route('blog.edit', $blog->id)->with(['message' => 'Your blog has been successfully updated.']);
