@@ -12,7 +12,8 @@
         "laravel/socialite": "^2.0",
         "intervention/image": "^2.3",
         "ixudra/curl": "^6.5",
-        "laravel/cashier": "^7.0"
+        "laravel/cashier": "^7.0",
+        "laracasts/flash": "^2.0"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",

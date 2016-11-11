@@ -171,6 +171,7 @@ return [
         Laravel\Socialite\SocialiteServiceProvider::class,
         Intervention\Image\ImageServiceProvider::class,
         Laravel\Cashier\CashierServiceProvider::class,
+        Laracasts\Flash\FlashServiceProvider::class,
 
         /*
          * Application Service Providers...

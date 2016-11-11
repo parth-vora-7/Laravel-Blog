@@ -38,7 +38,8 @@ class ProfileController extends Controller
         }
 
         $user->save();
-        return redirect()->route('profile.edit', $user->id)->with(['message' => 'Your profile has been successfully updated.']);
+        flash('Your profile has been successfully updated.', 'success')->important();
+        return redirect()->route('profile.edit', $user->id);
     }
 
     public function changePassword(User $user)
@@ -51,9 +52,11 @@ class ProfileController extends Controller
         if (Hash::check($request->current_password, $user->password)) {
             $user->password = bcrypt($request->password);
             $user->save();
-            return redirect()->route('password.change', $user)->with(['message' => 'Your password has been successfully updated.']);
+            flash('Your password has been successfully updated.', 'success')->important();
+            return redirect()->route('password.change', $user);
         } else {
-            return back()->withErrors('Current password doesn\'t macth');
+            flash('Current password doesn\'t macth', 'danger')->important();
+            return back();
         }
     }
 }

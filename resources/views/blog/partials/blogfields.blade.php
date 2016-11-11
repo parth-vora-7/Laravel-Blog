@@ -1,5 +1,4 @@
-@include('message.message')
-{{-- @include('errors.error') --}}
+@include('flash::message')
 
 <div class="form-group{{ $errors->has('title') ? ' has-error' : '' }}">
     <label for="title" class="col-md-2 col-md-offset-1 control-label">Blog title</label>

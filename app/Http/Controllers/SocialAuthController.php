@@ -141,7 +141,8 @@ class SocialAuthController extends Controller
 			$auth_user = $this->createUserFromSocialMdia($user);
 			if(!$auth_user)
 			{
-				return Redirect::back()->withErrors('This email has been already used.');
+				flash('This email has been already used.', 'danger')->important();
+				return Redirect::back();
 			}
 			$userid = $auth_user->id;
 		}

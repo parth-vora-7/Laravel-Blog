@@ -70,7 +70,8 @@ class BlogController extends Controller
         }
 
         if($blog) {
-            return redirect()->route('blog.index')->with(['message' => 'Your blog has been successfully posted.']);
+            flash('Your blog has been successfully posted.', 'success')->important();
+            return redirect()->route('blog.index');
         }
     }
 
@@ -136,7 +137,9 @@ class BlogController extends Controller
             
             $blog->save();
 
-            return redirect()->route('blog.edit', $blog->id)->with(['message' => 'Your blog has been successfully updated.']);
+            flash('Your blog has been successfully updated.', 'success')->important();
+
+            return redirect()->route('blog.edit', $blog->id);
         } 
     }
 
@@ -150,7 +153,8 @@ class BlogController extends Controller
     {
         if ($request->user()->can('delete', $blog)) {
             if($blog->delete()) {
-                return redirect()->route('blog.index')->with(['message' => 'Your blog has been successfully deleted.']);
+                flash('Your blog has been successfully deleted.', 'success')->important();
+                return redirect()->route('blog.index');
             }else {
                 abort(403);
             }
