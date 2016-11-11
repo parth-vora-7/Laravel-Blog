@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Http\Requests\BlogRequest;
 use App\Blog;
+use App\Tag;
 use Auth;
 use Storage;
 
@@ -28,7 +29,8 @@ class BlogController extends Controller
      */
     public function create()
     {
-        return view('blog.add');
+        $tags = Tag::pluck('name', '_id')->toArray();
+        return view('blog.add', compact('tags'));
     }
 
     /**
@@ -39,6 +41,7 @@ class BlogController extends Controller
      */
     public function store(BlogRequest $request)
     {
+        //dd($request->all());
         $blogs_org_dir = 'public/blogs/origional';
         Storage::makeDirectory($blogs_org_dir);
 

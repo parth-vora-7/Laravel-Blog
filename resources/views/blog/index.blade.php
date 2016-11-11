@@ -19,7 +19,7 @@
                     <blockquote>{!! str_limit($blog->text, 700) !!}</blockquote>
                     <div class="blog-footer">
                         <div class="blog-info">
-                            <p>Posted by: <em>{{ $blog->user->name }}</em><span>on</span><em>{{ $blog->published_on }}</em></p>
+                            <p>Posted by: <em>{{ $blog->user->name or 'Anonymous' }}</em><span>on</span><em>{{ $blog->published_on }}</em></p>
                         </div>
                         <div class="blog-actions">
                             <em><a href="{{ route('blog.show', $blog) }}">Read</a></em>

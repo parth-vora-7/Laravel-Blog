@@ -8,4 +8,8 @@ $(function () {
 		useCurrent: true,
 		format: 'DD-MM-YYYY hh:mm:ss'
 	});
+
+	$(document).ready(function() {
+		$("#tags").select2();
+	});
 });

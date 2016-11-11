@@ -27,6 +27,18 @@
     </div>
 </div>
 
+<div class="form-group{{ $errors->has('tags') ? ' has-error' : '' }}">
+    <label for="tags" class="col-md-2 col-md-offset-1 control-label">Tags</label>
+    <div class="col-md-8">
+        {!! Form::select('tags[]', $tags, NULL, ['class' => 'form-control', 'required' => 'required', 'id' => 'tags', 'multiple' => 'multiple']) !!}
+        @if ($errors->has('tags'))
+        <span class="help-block">
+            <strong>{{ $errors->first('tags') }}</strong>
+        </span>
+        @endif
+    </div>
+</div>
+
 <div class="form-group{{ $errors->has('published_on') ? ' has-error' : '' }}">
     <label for="published_on" class="col-md-2 col-md-offset-1 control-label">Published on</label>
     <div class="col-md-8">
@@ -57,9 +69,9 @@
     <label for="avatar" class="col-md-2 col-md-offset-1 control-label">Select new blog pic</label>
     <div class="col-md-8">
         @if(isset($blog->blog_image))
-            {!! Form::file('blog_image', ['class' => 'form-control']) !!}
+        {!! Form::file('blog_image', ['class' => 'form-control']) !!}
         @else
-            {!! Form::file('blog_image', ['class' => 'form-control', 'required' => 'required']) !!}
+        {!! Form::file('blog_image', ['class' => 'form-control', 'required' => 'required']) !!}
         @endif
         
         @if ($errors->has('blog_image'))
