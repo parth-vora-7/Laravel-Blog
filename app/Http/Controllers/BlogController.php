@@ -139,7 +139,7 @@ class BlogController extends Controller
 
             flash('Your blog has been successfully updated.', 'success')->important();
 
-            return redirect()->route('blog.edit', $blog->id);
+            return redirect()->route('blog.show', $blog->id);
         } 
     }
 

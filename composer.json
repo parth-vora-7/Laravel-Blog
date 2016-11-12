@@ -13,7 +13,9 @@
         "intervention/image": "^2.3",
         "ixudra/curl": "^6.5",
         "laravel/cashier": "^7.0",
-        "laracasts/flash": "^2.0"
+        "laracasts/flash": "^2.0",
+        "predis/predis": "^1.1",
+        "pusher/pusher-php-server": "^2.6"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",

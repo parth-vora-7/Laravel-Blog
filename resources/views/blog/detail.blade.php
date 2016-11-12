@@ -4,13 +4,12 @@
 <section id="blog-list">
 	<div class="container">
 		<div>
-			<div class="page-title"><h2>All blogs</h2></div>
+			<div class="page-title"><h2><a href="{{ route('blog.show', $blog) }}">{{ $blog->title }}</a></h2></div>
 		</div>
 		<div class="row">
 			@include('flash::message')
 			<div class="col-sm-9">
 				<article>
-					<h2><a href="{{ route('blog.show', $blog) }}">{{ $blog->title }}</a></h2>
 					<div class="col-sm-3">
 						<img src="{{ asset(Helper::getImageThumb($blog->blog_image, 150, 150)) }}" />
 					</div>

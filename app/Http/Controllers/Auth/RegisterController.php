@@ -4,10 +4,11 @@ namespace App\Http\Controllers\Auth;
 
 use App\User;
 use Validator;
+use Storage;
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\RegistersUsers;
-use Storage;
 use App\Http\Controllers\ImageThumbController;
+use App\Notifications\SignupComplete;
 
 class RegisterController extends Controller
 {
@@ -51,7 +52,7 @@ class RegisterController extends Controller
     {
         return Validator::make($data, [
             'name' => 'required|max:255|regex:/^[a-zA-Z\s]*$/',
-            'username' => 'required|min:3|max:255|regex:/^[a-zA-Z0-9\s]*$/',
+            'username' => 'required|min:3|max:255|regex:/^[a-zA-Z0-9\s]*$/|unique:users',
             'email' => 'required|email|max:255|unique:users',
             'password' => 'required|min:6|confirmed',
             'password_confirmation' => 'required',
@@ -80,7 +81,7 @@ class RegisterController extends Controller
         {
             $org_avatar_source = str_replace ('public', 'storage', $avatar_file);
 
-            return User::create([
+             $user = User::create([
                 'name' => $data['name'],
                 'username' => $data['username'],
                 'email' => $data['email'],
@@ -96,7 +97,14 @@ class RegisterController extends Controller
                 'social_id' => NULL,
                 'registration_type' => 'conventional',
                 'deleted_at' => NULL
-            ]);    
+            ]);  
+
+            if($user) {
+                $user->notify(new SignupComplete($user));
+                return $user;
+            }  else {
+                return false;
+            }
         }
     }
 }

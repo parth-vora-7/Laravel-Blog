@@ -58,7 +58,17 @@ Route::group(['prefix' => 'page'], function () {
 });
 
 Route::get('test', function() {
-	$blog = App\Blog::first()->tags()->get()->toArray();
-	$tag = App\Tag::find('58256a2bb3f3ba1abc1fb202')->blogs()->get()->toArray();
-	dd($tag);
+	$user = Auth::user();
+	//dd($user->email);
+	//event(new App\Events\SomeEvent); To fire and event
+	//dispatch(new App\Jobs\SendTestMail());
+
+	Mail::to('parth.vora.777@gmail.com')
+    ->queue(new App\Mail\Testmail());
+    
+    dd('asd');
+
+
+	$mail = (new App\Mail\Testmail())->onQueue('default');
+	Mail::to($user)->queue($mail);
 });

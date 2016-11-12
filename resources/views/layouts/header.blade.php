@@ -3,9 +3,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="description" content="">
 <meta name="author" content="">
+<meta name="csrf-token" content="{{ csrf_token() }}">
 
-<title>PV's blogging</title>
-
+<title>{{ config('app.name', 'Laravel') }}</title>
 <!-- Bootstrap Core CSS -->
 <link href="{{ asset('css/bootstrap.min.css') }}" rel="stylesheet">
 
@@ -23,6 +23,12 @@
 
 <link rel="stylesheet" href="{{ asset('css/bootstrap-datetimepicker.min.css') }}" />
 <link rel="stylesheet" href="{{ asset('css/select2.min.css') }}" />
+
+<script>
+    window.Laravel = <?php echo json_encode([
+        'csrfToken' => csrf_token(),
+    ]); ?>
+</script>
 
 <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
 <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
