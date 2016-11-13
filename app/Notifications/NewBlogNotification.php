@@ -8,8 +8,9 @@ use Illuminate\Notifications\Notification;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Messages\SlackMessage;
+use Illuminate\Notifications\Messages\NexmoMessage;
 
-class NewBlogSlackNotification extends Notification
+class NewBlogNotification extends Notification
 {
     use Queueable;
 
@@ -33,7 +34,7 @@ class NewBlogSlackNotification extends Notification
      */
     public function via($notifiable)
     {
-        return ['mail', 'slack'];
+        return ['mail', 'slack', 'nexmo'];
     }
 
     /**
@@ -45,11 +46,11 @@ class NewBlogSlackNotification extends Notification
     public function toMail($notifiable)
     {
         return (new MailMessage)
-                    ->subject('Blog notification')
-                    ->success('Blog published successfully')
-                    ->line('Your blog has been published successfully!')
-                    ->action('View blog', route('blog.show', $this->blog))
-                    ->line('Thank you for using our application!');
+        ->subject('Blog notification')
+        ->success('Blog published successfully')
+        ->line('Your blog has been published successfully!')
+        ->action('View blog', route('blog.show', $this->blog))
+        ->line('Thank you for using our application!');
     }
 
     /**
@@ -61,10 +62,23 @@ class NewBlogSlackNotification extends Notification
     public function toSlack($notifiable)
     {
         return (new SlackMessage)
-                    ->success()
-                    ->from("Pv's blog", ':ghost:')
-                    ->content('Your new blog "' . $this->blog['title'] . '" has been published.' );
+        ->success()
+        ->from("Pv's blog", ':ghost:')
+        ->content('Your new blog "' . $this->blog['title'] . '" has been published.' );
     }
+
+    /**
+     * Get the Nexmo / SMS representation of the notification.
+     *
+     * @param  mixed  $notifiable
+     * @return NexmoMessage
+     */
+    public function toNexmo($notifiable)
+    {
+        return (new NexmoMessage)
+        ->content('Your new blog "' . $this->blog['title'] . '" has been published.');
+    }
+
 
     /**
      * Get the array representation of the notification.

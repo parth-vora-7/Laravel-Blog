@@ -10,7 +10,7 @@ use App\User;
 use Auth;
 use Storage;
 use App\Events\NewBlogPublished;
-use App\Notifications\NewBlogSlackNotification;
+use App\Notifications\NewBlogNotification;
 
 class BlogController extends Controller
 {
@@ -73,7 +73,7 @@ class BlogController extends Controller
         }
 
         if($blog) {
-            Auth::User()->notify(new NewBlogSlackNotification($blog));
+            Auth::User()->notify(new NewBlogNotification($blog));
             event(new NewBlogPublished($blog));
             flash('Your blog has been successfully posted.', 'success')->important();
             return redirect()->route('blog.index');

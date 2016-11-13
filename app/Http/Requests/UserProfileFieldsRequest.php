@@ -37,7 +37,7 @@ class UserProfileFieldsRequest extends FormRequest
         'name' => 'required|max:255|regex:/^[a-zA-Z\s]*$/',
         'username' => ['required', 'min:3', 'max:255', 'regex:/^[a-zA-Z0-9\s]*$/', Rule::unique('users')->ignore($user->id, '_id')],
         'email' => ['required', 'email', 'max:255', Rule::unique('users')->ignore($user->id, '_id')],
-        'contact_no' => 'required|digits:10',
+        'contact_no' => 'required|digits:12',
         'gender' => 'required|in:male,female',
         'country' => 'required',
         'hobbies' => 'required',

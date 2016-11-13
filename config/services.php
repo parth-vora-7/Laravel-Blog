@@ -65,4 +65,9 @@ return [
         'client_secret' => env('BITBUCKET_CLIENT_SECRET'),
         'redirect' => env('BITBUCKET_REDIRECT'), //URL::route('auth.bitbucket.callback')
     ],
+    'nexmo' => [
+        'key' => env('NEXMO_KEY'),
+        'secret' => env('NEXMO_SECRET'),
+        'sms_from' => '15556666666',
+    ],
 ];

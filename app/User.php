@@ -114,6 +114,11 @@ class User extends Eloquent implements
 
     public function routeNotificationForSlack()
     {
-        return 'https://hooks.slack.com/services/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';
+        return $this->slack_webhook_url;
+    }
+
+    public function routeNotificationForNexmo()
+    {
+        return $this->contact_no;
     }
 }
