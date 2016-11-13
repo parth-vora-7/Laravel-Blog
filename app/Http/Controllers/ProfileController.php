@@ -27,6 +27,7 @@ class ProfileController extends Controller
         $user->hobbies = $request->hobbies;
         $user->about_me = $request->about_me;
         $user->date_of_birth = $request->date_of_birth;
+        $user->slack_webhook_url = $request->slack_webhook_url;
 
         $avatars_org_dir = 'public/avatars/origional';
         Storage::makeDirectory($avatars_org_dir);

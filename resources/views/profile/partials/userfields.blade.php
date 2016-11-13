@@ -167,15 +167,29 @@
                     <img src="{{ asset(Helper::getImageThumb($user->avatar, 70, 70)) }}" />  
                 </div>
             </div>
+
+            <div class="form-group{{ $errors->has('slack_webhook_url') ? ' has-error' : '' }}">
+            <label for="slack_webhook_url" class="col-md-4 control-label">Slack webhook url</label>
+                <div class="col-md-6">
+                    {!! Form::text('slack_webhook_url', NULL, ['class' => 'form-control']) !!}
+
+                    @if ($errors->has('slack_webhook_url'))
+                    <span class="help-block">
+                        <strong>{{ $errors->first('slack_webhook_url') }}</strong>
+                    </span>
+                    @endif
+                </div>
+            </div>
+
             @endif
 
             <div class="form-group{{ $errors->has('avatar') ? ' has-error' : '' }}">
                 <label for="avatar" class="col-md-4 control-label">Select new profile pic</label>
                 <div class="col-md-6">
                     @if(isset($user->avatar))
-                        {!! Form::file('avatar', ['class' => 'form-control']) !!}
+                    {!! Form::file('avatar', ['class' => 'form-control']) !!}
                     @else
-                        {!! Form::file('avatar', ['class' => 'form-control', 'required' => 'required']) !!}
+                    {!! Form::file('avatar', ['class' => 'form-control', 'required' => 'required']) !!}
                     @endif
                     @if ($errors->has('avatar'))
                     <span class="help-block">

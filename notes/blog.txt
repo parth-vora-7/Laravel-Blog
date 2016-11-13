@@ -35,10 +35,8 @@ tags:
 - id, tag
 comments:
 - id, comment
-- login with username or email
 
 
-Email notification upon signup
 Popup notification upon new blog post
 
 

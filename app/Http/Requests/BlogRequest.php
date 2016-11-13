@@ -40,7 +40,7 @@ class BlogRequest extends FormRequest
         'title' => ['required', 'min:5', 'max:255', Rule::unique('blogs')->ignore($blog_id, '_id')],
         'text' => 'required|min:5|max:3000',
         'published_on' => 'required|date',
-        'blog_image' => (!$blog) ? 'required|image' : 'image'    
+        'blog_image' => (!$blog) ? 'required|image' : 'image'
         ];
     }
 }

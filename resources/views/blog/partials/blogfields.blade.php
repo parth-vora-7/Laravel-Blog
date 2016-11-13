@@ -81,8 +81,22 @@
     </div>
 </div>
 
-<div class="form-group">
-    <div class="col-md-6 col-md-offset-5">
-        {!! Form::submit($btntitle, ['class' => 'btn btn-primary']) !!}
+<div class="form-group{{ $errors->has('commenting') ? ' has-error' : '' }}">
+    <label for="commenting" class="col-md-2 col-md-offset-1 control-label">Allow comments</label>
+    <div class="col-md-8">
+        <label class="checkbox-inline">{!! Form::checkbox('commenting', 'on', NULL, ['class' => '']) !!}
+        </label>
+            
+            @if ($errors->has('commenting'))
+            <span class="help-block">
+                <strong>{{ $errors->first('commenting') }}</strong>
+            </span>
+            @endif
+        </div>
     </div>
-</div>
+
+    <div class="form-group">
+        <div class="col-md-6 col-md-offset-5">
+            {!! Form::submit($btntitle, ['class' => 'btn btn-primary']) !!}
+        </div>
+    </div>

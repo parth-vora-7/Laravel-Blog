@@ -29,7 +29,6 @@
                             @can('update', $blog)
                             {!! Form::open(['route' => ['blog.destroy', $blog], 'method' => 'POST', 'role' => "form"]) !!}
                             <em>{!! Form::submit('Delete', ['class' => 'btn-link']) !!}</em>
-                            {{-- <em><a href="{{ route('blog.destroy', $blog) }}">Delete</a></em> --}}
                             {{ method_field('DELETE') }}
                             {!! Form::close() !!}
                             @endcan

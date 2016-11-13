@@ -38,6 +38,7 @@ class Blog extends Model
 	 	'text', 
         'published_on',
 	 	'blog_image',
+        'commenting',
         'deleted_at'
  	];
 

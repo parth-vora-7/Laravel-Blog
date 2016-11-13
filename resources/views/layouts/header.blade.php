@@ -6,29 +6,14 @@
 <meta name="csrf-token" content="{{ csrf_token() }}">
 
 <title>{{ config('app.name', 'Laravel') }}</title>
-<!-- Bootstrap Core CSS -->
-<link href="{{ asset('css/bootstrap.min.css') }}" rel="stylesheet">
 
-<!-- Custom Fonts -->
-<link href="{{ asset('font-awesome/css/font-awesome.min.css') }}" rel="stylesheet" type="text/css">
-<link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
-<link href='https://fonts.googleapis.com/css?family=Kaushan+Script' rel='stylesheet' type='text/css'>
-<link href='https://fonts.googleapis.com/css?family=Droid+Serif:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
-<link href='https://fonts.googleapis.com/css?family=Roboto+Slab:400,100,300,700' rel='stylesheet' type='text/css'>
-
-<!-- Theme CSS -->
-<link href="{{ asset('bootstrap-social-gh-pages/bootstrap-social.css') }}" rel="stylesheet">
-<link href="{{ asset('css/agency.min.css') }}" rel="stylesheet">
-<link href="{{ asset('css/custom.css') }}" rel="stylesheet">
-
-<link rel="stylesheet" href="{{ asset('css/bootstrap-datetimepicker.min.css') }}" />
-<link rel="stylesheet" href="{{ asset('css/select2.min.css') }}" />
+<link href="{{ elixir('css/all.css') }}" rel="stylesheet">
 
 <script>
     window.Laravel = <?php echo json_encode([
         'csrfToken' => csrf_token(),
     ]); ?>
-</script>
+</script> 
 
 <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
 <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->

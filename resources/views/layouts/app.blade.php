@@ -4,10 +4,10 @@
 	@include('layouts/header')
 </head>
 <body id="page-top" class="index">
-	
-	@include('layouts/navbar')
-	
-	@yield('content')
-	@include('layouts/footer')
+	<div id="app">
+		@include('layouts/navbar')
+		@yield('content')
+		@include('layouts/footer')
+	</div>
 </body>
 </html>

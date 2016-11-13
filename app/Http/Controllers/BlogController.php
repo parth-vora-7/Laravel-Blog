@@ -9,6 +9,8 @@ use App\Tag;
 use App\User;
 use Auth;
 use Storage;
+use App\Events\NewBlogPublished;
+use App\Notifications\NewBlogSlackNotification;
 
 class BlogController extends Controller
 {
@@ -54,6 +56,7 @@ class BlogController extends Controller
                 'text' => $request->text,
                 'published_on' => $request->published_on,
                 'blog_image' => $org_blog_source,
+                'commenting' => ($request->commenting) ? 1 : 0,
                 'deleted_at' => NULL
                 ]
                 );
@@ -70,6 +73,8 @@ class BlogController extends Controller
         }
 
         if($blog) {
+            Auth::User()->notify(new NewBlogSlackNotification($blog));
+            event(new NewBlogPublished($blog));
             flash('Your blog has been successfully posted.', 'success')->important();
             return redirect()->route('blog.index');
         }
@@ -118,6 +123,7 @@ class BlogController extends Controller
             $blog->title = $request->title;
             $blog->text = $request->text;
             $blog->published_on = $request->published_on;
+            $blog->commenting = ($request->commenting) ? 1 : 0;
 
             if($request->blog_image && $blog_img_file = $request->blog_image->store($blogs_org_dir)) // Upload avatar
             {

@@ -13,7 +13,31 @@ require('laravel-elixir-vue-2');
  |
  */
 
-elixir(mix => {
-    mix.sass('app.scss')
-       .webpack('app.js');
-});
+ elixir(mix => {
+ 	//mix.sass('app.scss')
+ 	mix.webpack('app.js')
+ 	.styles([
+ 		'bootstrap.min.css',
+ 		'agency.css',
+ 		'font-awesome.min.css',
+ 		'bootstrap-social.css',
+ 		'bootstrap-datetimepicker.min.css',
+ 		'select2.min.css',
+ 		'custom.css',
+ 		])
+ 	.scripts([
+ 		//'app.js',
+ 		//'jquery-3.1.1.min.js',
+ 		//'bootstrap.min.js',
+ 		'jquery.easing.min.js',
+ 		'jqBootstrapValidation.js',
+ 		'agency.min.js',
+ 		'moment.js',
+ 		'bootstrap-datetimepicker.min.js',
+ 		'select2.min.js',
+ 		'contact_me.js',
+ 		//'echo.js',
+ 		'custom.js'
+	])
+	.version(['css/all.css', 'js/all.js']);
+ });

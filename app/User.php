@@ -31,7 +31,7 @@ class User extends Eloquent implements
     protected $fillable = [
         'name', 'username', 'email', 'password', 'contact_no', 'gender', 'country', 
         'hobbies', 'about_me', 'date_of_birth', 'avatar', 'user_type', 
-        'social_id', 'registration_type', 'deleted_at'
+        'social_id', 'registration_type', 'slack_webhook_url', 'deleted_at'
     ];
 
     /**
@@ -109,5 +109,11 @@ class User extends Eloquent implements
     
     public function blogs() {
         return $this->hasMany('App\Blog');
+    }
+
+
+    public function routeNotificationForSlack()
+    {
+        return 'https://hooks.slack.com/services/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';
     }
 }
