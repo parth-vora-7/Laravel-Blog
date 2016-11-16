@@ -145,6 +145,8 @@ class SocialAuthController extends Controller
 				return Redirect::back();
 			}
 			$userid = $auth_user->id;
+			flash('Your account has been created. Please set your password.', 'success')->important();
+            return redirect()->route('blog.index');
 		}
 
 		$login = Auth::loginUsingId($userid);
@@ -152,6 +154,7 @@ class SocialAuthController extends Controller
 		{
 			throw new \Exception('Error logging in');
 		}
+
 		return redirect('/'); 
 	}
 

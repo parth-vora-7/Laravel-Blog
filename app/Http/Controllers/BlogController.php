@@ -7,10 +7,10 @@ use App\Http\Requests\BlogRequest;
 use App\Blog;
 use App\Tag;
 use App\User;
-use Auth;
-use Storage;
 use App\Events\NewBlogPublished;
 use App\Notifications\NewBlogNotification;
+use Auth;
+use Storage;
 
 class BlogController extends Controller
 {
@@ -76,7 +76,7 @@ class BlogController extends Controller
             Auth::User()->notify(new NewBlogNotification($blog));
             event(new NewBlogPublished($blog));
             flash('Your blog has been successfully posted.', 'success')->important();
-            return redirect()->route('blog.index');
+            return redirect()->route('user.blog', Auth::user());
         } else {
             flash('Something went wrong. Please try again.', 'danger')->important();
             return back()->withInput();

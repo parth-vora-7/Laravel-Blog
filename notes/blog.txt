@@ -21,8 +21,8 @@ Admin panel:
 
 
 Changes/bugs:
-1) If user is signuped using social media, then change password => choose password
-2) Publish on se;ected publish date only
+1) If user is signuped using social media, then change password => choose password --
+2) Publish on selected publish date only
 
 
 -------------------------------------------------------

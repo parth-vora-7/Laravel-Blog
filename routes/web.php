@@ -60,17 +60,5 @@ Route::group(['prefix' => 'page'], function () {
 });
 
 Route::get('test', function() {
-	$user = Auth::user();
-	//dd($user->email);
-	//event(new App\Events\SomeEvent); To fire and event
-	//dispatch(new App\Jobs\SendTestMail());
-
-	Mail::to('parth.vora.777@gmail.com')
-    ->queue(new App\Mail\Testmail());
-    
-    dd('asd');
-
-
-	$mail = (new App\Mail\Testmail())->onQueue('default');
-	Mail::to($user)->queue($mail);
+	dd(Carbon\Carbon::now());
 });

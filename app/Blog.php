@@ -16,14 +16,17 @@ class Blog extends Model
      *
      * @var string
      */
-    protected $dateFormat = 'd-m-Y H:i:s';
+
+   // protected $dateFormat = 'd-m-Y H:i:s';
 
     /**
      * The attributes that should be mutated to dates.
      *
      * @var array
      */
-    protected $dates = [
+
+    protected $dates = 
+    [
         'published_on',
         'deleted_at'
     ];
@@ -33,7 +36,9 @@ class Blog extends Model
      *
      * @var array
      */
-	protected $fillable = [
+
+	protected $fillable = 
+    [
 	 	'title', 
 	 	'text', 
         'published_on',
@@ -70,7 +75,9 @@ class Blog extends Model
      * 
      * @return mix
      */
-    public function user() {
+
+    public function user() 
+    {
         return $this->belongsTo('App\User');
     }
 
@@ -78,7 +85,8 @@ class Blog extends Model
      * To ckeck whether a blog has been published yet or not
      */
 
-    public function scopePublished($query) {
+    public function scopePublished($query) 
+    {
         $query->where('published_on', '<=', Carbon::now()->format('d-m-Y H:i:s'));
     }
 
@@ -87,7 +95,9 @@ class Blog extends Model
      * 
      * @return mix
      */
-    public function tags() {
+
+    public function tags() 
+    {
         return $this->belongsToMany('App\Tag');
     }
 
@@ -96,7 +106,9 @@ class Blog extends Model
      * 
      * @return mix
      */
-    public function getTagListAttribute() {
+
+    public function getTagListAttribute() 
+    {
         return $this->tags->pluck('id')->toArray();
     }
 }
