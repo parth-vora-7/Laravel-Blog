@@ -7,6 +7,7 @@
 6) Blog tagging feature --
 7) Blog comment feature --
 8) Notifications on new blog post(via Email, SMS and Popup)
+9) Tag pages (Sidebar)
 
 Admin panel:
 1) Admin theme integration
@@ -22,7 +23,7 @@ Admin panel:
 
 Changes/bugs:
 1) If user is signuped using social media, then change password => choose password --
-2) Publish on selected publish date only
+2) Publish on selected publish date only --
 
 
 -------------------------------------------------------

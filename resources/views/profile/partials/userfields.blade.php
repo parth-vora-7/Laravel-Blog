@@ -84,123 +84,127 @@
     <div class="form-group{{ $errors->has('gender') ? ' has-error' : '' }}">
         <label for="gender" class="col-md-4 control-label">Gender</label>
         <div class="col-md-6">
-            <label class="radio-inline">{!! Form::radio('gender', 'male', TRUE, ['required' => 'required']) !!}Male</label>
+            {!! Form::radio('gender', 'male', TRUE, ['required' => 'required', 'class' => 'radio']) !!}
+            <label>Male</label>
+            {!! Form::radio('gender', 'female', False, ['required' => 'required', 'class' => 'radio']) !!}
+            <label>Female</label>
 
-            <label class="radio-inline">{!! Form::radio('gender', 'female', False, ['required' => 'required']) !!}
-                Female</label>
-
-                @if ($errors->has('gender'))
-                <span class="help-block">
-                    <strong>{{ $errors->first('gender') }}</strong>
-                </span>
-                @endif
-            </div>
-        </div>
-
-        <div class="form-group{{ $errors->has('country') ? ' has-error' : '' }}">
-            <label for="country" class="col-md-4 control-label">Country</label>
-            <div class="col-md-6">
-                {!! Form::select('country', ['India' => 'India', 'USA' => 'USA'], NULL, ['class' => 'form-control', 'required' => 'required']) !!}
-
-                @if ($errors->has('country'))
-                <span class="help-block">
-                    <strong>{{ $errors->first('country') }}</strong>
-                </span>
-                @endif
-            </div>
-        </div>
-
-        <div class="form-group{{ $errors->has('hobbies') ? ' has-error' : '' }}">
-            <label for="hobbies" class="col-md-4 control-label">Hobbies</label>
-            <div class="col-md-6">
-                <label class="checkbox-inline">{!! Form::checkbox('hobbies[]', 'Playing cricket', NULL, ['class' => '']) !!}
-                    Playing cricket</label>
-                    <label class="checkbox-inline">{!! Form::checkbox('hobbies[]', 'Playing chess', NULL, ['class' => '']) !!} Playing chess</label>
-                    <br>
-                    <label class="checkbox-inline">{!! Form::checkbox('hobbies[]', 'Internet surfing', NULL, ['class' => '']) !!}Internet surfing</label>
-                    <label class="checkbox-inline">{!! Form::checkbox('hobbies[]', 'Outing', NULL, ['class' => '']) !!}Outing</label>
-                    <label class="checkbox-inline">{!! Form::checkbox('hobbies[]', 'Reading', NULL, ['class' => '']) !!}Reading</label>
-
-                    @if ($errors->has('hobbies'))
-                    <span class="help-block">
-                        <strong>{{ $errors->first('hobbies') }}</strong>
-                    </span>
-                    @endif
-                </div>
-            </div>
-
-            <div class="form-group{{ $errors->has('about_me') ? ' has-error' : '' }}">
-                <label for="about_me" class="col-md-4 control-label">About me</label>
-
-                <div class="col-md-6">
-                    {!! Form::textarea('about_me', NULL, ['class' => 'form-control', 'required' => 'required']) !!}
-                    @if ($errors->has('about_me'))
-                    <span class="help-block">
-                        <strong>{{ $errors->first('about_me') }}</strong>
-                    </span>
-                    @endif
-                </div>
-            </div>
-
-            <div class="form-group{{ $errors->has('date_of_birth') ? ' has-error' : '' }}">
-                <label for="date_of_birth" class="col-md-4 control-label">Date of birth</label>
-
-                <div class="col-md-6">
-                    <div class="input-group date" id="dob">
-                        {!! Form::text('date_of_birth', NULL, ['class' => 'form-control', 'required' => 'required']) !!}
-                        <span class="input-group-addon">
-                            <span class="glyphicon glyphicon-calendar"></span>
-                        </span>
-                    </div>
-                    @if ($errors->has('date_of_birth'))
-                    <span class="help-block">
-                        <strong>{{ $errors->first('date_of_birth') }}</strong>
-                    </span>
-                    @endif
-                </div>
-            </div>
-
-            @if(isset($user))
-            <div class="form-group">
-                <label for="avatar" class="col-md-4 control-label">Current profile pic</label>
-                <div class="col-md-6">
-                    <img src="{{ asset(Helper::getImageThumb($user->avatar, 70, 70)) }}" />  
-                </div>
-            </div>
-
-            <div class="form-group{{ $errors->has('slack_webhook_url') ? ' has-error' : '' }}">
-            <label for="slack_webhook_url" class="col-md-4 control-label">Slack webhook url</label>
-                <div class="col-md-6">
-                    {!! Form::text('slack_webhook_url', NULL, ['class' => 'form-control']) !!}
-
-                    @if ($errors->has('slack_webhook_url'))
-                    <span class="help-block">
-                        <strong>{{ $errors->first('slack_webhook_url') }}</strong>
-                    </span>
-                    @endif
-                </div>
-            </div>
-
+            @if ($errors->has('gender'))
+            <span class="help-block">
+                <strong>{{ $errors->first('gender') }}</strong>
+            </span>
             @endif
+        </div>
+    </div>
 
-            <div class="form-group{{ $errors->has('avatar') ? ' has-error' : '' }}">
-                <label for="avatar" class="col-md-4 control-label">Select new profile pic</label>
-                <div class="col-md-6">
-                    @if(isset($user->avatar))
-                    {!! Form::file('avatar', ['class' => 'form-control']) !!}
-                    @else
-                    {!! Form::file('avatar', ['class' => 'form-control', 'required' => 'required']) !!}
-                    @endif
-                    @if ($errors->has('avatar'))
-                    <span class="help-block">
-                        <strong>{{ $errors->first('avatar') }}</strong>
-                    </span>
-                    @endif
-                </div>
-            </div>
+    <div class="form-group{{ $errors->has('country') ? ' has-error' : '' }}">
+        <label for="country" class="col-md-4 control-label">Country</label>
+        <div class="col-md-6">
+            {!! Form::select('country', ['India' => 'India', 'USA' => 'USA'], NULL, ['class' => 'form-control', 'required' => 'required']) !!}
 
-            <div class="form-group">
-                <div class="col-md-6 col-md-offset-4">
-                    {!! Form::submit($btntitle, ['class' => 'btn btn-primary']) !!}
-                </div>
+            @if ($errors->has('country'))
+            <span class="help-block">
+                <strong>{{ $errors->first('country') }}</strong>
+            </span>
+            @endif
+        </div>
+    </div>
+
+    <div class="form-group{{ $errors->has('hobbies') ? ' has-error' : '' }}">
+        <label for="hobbies" class="col-md-4 control-label">Hobbies</label>
+        <div class="col-md-6">
+            {!! Form::checkbox('hobbies[]', 'Playing cricket', NULL, ['class' => 'checkbox']) !!}
+            <label>Playing cricket</label>
+            {!! Form::checkbox('hobbies[]', 'Playing chess', NULL, ['class' => 'checkbox']) !!} 
+            <label>Playing chess</label>
+            <br>
+            {!! Form::checkbox('hobbies[]', 'Internet surfing', NULL, ['class' => 'checkbox']) !!}
+            <label>Internet surfing</label>
+            {!! Form::checkbox('hobbies[]', 'Outing', NULL, ['class' => 'checkbox']) !!}
+            <label>Outing</label>
+            {!! Form::checkbox('hobbies[]', 'Reading', NULL, ['class' => 'checkbox']) !!}
+            <label>Reading</label>
+
+            @if ($errors->has('hobbies'))
+            <span class="help-block">
+                <strong>{{ $errors->first('hobbies') }}</strong>
+            </span>
+            @endif
+        </div>
+    </div>
+
+    <div class="form-group{{ $errors->has('about_me') ? ' has-error' : '' }}">
+        <label for="about_me" class="col-md-4 control-label">About me</label>
+
+        <div class="col-md-6">
+            {!! Form::textarea('about_me', NULL, ['class' => 'form-control', 'required' => 'required']) !!}
+            @if ($errors->has('about_me'))
+            <span class="help-block">
+                <strong>{{ $errors->first('about_me') }}</strong>
+            </span>
+            @endif
+        </div>
+    </div>
+
+    <div class="form-group{{ $errors->has('date_of_birth') ? ' has-error' : '' }}">
+        <label for="date_of_birth" class="col-md-4 control-label">Date of birth</label>
+
+        <div class="col-md-6">
+            <div class="input-group date" id="dob">
+                {!! Form::text('date_of_birth', NULL, ['class' => 'form-control', 'required' => 'required']) !!}
+                <span class="input-group-addon">
+                    <span class="glyphicon glyphicon-calendar"></span>
+                </span>
             </div>
+            @if ($errors->has('date_of_birth'))
+            <span class="help-block">
+                <strong>{{ $errors->first('date_of_birth') }}</strong>
+            </span>
+            @endif
+        </div>
+    </div>
+
+    @if(isset($user))
+    <div class="form-group">
+        <label for="avatar" class="col-md-4 control-label">Current profile pic</label>
+        <div class="col-md-6">
+            <img src="{{ asset(Helper::getImageThumb($user->avatar, 70, 70)) }}" />  
+        </div>
+    </div>
+
+    <div class="form-group{{ $errors->has('slack_webhook_url') ? ' has-error' : '' }}">
+        <label for="slack_webhook_url" class="col-md-4 control-label">Slack webhook url</label>
+        <div class="col-md-6">
+            {!! Form::text('slack_webhook_url', NULL, ['class' => 'form-control']) !!}
+
+            @if ($errors->has('slack_webhook_url'))
+            <span class="help-block">
+                <strong>{{ $errors->first('slack_webhook_url') }}</strong>
+            </span>
+            @endif
+        </div>
+    </div>
+
+    @endif
+
+    <div class="form-group{{ $errors->has('avatar') ? ' has-error' : '' }}">
+        <label for="avatar" class="col-md-4 control-label">Select new profile pic</label>
+        <div class="col-md-6">
+            @if(isset($user->avatar))
+            {!! Form::file('avatar', ['class' => 'form-control']) !!}
+            @else
+            {!! Form::file('avatar', ['class' => 'form-control', 'required' => 'required']) !!}
+            @endif
+            @if ($errors->has('avatar'))
+            <span class="help-block">
+                <strong>{{ $errors->first('avatar') }}</strong>
+            </span>
+            @endif
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="col-md-6 col-md-offset-4">
+            {!! Form::submit($btntitle, ['class' => 'btn btn-primary']) !!}
+        </div>
+    </div>

@@ -23,6 +23,7 @@ require('laravel-elixir-vue-2');
  		'bootstrap-social.css',
  		'bootstrap-datetimepicker.min.css',
  		'select2.min.css',
+ 		'icheck.css',
  		'custom.css',
  		])
  	.scripts([
@@ -36,6 +37,7 @@ require('laravel-elixir-vue-2');
  		'bootstrap-datetimepicker.min.js',
  		'select2.min.js',
  		'contact_me.js',
+ 		'icheck.min.js',
  		//'echo.js',
  		'custom.js'
 	])

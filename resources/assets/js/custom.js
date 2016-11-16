@@ -26,8 +26,15 @@ $(function () {
 		}
 	});
 
+	$('.checkbox, .radio').iCheck({
+		checkboxClass: 'icheckbox_flat-yellow',
+		radioClass: 'iradio_flat-yellow',
+		labelHover: false,
+		cursor: true
+	});
+
 	Echo.channel('blog')
-    .listen('NewBlogPublished', (e) => {
-        console.log(e);
-    });
+	.listen('NewBlogPublished', (e) => {
+		console.log(e);
+	});
 });
