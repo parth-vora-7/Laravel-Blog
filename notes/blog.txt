@@ -1,20 +1,12 @@
-Changes:
-If user is signuped using social media, then change password => choose password
-1) Theme integration --
-2) User types
-- admin --
-- author (signup user) --
-3) Login, signup and reset password --
-4) Edit profile, change password pages --- 
-4) Blog add page (RTE) ---
-- My blog page (edit and delete(soft delete)) ---
-5) Blog listing page
-- Pagination ---
-- Lazy loading
-6) Tags for blog ---
-7) Comments on blogs
-8) Notifications for new blogs(email and realtime message)
-9) Social media login/singup --
+
+1) Front-end theme integration --
+2) Login, signup and reset password --
+3) Social media login --
+4) Edit profile, change password --
+5) Blog add/edit/delete --
+6) Blog tagging feature --
+7) Blog comment feature --
+8) Notifications on new blog post(via Email, SMS and Popup)
 
 Admin panel:
 1) Admin theme integration
@@ -26,20 +18,11 @@ Admin panel:
 7) Bulk email sending
 8) Manage country
 
-Collections
-users:
-- id, email, password, gender, contact_no, country, profile_pic, signup_type
-blogs:
-- id, uid, title, text, publish_date,
-tags: 
-- id, tag
-comments:
-- id, comment
 
 
-Popup notification upon new blog post
-
-
+Changes/bugs:
+1) If user is signuped using social media, then change password => choose password
+2) Publish on se;ected publish date only
 
 
 -------------------------------------------------------

@@ -21,7 +21,9 @@ Route::group(['prefix' => 'profile', 'middleware' => 'can:update,user'], functio
 	Route::put('update/{user}', ['as' => 'profile.udpate', 'uses' => 'ProfileController@updateProfile']);
 	Route::get('change-password/{user}', ['as' => 'password.change', 'uses' => 'ProfileController@changePassword']);
 	Route::put('update-password/{user}', ['as' => 'password.udpate', 'uses' => 'ProfileController@udpatePassword']);
-});	
+	Route::get('set-password/{user}', ['as' => 'password.set', 'uses' => 'ProfileController@setPassword']);
+	Route::post('save-password/{user}', ['as' => 'password.save', 'uses' => 'ProfileController@savePassword']);
+});
 
 Route::group(['prefix' => 'auth'], function () {
 	Route::get('facebook', ['as' => 'auth.facebook', 'uses' => 'SocialAuthController@redirectToFacebook']);

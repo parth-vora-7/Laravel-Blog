@@ -77,6 +77,9 @@ class BlogController extends Controller
             event(new NewBlogPublished($blog));
             flash('Your blog has been successfully posted.', 'success')->important();
             return redirect()->route('blog.index');
+        } else {
+            flash('Something went wrong. Please try again.', 'danger')->important();
+            return back()->withInput();
         }
     }
 
@@ -141,11 +144,13 @@ class BlogController extends Controller
                 }
             }
             
-            $blog->save();
-
-            flash('Your blog has been successfully updated.', 'success')->important();
-
-            return redirect()->route('blog.show', $blog->id);
+            if($blog->save()) {
+                flash('Your blog has been successfully updated.', 'success')->important();
+                return redirect()->route('blog.show', $blog->id);
+            } else {
+                flash('Something went wrong. Please try again.', 'danger')->important();
+                return back()->withInput();
+            }
         } 
     }
 

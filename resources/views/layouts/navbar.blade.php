@@ -42,7 +42,7 @@ $isHome = FALSE;
                     </ul>
                 </li>
                 @endif
-                @if(auth::guest())
+                @if(Auth::guest())
                 <li>
                     <a href="{{ url('login') }}">Login</a>
                 </li>
@@ -54,7 +54,11 @@ $isHome = FALSE;
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown"><small>Welcome</small>, {{ auth::user()->name }}<b class="caret"></b></a>
                     <ul class="dropdown-menu">
                       <li><a href="{{ URL::route('profile.edit', auth::user()->id) }}">Edit profile</a></li>
+                      @if(Auth::user()->password)
                       <li><a href="{{ URL::route('password.change', auth::user()->id) }}">Change password</a></li>
+                      @else
+                      <li><a href="{{ URL::route('password.set', auth::user()) }}">Set password</a></li>
+                      @endif
                       <li>
                           <a href="{{ url('/logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Logout</a>
                           <form id="logout-form" action="{{ url('/logout') }}" method="POST" style="display: none;">
