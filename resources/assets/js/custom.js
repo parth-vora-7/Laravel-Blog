@@ -1,4 +1,10 @@
 $(function () {
+	$.ajaxSetup({
+		headers: {
+			'X-CSRF-TOKEN': window.Laravel.csrfToken
+		}
+	});
+
 	$('#dob').datetimepicker({
 		useCurrent: true,
 		format: 'DD-MM-YYYY'
@@ -31,6 +37,32 @@ $(function () {
 		radioClass: 'iradio_flat-yellow',
 		labelHover: false,
 		cursor: true
+	});
+
+	$(document).on('submit', '.ajax-submit', function(e) {
+		var form = this;
+		e.preventDefault();
+		var formData = $(this).serialize();
+		var action = $(this).attr('action');
+		var method = $(this).attr('method');
+		$.ajax({
+			type: method,
+			url: action,
+			data: formData,
+			success: function(data)
+			{
+				if($('.ajax-content').length) {
+					$('.ajax-content').html(data);
+					$(form).find('text, textarea').val(null);
+				}
+			}
+		});
+	});
+
+	$(document).on('click', '.ajax-pagination a', function(e) {
+		e.preventDefault();
+		var action = $(this).attr('href');
+		$('.ajax-content').load(action);
 	});
 
 	Echo.channel('blog')

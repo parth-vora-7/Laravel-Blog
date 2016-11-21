@@ -44,7 +44,8 @@ class Blog extends Model
         'published_on',
 	 	'blog_image',
         'commenting',
-        'deleted_at'
+        'deleted_at',
+        'user_id'
  	];
 
     /**
@@ -110,5 +111,9 @@ class Blog extends Model
     public function getTagListAttribute() 
     {
         return $this->tags->pluck('id')->toArray();
+    }
+
+    public function comments() {
+        return $this->hasMany('App\Comment');
     }
 }

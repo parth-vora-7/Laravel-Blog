@@ -40,7 +40,7 @@
 
 <div class="form-group{{ $errors->has('published_on') ? ' has-error' : '' }}">
     <label for="published_on" class="col-md-2 col-md-offset-1 control-label">Published on</label>
-    <div class="col-md-8">
+    <div class="col-md-3">
         <div class="input-group date" id="published_on">
             {!! Form::text('published_on', NULL, ['class' => 'form-control', 'required' => 'required']) !!}
             <span class="input-group-addon">

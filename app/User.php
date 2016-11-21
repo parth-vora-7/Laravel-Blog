@@ -111,6 +111,15 @@ class User extends Eloquent implements
         return $this->hasMany('App\Blog');
     }
 
+    /**
+     * Get blog comments of a user
+     * 
+     * @return mix
+     */
+    
+    public function comments() {
+        return $this->hasMany('App\Comment');
+    }
 
     public function routeNotificationForSlack()
     {

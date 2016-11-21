@@ -66,7 +66,7 @@ class BlogController extends Controller
                 foreach($request->new_tags as $new_tag) {
                     $tag = Tag::create(['name' => $new_tag]);
                     if($tag) {
-                        $blog->tags()->attach($tag->id);        
+                        $blog->tags()->attach($tag->id);
                     }
                 }
             }
@@ -89,9 +89,14 @@ class BlogController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(Blog $blog)
+    public function show(Request $request, Blog $blog)
     {
-        return view('blog.detail', compact('blog'));
+        $comments = $blog->comments()->latest('created_at')->paginate(3);
+        
+        if ($request->ajax()) {
+            return view('comment.index', compact('comments'))->render();  
+        }
+        return view('blog.detail', compact('blog', 'comments'));
     }
 
     /**
@@ -151,7 +156,7 @@ class BlogController extends Controller
                 flash('Something went wrong. Please try again.', 'danger')->important();
                 return back()->withInput();
             }
-        } 
+        }
     }
 
     /**
@@ -162,13 +167,12 @@ class BlogController extends Controller
      */
     public function destroy(Request $request, Blog $blog)
     {
-        if ($request->user()->can('delete', $blog)) {
-            if($blog->delete()) {
-                flash('Your blog has been successfully deleted.', 'success')->important();
-                return redirect()->route('blog.index');
-            }else {
-                abort(403);
-            }
+        if($blog->delete()) {
+            flash('Your blog has been successfully deleted.', 'success')->important();
+            return redirect()->route('blog.index');
+        } else {
+            flash('Something went wrong. Please try again.', 'danger')->important();
+            return back();
         }
     }
 

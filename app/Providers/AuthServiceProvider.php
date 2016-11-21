@@ -4,8 +4,10 @@ namespace App\Providers;
 
 use App\User;
 use App\Blog;
+use App\Comment;
 use App\Policies\UserPolicy;
 use App\Policies\BlogPolicy;
+use App\Policies\CommentPolicy;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
 
@@ -20,6 +22,7 @@ class AuthServiceProvider extends ServiceProvider
         'App\Model' => 'App\Policies\ModelPolicy',
         User::class => UserPolicy::class,
         Blog::class => BlogPolicy::class,
+        Comment::class => CommentPolicy::class
     ];
 
     /**

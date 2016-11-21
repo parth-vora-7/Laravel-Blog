@@ -51,6 +51,12 @@ Route::group(['prefix' => 'blog'], function () {
 	Route::get('{blog}', ['as' => 'blog.show', 'uses' => 'BlogController@show']);
 });
 
+Route::group(['prefix' => 'comment'], function () {
+	Route::get('{blog}', 'CommentController@index');
+	Route::post('{blog}', ['as' => 'blog.comment.store', 'uses' => 'CommentController@store'])->middleware('auth');
+	Route::delete('{blog}/{comment}', ['as' => 'comment.destroy', 'uses' => 'CommentController@destroy'])->middleware('can:delete,comment');
+});
+
 Route::group(['prefix' => 'page'], function () {
 	Route::get('services', ['as' => 'services', 'uses' => 'BasicpageController@getServices']);
 	Route::get('portfolio', ['as' => 'portfolio', 'uses' => 'BasicpageController@getPortfolio']);
@@ -59,6 +65,10 @@ Route::group(['prefix' => 'page'], function () {
 	Route::get('contact', ['as' => 'contact', 'uses' => 'BasicpageController@getContact']);
 });
 
+Route::get('tags', ['as' => 'tags.index', 'uses' => 'TagController@index']);
+Route::get('tags/{tag}', ['as' => 'tags.show', 'uses' => 'TagController@show']);
+
 Route::get('test', function() {
-	dd(Carbon\Carbon::now());
+	$blog = App\Blog::first();
+	dd(App\Http\Controllers\CommentController::commentPagination($blog));
 });

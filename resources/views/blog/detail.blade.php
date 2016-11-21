@@ -20,13 +20,12 @@
 								<p>Posted by: <em>{{ $blog->user->name or 'Anonymous' }}</em><span>on</span><em>{{ $blog->published_on }}</em></p>
 							</div>
 							<div class="blog-actions">
-							@can('update', $blog)
+								@can('update', $blog)
 								<em><a href="{{ route('blog.edit', $blog) }}">Edit</a></em>
 								@endcan
 								@can('update', $blog)
 								{!! Form::open(['route' => ['blog.destroy', $blog], 'method' => 'POST', 'role' => "form"]) !!}
 								<em>{!! Form::submit('Delete', ['class' => 'btn-link']) !!}</em>
-								{{-- <em><a href="{{ route('blog.destroy', $blog) }}">Delete</a></em> --}}
 								{{ method_field('DELETE') }}
 								{!! Form::close() !!}
 								@endcan
@@ -34,9 +33,15 @@
 						</div>    
 					</div>
 				</article>
+				@if($blog->commenting)
+				@include('comment.create', ['blog' => $blog])
+				@endif
+				<div class="ajax-content">
+					@include('comment.index')
+				</div>
 			</div>
 			<div class="sidebar col-sm-3">
-				<h3>sidebar comming soon</h3>
+            	@include('tag.index')
 			</div>
 		</div>
 	</div>

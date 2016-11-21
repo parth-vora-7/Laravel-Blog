@@ -5499,6 +5499,12 @@ A(a,!1,!0)}else B&&(/ut|nd/.test(d)?(h[_remove](v),e[_remove](w)):(h[_add](v),e[
 b[_type],e=/wn|up/.test(d)?t:v;if(!c[n]){if(d==_click)A(a,!1,!0);else{if(/wn|er|in/.test(d))h[_add](e);else h[_remove](e+" "+t);if(z.length&&B&&e==v)z[/ut|nd/.test(d)?_remove:_add](w)}if(_mobile)b.stopPropagation();else return!1}})})}})(window.jQuery||window.Zepto);
 
 $(function () {
+	$.ajaxSetup({
+		headers: {
+			'X-CSRF-TOKEN': window.Laravel.csrfToken
+		}
+	});
+
 	$('#dob').datetimepicker({
 		useCurrent: true,
 		format: 'DD-MM-YYYY'
@@ -5531,6 +5537,32 @@ $(function () {
 		radioClass: 'iradio_flat-yellow',
 		labelHover: false,
 		cursor: true
+	});
+
+	$(document).on('submit', '.ajax-submit', function(e) {
+		var form = this;
+		e.preventDefault();
+		var formData = $(this).serialize();
+		var action = $(this).attr('action');
+		var method = $(this).attr('method');
+		$.ajax({
+			type: method,
+			url: action,
+			data: formData,
+			success: function(data)
+			{
+				if($('.ajax-content').length) {
+					$('.ajax-content').html(data);
+					$(form).find('text, textarea').val(null);
+				}
+			}
+		});
+	});
+
+	$(document).on('click', '.ajax-pagination a', function(e) {
+		e.preventDefault();
+		var action = $(this).attr('href');
+		$('.ajax-content').load(action);
 	});
 
 	Echo.channel('blog')

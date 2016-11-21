@@ -47,7 +47,7 @@
             @endif
         </div>
         <div class="sidebar col-sm-3">
-            <h3>sidebar comming soon</h3>
+            @include('tag.index')
         </div>
     </div>
 </div>
