@@ -2,7 +2,9 @@
     <div class="col-md-12">
         {!! Form::open(['route' => ['blog.comment.store', $blog], 'method' => 'POST', 'files' => TRUE,
         'class' => 'form-horizontal ajax-submit', 'role' => "form"]) !!}
-
+        <div class="alert alert-danger hidden" role="alert">
+            <ul></ul>
+        </div>
         <div class="form-group{{ $errors->has('text') ? ' has-error' : '' }}">
             <div class="col-md-12">
                 {!! Form::textarea('text', NULL, ['class' => 'form-control', 'required' => 'required', 'rows' => 3]) !!}

@@ -5540,7 +5540,8 @@ $(function () {
 	});
 
 	$(document).on('submit', '.ajax-submit', function(e) {
-		var form = this;
+		var form = $(this);
+		var errorContainer = $(form.find('.alert-danger'));
 		e.preventDefault();
 		var formData = $(this).serialize();
 		var action = $(this).attr('action');
@@ -5549,11 +5550,23 @@ $(function () {
 			type: method,
 			url: action,
 			data: formData,
-			success: function(data)
+			success: function(result)
 			{
 				if($('.ajax-content').length) {
-					$('.ajax-content').html(data);
-					$(form).find('text, textarea').val(null);
+					$('.ajax-content').html(result);
+					form.find('text, textarea').val(null);
+					errorContainer.html('<ul></ul>');
+					errorContainer.addClass('hidden');
+				}
+			},
+			error: function(xhr, status, error)
+			{
+				var textErrors = JSON.parse(xhr.responseText).text;
+				if(errorContainer.length && xhr.status == 422) {
+					errorContainer.removeClass('hidden');
+					textErrors.forEach(function(error) {
+						errorContainer.html('<li>' + error + '</li>');
+					});	
 				}
 			}
 		});

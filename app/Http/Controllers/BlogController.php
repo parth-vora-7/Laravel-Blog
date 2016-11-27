@@ -94,7 +94,7 @@ class BlogController extends Controller
         $comments = $blog->comments()->latest('created_at')->paginate(3);
         
         if ($request->ajax()) {
-            return view('comment.index', compact('comments'))->render();  
+            return view('comment.index', compact('blog', 'comments'))->render();  
         }
         return view('blog.detail', compact('blog', 'comments'));
     }
