@@ -30,7 +30,7 @@ footer {
     right: 0px;
     color: inherit;
 }
-article {
+article, .comment {
     float: left;
     display: inline-block;
     clear: both;
@@ -52,15 +52,17 @@ article blockquote {
     text-align: justify;
     margin-bottom: 5px;
 }
-article form {
+article form, .comment .comment-delete-form {
     float: right;
 }
-article form input[type="submit"] {
+article form input[type="submit"],
+.comment form input[type="submit"] {
     border: 0;
     padding: 0;
     color: #fed136;
 }
-article form input[type="submit"]:hover {
+article form input[type="submit"]:hover,
+.comment form input[type="submit"]:hover {
     color: #fed136;
 }
 .blog-footer {

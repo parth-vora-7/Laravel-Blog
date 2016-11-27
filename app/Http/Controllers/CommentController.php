@@ -17,7 +17,6 @@ class CommentController extends Controller
     public function index(Blog $blog)
     {
         $comments = $blog->comments()->latest('created_at')->paginate(3);
-
         return view('comment.index', compact('blog', 'comments'));
     }
 
@@ -31,34 +30,12 @@ class CommentController extends Controller
     {
         $comment = $blog->comments()->create(['text' => request('text'), 'user_id' => $request->user()->id, 'deleted_at' => NULL]);
         if($comment) {
-            flash('Your comment has been successfully posted.', 'success')->important();
+            //flash('Your comment has been successfully posted.', 'success')->important();
             return $this->index($blog);
         } else {
-            flash('Something went wrong. Please try again.', 'danger')->important();
+            //flash('Something went wrong. Please try again.', 'danger')->important();
             return $this->index($blog);
         }
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-
-    }
-    
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
     }
     
     /**
@@ -68,9 +45,13 @@ class CommentController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Blog $blog, Comment $comment, CommentRequest $request)
     {
-        //
+        $comment->text = $request->text;
+        if($comment->save()) {
+            //flash('Your comment has been successfully deleted.', 'success')->important();
+            return $this->index($blog);
+        }
     }
     
     /**
@@ -82,7 +63,7 @@ class CommentController extends Controller
     public function destroy(Blog $blog, Comment $comment)
     {
         if($comment->delete()) {
-            flash('Your comment has been successfully deleted.', 'success')->important();
+            //flash('Your comment has been successfully deleted.', 'success')->important();
             return $this->index($blog);
         } 
     }

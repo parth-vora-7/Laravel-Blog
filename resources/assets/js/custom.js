@@ -61,12 +61,16 @@ $(function () {
 			},
 			error: function(xhr, status, error)
 			{
-				var textErrors = JSON.parse(xhr.responseText).text;
+				var errorsHTML = '';
+				var errorMsgs = JSON.parse(xhr.responseText);
 				if(errorContainer.length && xhr.status == 422) {
 					errorContainer.removeClass('hidden');
-					textErrors.forEach(function(error) {
-						errorContainer.html('<li>' + error + '</li>');
-					});	
+					$.each(errorMsgs, function(field, errors) {
+						$.each(errors, function(index, error) {
+							errorsHTML = errorsHTML + '<li>' + error + '</li>';
+						}); 
+					}); 
+					errorContainer.html(errorsHTML);
 				}
 			}
 		});
@@ -76,6 +80,29 @@ $(function () {
 		e.preventDefault();
 		var action = $(this).attr('href');
 		$('.ajax-content').load(action);
+	});
+
+	$(document).on('click', 'a.edit-comment', function(e) {
+		e.preventDefault();
+		var commentEditForm = $(this).closest('.comment').find('form.comment-edit-form');
+		if($(this).text() == 'Save') {
+			commentEditForm.submit();
+		} else {
+			commentEditForm.find('blockquote').addClass('hidden');
+			commentEditForm.find('textarea').removeClass('hidden');
+			$(this).text('Save');
+			$(this).closest('.comment').find('.edit-comment-cancel').removeClass('hidden');
+		}
+	});
+
+	$(document).on('click', 'a.edit-comment-cancel', function(e) {
+		e.preventDefault();
+		var commentEditForm = $(this).closest('.comment').find('form.comment-edit-form');
+		commentEditForm.find('textarea').val(commentEditForm.find('blockquote').text());
+		commentEditForm.find('blockquote').removeClass('hidden');
+		commentEditForm.find('textarea').addClass('hidden');
+		$(this).closest('.comment').find('.edit-comment').text('Edit');
+		$(this).closest('.comment').find('.edit-comment-cancel').addClass('hidden');
 	});
 
 	Echo.channel('blog')

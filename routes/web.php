@@ -54,6 +54,7 @@ Route::group(['prefix' => 'blog'], function () {
 Route::group(['prefix' => 'comment'], function () {
 	Route::get('{blog}', 'CommentController@index');
 	Route::post('{blog}', ['as' => 'blog.comment.store', 'uses' => 'CommentController@store'])->middleware('auth');
+	Route::match(['put', 'patch'], '{blog}/{comment}', ['as' => 'comment.update', 'uses' => 'CommentController@update'])->middleware('can:update,comment');
 	Route::delete('{blog}/{comment}', ['as' => 'comment.destroy', 'uses' => 'CommentController@destroy'])->middleware('can:delete,comment');
 });
 

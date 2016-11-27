@@ -49,7 +49,7 @@ class BlogController extends Controller
 
         if($blog_file = $request->blog_image->store($blogs_org_dir)) // Upload avatar
         {
-            $org_blog_source = str_replace ('public', 'storage', $blog_file);
+            $org_blog_source = str_replace('public', 'storage', $blog_file);
             $blog = Auth::User()->blogs()->create(
                 [
                 'title' => $request->title,
@@ -108,11 +108,12 @@ class BlogController extends Controller
     public function edit(Request $request, Blog $blog)
     {
         $tags = Tag::pluck('name', '_id');
-        if ($request->user()->can('update', $blog)) {
-            return view('blog.edit', compact('blog', 'tags'));
-        } else {
-            abort(403);
-        }
+        return view('blog.edit', compact('blog', 'tags'));
+        // if ($request->user()->can('update', $blog)) {
+        //     return view('blog.edit', compact('blog', 'tags'));
+        // } else {
+        //     abort(403);
+        // }
     }
 
     /**

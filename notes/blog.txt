@@ -25,9 +25,9 @@ Changes/bugs:
 2) Publish on selected publish date only --
 3) Comment:
 - Submit comment form using AJAX and update comment list --
-- Comment edit and delete using AJAX
+- Comment edit and delete using AJAX --
 - Comment authorization
-- comment success/failure messages using AJAX
+- comment success/failure messages using AJAX --
 - Popup/email/SMS notification to the user when someone comments on his/her blog
 
 
@@ -39,3 +39,5 @@ https://www.twilio.com/sms/toll-free
 4) Nexmo --
 5) Pusher --
 6) mailtrap --
+
+db.users.update({_id:ObjectId("583af27b0fe601137c00422c")},{$set:{"user_type":"admin"}})
