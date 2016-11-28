@@ -1,4 +1,5 @@
 <h3>Blog comments</h3>
+@include('flash::message')
 @if($comments->count())
 <div class="col-md-12">
 	@foreach($comments as $comment)

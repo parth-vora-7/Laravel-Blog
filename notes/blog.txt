@@ -6,7 +6,7 @@
 6) Blog tagging feature --
 7) Blog comment feature --
 8) Notifications on new blog post(via Email, SMS and Popup)
-9) Tag pages (Sidebar)
+9) Tag pages (Sidebar) --
 
 Admin panel:
 1) Admin theme integration
@@ -26,7 +26,7 @@ Changes/bugs:
 3) Comment:
 - Submit comment form using AJAX and update comment list --
 - Comment edit and delete using AJAX --
-- Comment authorization
+- Comment authorization 
 - comment success/failure messages using AJAX --
 - Popup/email/SMS notification to the user when someone comments on his/her blog
 

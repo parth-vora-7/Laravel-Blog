@@ -30,10 +30,10 @@ class CommentController extends Controller
     {
         $comment = $blog->comments()->create(['text' => request('text'), 'user_id' => $request->user()->id, 'deleted_at' => NULL]);
         if($comment) {
-            //flash('Your comment has been successfully posted.', 'success')->important();
+            flash('Your comment has been successfully posted.', 'success')->important();
             return $this->index($blog);
         } else {
-            //flash('Something went wrong. Please try again.', 'danger')->important();
+            flash('Something went wrong. Please try again.', 'danger')->important();
             return $this->index($blog);
         }
     }
@@ -49,7 +49,10 @@ class CommentController extends Controller
     {
         $comment->text = $request->text;
         if($comment->save()) {
-            //flash('Your comment has been successfully deleted.', 'success')->important();
+            flash('Your comment has been successfully updated.', 'success')->important();
+            return $this->index($blog);
+        } else {
+            flash('Something went wrong. Please try again.', 'danger')->important();
             return $this->index($blog);
         }
     }
@@ -63,7 +66,10 @@ class CommentController extends Controller
     public function destroy(Blog $blog, Comment $comment)
     {
         if($comment->delete()) {
-            //flash('Your comment has been successfully deleted.', 'success')->important();
+            flash('Your comment has been successfully deleted.', 'success')->important();
+            return $this->index($blog);
+        } else {
+            flash('Something went wrong. Please try again.', 'danger')->important();
             return $this->index($blog);
         } 
     }

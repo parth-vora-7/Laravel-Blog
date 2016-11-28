@@ -12,7 +12,7 @@ $isHome = FALSE;
             <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
                 <span class="sr-only">Toggle navigation</span> Menu <i class="fa fa-bars"></i>
             </button>
-            <a class="navbar-brand page-scroll" href="{{ ($isHome) ? '#page-top' : URL::route('home') }}">Start Bootstrap</a>
+            <a class="navbar-brand page-scroll" href="{{ ($isHome) ? '#page-top' : URL::route('home') }}">PV's blog</a>
         </div>
 
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
