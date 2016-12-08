@@ -6,6 +6,7 @@ use App\Blog;
 use App\Comment;
 use Illuminate\Http\Request;
 use App\Http\Requests\CommentRequest;
+use App\Notifications\CommentPostNotification;
 
 class CommentController extends Controller
 {
@@ -30,6 +31,8 @@ class CommentController extends Controller
     {
         $comment = $blog->comments()->create(['text' => request('text'), 'user_id' => $request->user()->id, 'deleted_at' => NULL]);
         if($comment) {
+            //dd($blog->user->email);
+            $blog->user->notify(new CommentPostNotification($blog, $comment));
             flash('Your comment has been successfully posted.', 'success')->important();
             return $this->index($blog);
         } else {
