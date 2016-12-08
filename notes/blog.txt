@@ -26,7 +26,7 @@ Changes/bugs:
 3) Comment:
 - Submit comment form using AJAX and update comment list --
 - Comment edit and delete using AJAX --
-- Comment authorization 
+- Comment authorization --
 - comment success/failure messages using AJAX --
 - Popup/email/SMS notification to the user when someone comments on his/her blog
 
