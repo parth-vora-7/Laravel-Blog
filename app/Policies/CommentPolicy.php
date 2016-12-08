@@ -44,9 +44,6 @@ class CommentPolicy
      */
     public function update(User $user, Comment $comment)
     {
-        if ($user->isAdmin()) {
-            return true;
-        }
         return $user->id === $comment->user_id;
     }
 
@@ -59,9 +56,6 @@ class CommentPolicy
      */
     public function delete(User $user, Comment $comment)
     {
-        if ($user->isAdmin()) {
-            return true;
-        }
         return $user->id === $comment->user_id;
     }
 }

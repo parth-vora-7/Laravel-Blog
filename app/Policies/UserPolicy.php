@@ -23,7 +23,7 @@ class UserPolicy
      * @param  \App\User  $user
      * @return mixed
      */
-    public function view(User $user, User $user)
+    public function view(User $user, User $updatingUser)
     {
         //
     }
@@ -58,7 +58,7 @@ class UserPolicy
      * @param  \App\User  $user
      * @return mixed
      */
-    public function delete(User $user, User $user)
+    public function delete(User $user, User $updatingUser)
     {
         return $user->id === $updatingUser->id;
     }
