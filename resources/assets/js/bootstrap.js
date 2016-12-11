@@ -43,5 +43,3 @@ window.Echo = new Echo({
     broadcaster: 'pusher',
     key: '192be8e9602ea0b049cc'
 });
-
-

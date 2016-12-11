@@ -27,7 +27,6 @@ require('laravel-elixir-vue-2');
  		'custom.css'
  		])
  	.scripts([
- 		//'app.js',
  		//'jquery-3.1.1.min.js',
  		//'bootstrap.min.js',
  		'jquery.easing.min.js',
@@ -38,9 +37,7 @@ require('laravel-elixir-vue-2');
  		'select2.min.js',
  		'contact_me.js',
  		'icheck.min.js',
- 		//'ckeditor.js',
- 		//'echo.js',
  		'custom.js'
 	])
-	.version(['css/all.css', 'js/all.js']);
+	.version(['css/all.css', 'js/app.js', 'js/all.js'], 'public');
  });

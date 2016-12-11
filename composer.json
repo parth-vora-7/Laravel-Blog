@@ -17,7 +17,8 @@
         "predis/predis": "^1.1",
         "pusher/pusher-php-server": "^2.6",
         "guzzlehttp/guzzle": "^6.2",
-        "nexmo/client": "@beta"
+        "nexmo/client": "@beta",
+        "jrean/laravel-user-verification": "^3.0"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",
