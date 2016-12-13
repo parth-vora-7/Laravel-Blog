@@ -37,6 +37,7 @@ require('laravel-elixir-vue-2');
  		'select2.min.js',
  		'contact_me.js',
  		'icheck.min.js',
+ 		//'socket.io-1.4.5.js',
  		'custom.js'
 	])
 	.version(['css/all.css', 'js/app.js', 'js/all.js'], 'public');

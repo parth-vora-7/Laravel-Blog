@@ -71,7 +71,7 @@
     <div class="form-group{{ $errors->has('contact_no') ? ' has-error' : '' }}">
         <label for="contact_no" class="col-md-4 control-label">Contact no</label>
         <div class="col-md-6">
-            {!! Form::number('contact_no', NULL, ['class' => 'form-control', 'required' => 'required']) !!}
+            {!! Form::number('contact_no', NULL, ['class' => 'form-control']) !!}
 
             @if ($errors->has('contact_no'))
             <span class="help-block">
@@ -84,9 +84,9 @@
     <div class="form-group{{ $errors->has('gender') ? ' has-error' : '' }}">
         <label for="gender" class="col-md-4 control-label">Gender</label>
         <div class="col-md-6">
-            {!! Form::radio('gender', 'male', TRUE, ['required' => 'required', 'class' => 'radio']) !!}
+            {!! Form::radio('gender', 'male', TRUE, ['class' => 'radio']) !!}
             <label>Male</label>
-            {!! Form::radio('gender', 'female', False, ['required' => 'required', 'class' => 'radio']) !!}
+            {!! Form::radio('gender', 'female', False, ['class' => 'radio']) !!}
             <label>Female</label>
 
             @if ($errors->has('gender'))
@@ -100,7 +100,7 @@
     <div class="form-group{{ $errors->has('country') ? ' has-error' : '' }}">
         <label for="country" class="col-md-4 control-label">Country</label>
         <div class="col-md-6">
-            {!! Form::select('country', ['India' => 'India', 'USA' => 'USA'], NULL, ['class' => 'form-control', 'required' => 'required']) !!}
+            {!! Form::select('country', ['India' => 'India', 'USA' => 'USA'], NULL, ['class' => 'form-control']) !!}
 
             @if ($errors->has('country'))
             <span class="help-block">
@@ -137,7 +137,7 @@
         <label for="about_me" class="col-md-4 control-label">About me</label>
 
         <div class="col-md-6">
-            {!! Form::textarea('about_me', NULL, ['class' => 'form-control', 'required' => 'required']) !!}
+            {!! Form::textarea('about_me', NULL, ['class' => 'form-control']) !!}
             @if ($errors->has('about_me'))
             <span class="help-block">
                 <strong>{{ $errors->first('about_me') }}</strong>
@@ -151,7 +151,7 @@
 
         <div class="col-md-6">
             <div class="input-group date" id="dob">
-                {!! Form::text('date_of_birth', NULL, ['class' => 'form-control', 'required' => 'required']) !!}
+                {!! Form::text('date_of_birth', NULL, ['class' => 'form-control']) !!}
                 <span class="input-group-addon">
                     <span class="glyphicon glyphicon-calendar"></span>
                 </span>
@@ -193,7 +193,7 @@
             @if(isset($user->avatar))
             {!! Form::file('avatar', ['class' => 'form-control']) !!}
             @else
-            {!! Form::file('avatar', ['class' => 'form-control', 'required' => 'required']) !!}
+            {!! Form::file('avatar', ['class' => 'form-control']) !!}
             @endif
             @if ($errors->has('avatar'))
             <span class="help-block">

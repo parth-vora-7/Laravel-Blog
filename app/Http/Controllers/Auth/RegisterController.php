@@ -9,6 +9,10 @@ use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use App\Http\Controllers\ImageThumbController;
 use App\Notifications\SignupComplete;
+use Jrean\UserVerification\Traits\VerifiesUsers;
+use Jrean\UserVerification\Facades\UserVerification;
+use Illuminate\Http\Request;
+use Illuminate\Auth\Events\Registered;
 
 class RegisterController extends Controller
 {
@@ -24,6 +28,7 @@ class RegisterController extends Controller
     */
 
     use RegistersUsers;
+    use VerifiesUsers;
 
     /**
      * Where to redirect users after login / registration.
@@ -39,7 +44,7 @@ class RegisterController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('guest');
+        $this->middleware('guest', ['getVerification', 'getVerificationError']);
     }
 
     /**
@@ -56,14 +61,30 @@ class RegisterController extends Controller
             'email' => 'required|email|max:255|unique:users',
             'password' => 'required|min:6|confirmed',
             'password_confirmation' => 'required',
-            'contact_no' => 'required|digits:12',
-            'gender' => 'required|in:male,female',
-            'country' => 'required',
-            'hobbies' => 'required',
-            'about_me' => 'required|min:6',
+            'contact_no' => 'digits:10',
+            'gender' => 'in:male,female',
+            'country' => '',
+            'hobbies' => '',
+            'about_me' => 'min:6',
             'date_of_birth' => 'date',
-            'avatar' => 'required|image',
+            'avatar' => 'image',
             ]);
+    }
+
+    /**
+     * Handle a registration request for the application.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function register(Request $request)
+    {
+        $this->validator($request->all())->validate();
+
+        event(new Registered($user = $this->create($request->all())));
+
+        return $this->registered($request, $user)
+            ?: redirect($this->redirectPath());
     }
 
     /**
@@ -74,37 +95,43 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
+        $org_avatar_source = '';
         $avatars_org_dir = 'public/avatars/origional';
         Storage::makeDirectory($avatars_org_dir);
 
-        if($avatar_file = $data['avatar']->store($avatars_org_dir)) // Upload avatar
-        {
-            $org_avatar_source = str_replace ('public', 'storage', $avatar_file);
-
-             $user = User::create([
-                'name' => $data['name'],
-                'username' => $data['username'],
-                'email' => $data['email'],
-                'password' => bcrypt($data['password']),
-                'contact_no' => $data['contact_no'],
-                'gender' => $data['gender'],
-                'country' => $data['country'],
-                'hobbies' => $data['hobbies'],
-                'about_me' => $data['about_me'],
-                'date_of_birth' => $data['date_of_birth'],
-                'avatar' => $org_avatar_source,
-                'user_type' => 'blogger',
-                'social_id' => NULL,
-                'registration_type' => 'conventional',
-                'deleted_at' => NULL
-            ]);  
-
-            if($user) {
-                $user->notify(new SignupComplete($user));
-                return $user;
-            }  else {
-                return false;
+        if (isset($data['avatar'])) {
+            if($avatar_file = $data['avatar']->store($avatars_org_dir)) // Upload avatar
+            {
+                $org_avatar_source = str_replace ('public', 'storage', $avatar_file);
             }
+        }
+
+        $user = User::create([
+            'name' => $data['name'],
+            'username' => $data['username'],
+            'email' => $data['email'],
+            'password' => bcrypt($data['password']),
+            'contact_no' => isset($data['contact_no']) ? $data['contact_no'] : '',
+            'gender' => isset($data['gender']) ? $data['gender'] : '',
+            'country' => isset($data['country']) ? $data['country'] : '',
+            'hobbies' => isset($data['hobbies']) ? $data['hobbies'] : '',
+            'about_me' => isset($data['about_me']) ? $data['about_me'] : '',
+            'date_of_birth' => isset($data['date_of_birth']) ? $data['date_of_birth'] : '',
+            'avatar' => $org_avatar_source,
+            'user_type' => 'blogger',
+            'social_id' => NULL,
+            'registration_type' => 'conventional',
+            'deleted_at' => NULL
+        ]);  
+
+        if($user) {
+            UserVerification::generate($user);
+            UserVerification::sendQueue($user, 'E-mail verification');
+
+            $user->notify(new SignupComplete($user));
+            return $user;
+        }  else {
+            return false;
         }
     }
 }

@@ -174,6 +174,8 @@ return [
         Laracasts\Flash\FlashServiceProvider::class,
         Jenssegers\Mongodb\MongodbServiceProvider::class,
         Jenssegers\Mongodb\MongodbQueueServiceProvider::class,
+        Jrean\UserVerification\UserVerificationServiceProvider::class,
+
 
         /*
          * Application Service Providers...
@@ -238,6 +240,7 @@ return [
         'Socialite' => Laravel\Socialite\Facades\Socialite::class,
         'Image' => Intervention\Image\Facades\Image::class,
         'Helper' => App\Helpers\Helper::class,
+        'UserVerification' => Jrean\UserVerification\Facades\UserVerification::class
 
     ],
 

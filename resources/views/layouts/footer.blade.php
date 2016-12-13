@@ -32,5 +32,6 @@
 </footer>
 
 <script src="{{ asset('vendor/ckeditor/ckeditor.js') }}"></script>
+<script src="{{ asset('js/socket.io-1.4.5.js') }}"></script>
 <script src="{{ elixir('js/app.js') }}"></script>
 <script src="{{ elixir('js/all.js') }}"></script>

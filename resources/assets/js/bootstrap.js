@@ -40,6 +40,9 @@ require('vue-resource');*/
 import Echo from "laravel-echo"
 
 window.Echo = new Echo({
-    broadcaster: 'pusher',
-    key: '192be8e9602ea0b049cc'
+    //broadcaster: 'pusher',
+    //key: '192be8e9602ea0b049cc'
+
+    broadcaster: 'socket.io',
+    key: 'http://127.0.0.1:6001'
 });
