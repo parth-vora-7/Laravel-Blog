@@ -45,7 +45,7 @@ class LoginController extends Controller
         $password = $request->input('password');
         $field = filter_var($usernameinput, FILTER_VALIDATE_EMAIL) ? 'email' : 'username';
 
-        if (Auth::attempt([$field => $usernameinput, 'password' => $password])) { //'verified' => true
+        if (Auth::attempt([$field => $usernameinput, 'password' => $password, 'verified' => true])) {
             return redirect()->intended('/');
         } else {
             return $this->sendFailedLoginResponse($request);
