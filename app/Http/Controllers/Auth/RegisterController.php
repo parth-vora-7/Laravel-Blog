@@ -9,10 +9,10 @@ use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use App\Http\Controllers\ImageThumbController;
 use App\Notifications\SignupComplete;
-use Jrean\UserVerification\Traits\VerifiesUsers;
-use Jrean\UserVerification\Facades\UserVerification;
 use Illuminate\Http\Request;
 use Illuminate\Auth\Events\Registered;
+use Jrean\UserVerification\Traits\VerifiesUsers;
+use Jrean\UserVerification\Facades\UserVerification;
 
 class RegisterController extends Controller
 {
@@ -128,6 +128,7 @@ class RegisterController extends Controller
             UserVerification::generate($user);
             UserVerification::sendQueue($user, 'E-mail verification');
 
+            flash('Please check your inbox and verify your email to login.', 'success')->important();
             $user->notify(new SignupComplete($user));
             return $user;
         }  else {

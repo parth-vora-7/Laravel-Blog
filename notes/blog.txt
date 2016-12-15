@@ -1,5 +1,3 @@
-81889966230747b2c58f0dc2333fbbfdd4798afd
-
 1) Front-end theme integration --
 2) Login, signup and reset password --
 3) Social media login --
@@ -9,7 +7,7 @@
 7) Blog comment feature --
 8) Notifications on new blog post(via Email, SMS and Popup)
 9) Tag pages (Sidebar) --
-4) User verification and validate the e-mail. - stop login after signup
+4) User verification and validate the e-mail. - buggy
 10) Subscription/Payment integration
 11) Webservice
 12) Like/Dislike on blog/comment
@@ -31,14 +29,6 @@ Admin panel:
 
 
 Changes/bugs:
-1) If user is signuped using social media, then change password => choose password --
-2) Publish on selected publish date only --
-3) Comment:
-- Submit comment form using AJAX and update comment list --
-- Comment edit and delete using AJAX --
-- Comment authorization --
-- comment success/failure messages using AJAX --
-- Popup/email/SMS notification to the user when someone comments on his/her blog --
 
 
 -------------------------------------------------------
