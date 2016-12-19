@@ -99,10 +99,16 @@ section#blog-list {
 .pagination>li>a, .pagination>li>span {
     color: #fed136;
 }
-.pagination>li>a:focus, .pagination>li>a:hover, .pagination>li>span:focus, .pagination>li>span:hover {
+.pagination>li>a:focus,
+.pagination>li>a:hover,
+.pagination>li>span:focus, 
+.pagination>li>span:hover {
     color: #fed136;
 }
 .sidebar {
     background-color: #fbfbfb;
     border-radius: 20px;
+}
+.sub-comment-container {
+    clear: both;
 }

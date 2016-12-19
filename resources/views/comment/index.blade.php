@@ -19,6 +19,9 @@
 				<p>Posted by: <em>{{ $comment->user->name or 'Anonymous' }}</em><span>on</span><em>{{ $comment->created_at }}</em></p>
 			</div>
 			<div class="blog-actions">
+				@can('create', $comment)
+				<em><a href="" class="sub-comment">Comment</a></em>
+				@endcan
 				@can('update', $comment)
 				<em><a href="" class="edit-comment">Edit</a></em>
 				@endcan
@@ -30,6 +33,9 @@
 				{!! Form::close() !!}
 				@endcan
 			</div>
+		</div>
+		<div class="sub-comment-container">
+			
 		</div>
 	</div>
 	@endforeach

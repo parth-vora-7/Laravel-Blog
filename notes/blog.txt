@@ -9,9 +9,9 @@
 9) Tag pages (Sidebar) --
 4) User verification and validate the e-mail. - buggy
 10) Subscription/Payment integration
-11) Webservice
-12) Like/Dislike on blog/comment
-13) Multilevel commens
+12) Multilevel commens
+11) Like/Dislike on blog/comment
+13) Webservice
 14) Localization
 15) Cron to unpublish old blogs
 16) Test cases
@@ -26,10 +26,7 @@ Admin panel:
 7) Bulk email sending
 8) Manage country
 
-
-
 Changes/bugs:
-
 
 -------------------------------------------------------
 https://www.twilio.com/sms/toll-free

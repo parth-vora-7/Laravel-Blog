@@ -105,6 +105,19 @@ $(function () {
 		$(this).closest('.comment').find('.edit-comment-cancel').addClass('hidden');
 	});
 
+	$(document).on('click', 'a.sub-comment', function(e) {
+		e.preventDefault();
+		/*var commentEditForm = $(this).closest('.comment').find('form.comment-edit-form');
+		if($(this).text() == 'Save') {
+			commentEditForm.submit();
+		} else {
+			commentEditForm.find('blockquote').addClass('hidden');
+			commentEditForm.find('textarea').removeClass('hidden');
+			$(this).text('Save');
+			$(this).closest('.comment').find('.edit-comment-cancel').removeClass('hidden');
+		}*/
+	});
+
 	Echo.channel('blog')
 	.listen('NewBlogPublished', (e) => {
 		console.log(e);
