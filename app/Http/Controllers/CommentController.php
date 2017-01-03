@@ -18,7 +18,7 @@ class CommentController extends Controller
     public function index(Blog $blog)
     {
         $comments = $blog->comments()->latest('created_at')->paginate(3);
-        return view('comment.index', compact('blog', 'comments'));
+        return view('comment.comment', compact('blog', 'comments'));
     }
 
     /**
@@ -32,7 +32,7 @@ class CommentController extends Controller
         $comment = $blog->comments()->create(['text' => request('text'), 'user_id' => $request->user()->id, 'deleted_at' => NULL]);
         if($comment) {
             if($blog->user) {
-               $blog->user->notify(new CommentPostNotification($blog, $comment));
+               //$blog->user->notify(new CommentPostNotification($blog, $comment));
             }
             flash('Your comment has been successfully posted.', 'success')->important();
             return $this->index($blog);
@@ -84,8 +84,14 @@ class CommentController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function subCommentStore(Comment $comment, CommentRequest $request)
+    public function getSubComments(Comment $comment)
     {
+        $comments = $comments->comments()->latest('created_at')->paginate(3);
+
+        dd($comments);
         
+        if ($request->ajax()) {
+            return view('comment.comment', compact('comments'))->render();
+        }
     }
 }

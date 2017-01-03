@@ -25,7 +25,7 @@
 								@endcan
 								@can('delete', $blog)
 								{!! Form::open(['route' => ['blog.destroy', $blog], 'method' => 'POST', 'role' => "form"]) !!}
-								<em>{!! Form::submit('Delete', ['class' => 'btn-link']) !!}</em>
+								<em>{!! Form::submit('Delete', ['class' => 'btn-link delete-btn']) !!}</em>
 								{{ method_field('DELETE') }}
 								{!! Form::close() !!}
 								@endcan
@@ -33,15 +33,10 @@
 						</div>    
 					</div>
 				</article>
-				@if($blog->commenting)
-				@include('comment.create', ['blog' => $blog])
-				@endif
-				<div class="ajax-content">
-					@include('comment.index')
-				</div>
+				@include('comment.comment')
 			</div>
 			<div class="sidebar col-sm-3">
-            	@include('tag.index')
+				@include('tag.index')
 			</div>
 		</div>
 	</div>

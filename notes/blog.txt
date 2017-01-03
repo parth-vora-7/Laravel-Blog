@@ -8,6 +8,8 @@
 8) Notifications on new blog post(via Email, SMS and Popup)
 9) Tag pages (Sidebar) --
 4) User verification and validate the e-mail. - buggy
+5) Comment notofication using socket - buggy
+11) Searching
 10) Subscription/Payment integration
 12) Multilevel commens
 11) Like/Dislike on blog/comment
@@ -15,6 +17,8 @@
 14) Localization
 15) Cron to unpublish old blogs
 16) Test cases
+17) Soft delete
+18) Multiauth
 
 Admin panel:
 1) Admin theme integration
@@ -27,6 +31,12 @@ Admin panel:
 8) Manage country
 
 Changes/bugs:
+Edit comment
+Delete comment
+Validation messages
+Loader
+Button disable
+Slide up/down effect
 
 -------------------------------------------------------
 https://www.twilio.com/sms/toll-free
@@ -38,3 +48,20 @@ https://www.twilio.com/sms/toll-free
 6) mailtrap --
 
 db.users.update({_id:ObjectId("583af27b0fe601137c00422c")},{$set:{"user_type":"admin"}})
+
+
+--------------------------------------------------------
+
+Multilevel comment:
+
+Common between comment and sub-comment
+Both can have another comments
+Both can be edited and deleted
+
+
+create a partial with a comment form and comments
+
+pass the blog id and blog's first level comment from the controller method 
+
+when clicking on the comment link of a comment, make AJAX call, get the sub-comments and return the same partial view
+

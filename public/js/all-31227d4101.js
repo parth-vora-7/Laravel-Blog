@@ -5539,6 +5539,44 @@ $(function () {
 		cursor: true
 	});
 
+	/*$(document).on('submit', 'form.add-comment', function(e) {
+		alert('ss');
+		e.preventDefault();
+		var form = $(this);
+		var msgContainer = $(form.find('.alert'));
+		var formData = $(this).serialize();
+		var action = $(this).attr('action');
+		var method = $(this).attr('method');
+		$.ajax({
+			type: method,
+			url: action,
+			data: formData,
+			success: function(result)
+			{
+				if($('.ajax-content').length) {
+					$('.ajax-content').html(result);
+					form.find('text, textarea').val(null);
+					msgContainer.addClass('hidden');
+				}
+			},
+			error: function(xhr, status, error)
+			{
+				var errorsHTML = '';
+				var errorMsgs = JSON.parse(xhr.responseText);
+				if(msgContainer.length && xhr.status == 422) {
+					msgContainer.removeClass('alert-success').addClass('alert-danger');
+					msgContainer.removeClass('hidden');
+					$.each(errorMsgs, function(field, errors) {
+						$.each(errors, function(index, error) {
+							errorsHTML = errorsHTML + '<li>' + error + '</li>';
+						}); 
+					}); 
+					msgContainer.html(errorsHTML);
+				}
+			}
+		});
+	});		*/
+
 	$(document).on('submit', '.ajax-submit', function(e) {
 		var form = $(this);
 		var errorContainer = $(form.find('.alert-danger'));
@@ -5553,7 +5591,7 @@ $(function () {
 			success: function(result)
 			{
 				if($('.ajax-content').length) {
-					$('.ajax-content').html(result);
+					$(form).closest('.comment-container').find('.ajax-content').html(result);
 					form.find('text, textarea').val(null);
 					errorContainer.html('<ul></ul>');
 					errorContainer.addClass('hidden');
@@ -5568,7 +5606,7 @@ $(function () {
 					$.each(errorMsgs, function(field, errors) {
 						$.each(errors, function(index, error) {
 							errorsHTML = errorsHTML + '<li>' + error + '</li>';
-						}); 
+						});
 					}); 
 					errorContainer.html(errorsHTML);
 				}
@@ -5579,48 +5617,53 @@ $(function () {
 	$(document).on('click', '.ajax-pagination a', function(e) {
 		e.preventDefault();
 		var action = $(this).attr('href');
-		$('.ajax-content').load(action);
+		$(this).closest('.comment-container').find('.ajax-content').load(action);
 	});
 
 	$(document).on('click', 'a.edit-comment', function(e) {
 		e.preventDefault();
-		var commentEditForm = $(this).closest('.comment').find('form.comment-edit-form');
+		var commentId = $(this).data('comment-id');
+		var commentContainer = $('#comment-' + commentId); 
+		var commentEditForm = $('#comment-edit-form-' + commentId);
+
 		if($(this).text() == 'Save') {
 			commentEditForm.submit();
 		} else {
 			commentEditForm.find('blockquote').addClass('hidden');
 			commentEditForm.find('textarea').removeClass('hidden');
 			$(this).text('Save');
-			$(this).closest('.comment').find('.edit-comment-cancel').removeClass('hidden');
+			$(commentContainer).find('.edit-comment-cancel').removeClass('hidden');
 		}
 	});
 
 	$(document).on('click', 'a.edit-comment-cancel', function(e) {
 		e.preventDefault();
-		var commentEditForm = $(this).closest('.comment').find('form.comment-edit-form');
+		
+		var commentId = $(this).data('comment-id');
+		var commentContainer = $('#comment-' + commentId); 
+		var commentEditForm = $('#comment-edit-form-' + commentId);
+
 		commentEditForm.find('textarea').val(commentEditForm.find('blockquote').text());
 		commentEditForm.find('blockquote').removeClass('hidden');
 		commentEditForm.find('textarea').addClass('hidden');
-		$(this).closest('.comment').find('.edit-comment').text('Edit');
-		$(this).closest('.comment').find('.edit-comment-cancel').addClass('hidden');
+		commentContainer.find('.edit-comment').text('Edit');
+		commentContainer.find('.edit-comment-cancel').addClass('hidden');
 	});
-
-	$(document).on('click', 'a.sub-comment', function(e) {
+	
+	$(document).on('click', 'a.add-comment', function(e) {
 		e.preventDefault();
-		/*var commentEditForm = $(this).closest('.comment').find('form.comment-edit-form');
-		if($(this).text() == 'Save') {
-			commentEditForm.submit();
+		if($(this).hasClass('comment-collapse')) {
+			var action = $(this).attr('href');
+			$(this).closest('.comment-container').find('.ajax-content').load(action);
 		} else {
-			commentEditForm.find('blockquote').addClass('hidden');
-			commentEditForm.find('textarea').removeClass('hidden');
-			$(this).text('Save');
-			$(this).closest('.comment').find('.edit-comment-cancel').removeClass('hidden');
-		}*/
+			$(this).closest('.comment-container').find('.ajax-content').html(null);
+		}
+		$(this).toggleClass('comment-collapse');
 	});
-
-	Echo.channel('blog')
+	
+	/*Echo.channel('blog')
 	.listen('NewBlogPublished', (e) => {
 		console.log(e);
-	});
+	});*/
 });
 //# sourceMappingURL=all.js.map

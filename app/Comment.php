@@ -15,7 +15,7 @@ class Comment extends Eloquent
      *
      * @var array
      */
-    protected $fillable = ['text', 'user_id', 'blog_id', 'parent_comment', 'deleted_at'];
+    protected $fillable = ['text', 'user_id', 'blog_id', 'parent_id', 'deleted_at'];
 
     /**
      * Get the blog of a comment
@@ -35,21 +35,21 @@ class Comment extends Eloquent
 		return $this->belongsTo('App\User');
     }
 
-	/**
-     * Get all the parent comment of a comment
+    /**
+     * Get paranet comment of a comment
      * 
      * @return mix
      */
     public function parentComment() {
-		return $this->belongsTo('App\Comment', 'parent_comment');
+        return $this->belongsTo('App\Comment', 'parent_id');
     }
 
-	/**
-     * Get all the child comments of a comment
+    /**
+     * Get all the comments of a comment
      * 
      * @return mix
      */
     public function childComments() {
-		return $this->belongsTo('App\Comment', 'parent_comment');
+        return $this->hasMany('App\Comment', 'parent_id');
     }
 }

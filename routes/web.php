@@ -53,10 +53,16 @@ Route::group(['prefix' => 'blog'], function () {
 
 Route::group(['prefix' => 'comment'], function () {
 	Route::get('{blog}', 'CommentController@index');
-	Route::post('{blog}', ['as' => 'blog.comment.store', 'uses' => 'CommentController@store'])->middleware('auth');
-	Route::post('{comment}', ['as' => 'blog.subcomment.store', 'uses' => 'CommentController@subCommentStore'])->middleware('auth');
+	Route::post('{blog}', ['as' => 'comment.store', 'uses' => 'CommentController@store'])->middleware('auth');
 	Route::match(['put', 'patch'], '{blog}/{comment}', ['as' => 'comment.update', 'uses' => 'CommentController@update'])->middleware('can:update,comment');
 	Route::delete('{blog}/{comment}', ['as' => 'comment.destroy', 'uses' => 'CommentController@destroy'])->middleware('can:delete,comment');
+});
+
+Route::group(['prefix' => 'sub-comment'], function () {
+	Route::get('{comment}', ['as' => 'subcomment.index', 'uses' => 'SubCommentController@index']);
+	Route::post('{comment}', ['as' => 'subcomment.store', 'uses' => 'SubCommentController@store'])->middleware('auth');
+	Route::match(['put', 'patch'], '{comment}', ['as' => 'subcomment.update', 'uses' => 'SubCommentController@update'])->middleware('can:update,comment');
+	Route::delete('{comment}', ['as' => 'subcomment.destroy', 'uses' => 'SubCommentController@destroy'])->middleware('can:delete,comment');
 });
 
 Route::group(['prefix' => 'page'], function () {
@@ -71,6 +77,12 @@ Route::get('tags', ['as' => 'tags.index', 'uses' => 'TagController@index']);
 Route::get('tags/{tag}', ['as' => 'tags.show', 'uses' => 'TagController@show']);
 
 Route::get('test', function() {
+
+	$comments = App\Comment::find('586927160fe60117ac002c6b');
+
+	dd($comments->childComments()->latest('created_at')->get());
+
+
 	$users = App\User::all();
 
 	//dd($users);

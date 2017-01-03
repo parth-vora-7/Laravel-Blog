@@ -55,14 +55,14 @@ article blockquote {
 article form, .comment .comment-delete-form {
     float: right;
 }
-article form input[type="submit"],
-.comment form input[type="submit"] {
+article .delete-btn,
+.comment .delete-btn {
     border: 0;
     padding: 0;
     color: #fed136;
 }
-article form input[type="submit"]:hover,
-.comment form input[type="submit"]:hover {
+article .delete-btn:hover,
+.comment .delete-btn:hover {
     color: #fed136;
 }
 .blog-footer {
@@ -111,4 +111,7 @@ section#blog-list {
 }
 .sub-comment-container {
     clear: both;
+}
+.ajax-pagination .pagination {
+    margin: 0;
 }
