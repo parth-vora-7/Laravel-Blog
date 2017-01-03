@@ -91,12 +91,13 @@ class BlogController extends Controller
      */
     public function show(Request $request, Blog $blog)
     {
+        $messages = [];
         $comments = $blog->comments()->latest('created_at')->paginate(3);
         
         if ($request->ajax()) {
-            return view('comment.comment', compact('blog', 'comments'))->render();  
+            return view('comment.comment', compact('blog', 'comments'))->render();
         }
-        return view('blog.detail', compact('blog', 'comments'));
+        return view('blog.detail', compact('blog', 'comments', 'messages'));
     }
 
     /**

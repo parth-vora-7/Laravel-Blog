@@ -15,10 +15,10 @@ class CommentController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Blog $blog)
+    public function index(Blog $blog, $messages = [])
     {
         $comments = $blog->comments()->latest('created_at')->paginate(3);
-        return view('comment.comment', compact('blog', 'comments'));
+        return view('comment.comment', compact('blog', 'comments', 'messages'));
     }
 
     /**
@@ -34,11 +34,17 @@ class CommentController extends Controller
             if($blog->user) {
                //$blog->user->notify(new CommentPostNotification($blog, $comment));
             }
-            flash('Your comment has been successfully posted.', 'success')->important();
-            return $this->index($blog);
+            $messages[] = [
+            'message' => 'Your comment has been successfully posted.',
+            'class' => 'success'
+            ];
+            return $this->index($blog, $messages);
         } else {
-            flash('Something went wrong. Please try again.', 'danger')->important();
-            return $this->index($blog);
+            $messages[] = [
+            'message' => 'Something went wrong. Please try again.',
+            'class' => 'danger'
+            ];
+            return $this->index($blog, $messages);
         }
     }
     
@@ -52,12 +58,19 @@ class CommentController extends Controller
     public function update(Blog $blog, Comment $comment, CommentRequest $request)
     {
         $comment->text = $request->text;
+
         if($comment->save()) {
-            flash('Your comment has been successfully updated.', 'success')->important();
-            return $this->index($blog);
+            $messages[] = [
+            'message' => 'Your comment has been successfully updated.',
+            'class' => 'success'
+            ];
+            return $this->index($blog, $messages);
         } else {
-            flash('Something went wrong. Please try again.', 'danger')->important();
-            return $this->index($blog);
+            $messages[] = [
+            'message' => 'Something went wrong. Please try again.',
+            'class' => 'danger'
+            ];
+            return $this->index($blog, $messages);
         }
     }
     
@@ -70,10 +83,16 @@ class CommentController extends Controller
     public function destroy(Blog $blog, Comment $comment)
     {
         if($comment->delete()) {
-            flash('Your comment has been successfully deleted.', 'success')->important();
+            $messages[] = [
+            'message' => 'Your comment has been successfully deleted.',
+            'class' => 'success'
+            ];
             return $this->index($blog);
         } else {
-            flash('Something went wrong. Please try again.', 'danger')->important();
+            $messages[] = [
+            'message' => 'Something went wrong. Please try again.',
+            'class' => 'danger'
+            ];
             return $this->index($blog);
         } 
     }

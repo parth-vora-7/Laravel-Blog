@@ -87,9 +87,25 @@ class SubCommentController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(CommentRequest $request, Comment $comment)
     {
-        //
+        $comment->text = $request->text;
+
+        if($comment->save()) {
+            $messages[] = [
+            'message' => 'Your comment has been successfully updated.',
+            'class' => 'success'
+            ];
+            $comment = $comment->parentComment;
+            return $this->index($comment, $messages);
+        } else {
+            $messages[] = [
+            'message' => 'Something went wrong. Please try again.',
+            'class' => 'danger'
+            ];
+            $comment = $comment->parentComment;
+            return $this->index($comment, $messages);
+        }
     }
 
     /**
@@ -98,8 +114,16 @@ class SubCommentController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Comment $comment)
     {
-        //
+        if($comment->delete()) {
+            flash('Your comment has been successfully deleted.', 'success')->important();
+            $comment = $comment->parentComment;
+            return $this->index($comment);
+        } else {
+            flash('Something went wrong. Please try again.', 'danger')->important();
+            $comment = $comment->parentComment;
+            return $this->index($comment);
+        }
     }
 }

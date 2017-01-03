@@ -114,6 +114,43 @@ $(function () {
 		});
 	});
 
+	$(document).on('submit', '.ajax-submit.comment-edit-form, .ajax-submit.comment-delete-form', function(e) {
+		var form = $(this);
+		var errorContainer = $(form.find('.alert-danger'));
+		e.preventDefault();
+		var formData = $(this).serialize();
+		var action = $(this).attr('action');
+		var method = $(this).attr('method');
+		$.ajax({
+			type: method,
+			url: action,
+			data: formData,
+			success: function(result)
+			{
+				if($('.ajax-content').length) {
+					$(form).parents('.comment-container').eq(1).find('.ajax-content').html(result);
+					form.find('text, textarea').val(null);
+					errorContainer.html('<ul></ul>');
+					errorContainer.addClass('hidden');
+				}
+			},
+			error: function(xhr, status, error)
+			{
+				var errorsHTML = '';
+				var errorMsgs = JSON.parse(xhr.responseText);
+				if(errorContainer.length && xhr.status == 422) {
+					errorContainer.removeClass('hidden');
+					$.each(errorMsgs, function(field, errors) {
+						$.each(errors, function(index, error) {
+							errorsHTML = errorsHTML + '<li>' + error + '</li>';
+						});
+					}); 
+					errorContainer.html(errorsHTML);
+				}
+			}
+		});
+	});
+
 	$(document).on('click', '.ajax-pagination a', function(e) {
 		e.preventDefault();
 		var action = $(this).attr('href');

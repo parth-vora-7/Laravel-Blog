@@ -31,12 +31,16 @@ Admin panel:
 8) Manage country
 
 Changes/bugs:
-Edit comment
-Delete comment
-Validation messages
-Loader
+Edit comment - test
+Delete comment - test
+Validation messages - error messages
+Loader 
 Button disable
 Slide up/down effect
+Improove design
+Child comment counter
+Expand/collapse link icons
+Code cleanup
 
 -------------------------------------------------------
 https://www.twilio.com/sms/toll-free

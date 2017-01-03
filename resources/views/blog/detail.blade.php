@@ -1,6 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
+
 <section id="blog-list">
 	<div class="container">
 		<div>
