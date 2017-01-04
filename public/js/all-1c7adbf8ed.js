@@ -5579,7 +5579,7 @@ $(function () {
 
 	$(document).on('submit', '.ajax-submit', function(e) {
 		var form = $(this);
-		var errorContainer = $(form.find('.alert-danger'));
+		var errorContainer = $(form.find('.error-container'));
 		e.preventDefault();
 		var formData = $(this).serialize();
 		var action = $(this).attr('action');
@@ -5593,22 +5593,24 @@ $(function () {
 				if($('.ajax-content').length) {
 					$(form).closest('.comment-container').find('.ajax-content').html(result);
 					form.find('text, textarea').val(null);
-					errorContainer.html('<ul></ul>');
+					errorContainer.find('.alert-danger').remove('</p>');
 					errorContainer.addClass('hidden');
 				}
 			},
 			error: function(xhr, status, error)
 			{
+				console.log(xhr);
 				var errorsHTML = '';
 				var errorMsgs = JSON.parse(xhr.responseText);
 				if(errorContainer.length && xhr.status == 422) {
 					errorContainer.removeClass('hidden');
 					$.each(errorMsgs, function(field, errors) {
 						$.each(errors, function(index, error) {
-							errorsHTML = errorsHTML + '<li>' + error + '</li>';
+							errorsHTML = errorsHTML + '<p>' + error + '</p>';
 						});
 					}); 
-					errorContainer.html(errorsHTML);
+					errorContainer.removeClass('.hidden');
+					errorContainer.find('.alert-danger').append(errorsHTML);
 				}
 			}
 		});

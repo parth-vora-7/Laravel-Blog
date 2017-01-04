@@ -6,8 +6,10 @@
         <div class="col-md-12">
             {!! Form::open(['route' => ['comment.store', $blog], 'method' => 'POST', 'files' => TRUE,
             'class' => 'form-horizontal ajax-submit add-comment', 'role' => "form"]) !!}
-            <div class="alert hidden" role="alert">
-                <ul></ul>
+            <div class="error-container hidden">
+                <div class="alert alert-danger alert-dismissible" role="alert">
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                </div>  
             </div>
             <div class="form-group{{ $errors->has('text') ? ' has-error' : '' }}">
                 <div class="col-md-12">

@@ -5,6 +5,11 @@
             @include('layouts.message')
             {!! Form::open(['route' => ['subcomment.store', $comment], 'method' => 'POST', 'files' => TRUE,
             'class' => 'form-horizontal ajax-submit add-comment', 'role' => "form"]) !!}
+            <div class="error-container hidden">
+                <div class="alert alert-danger alert-dismissible" role="alert">
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                </div>  
+            </div>
             <div class="form-group{{ $errors->has('text') ? ' has-error' : '' }}">
                 <div class="col-md-12">
                     {!! Form::textarea('text', NULL, ['class' => 'form-control', 'required' => 'required', 'rows' => 3]) !!}
