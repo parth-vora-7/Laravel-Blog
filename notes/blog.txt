@@ -8,7 +8,7 @@
 8) Notifications on new blog post(via Email, SMS and Popup)
 9) Tag pages (Sidebar) --
 4) User verification and validate the e-mail. - buggy
-5) Comment notofication using socket - buggy
+5) Comment notification using socket - buggy
 11) Searching
 10) Subscription/Payment integration
 12) Multilevel commens
@@ -19,6 +19,7 @@
 16) Test cases
 17) Soft delete
 18) Multiauth
+19) Post on social media
 
 Admin panel:
 1) Admin theme integration
@@ -37,9 +38,9 @@ Validation messages - error messages
 Loader 
 Button disable
 Slide up/down effect
-Improove design
-Child comment counter
-Expand/collapse link icons
+Improve design
+Child comment counter -
+Expand/collapse link icons -
 Code cleanup
 
 -------------------------------------------------------

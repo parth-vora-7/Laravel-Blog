@@ -61,7 +61,8 @@ class User extends Eloquent implements
      */
     protected $dates = [
         'date_of_birth',
-        'deleted_at'
+        'deleted_at',
+        'trial_ends_at'
     ];
 
      /**
@@ -69,7 +70,7 @@ class User extends Eloquent implements
      *
      * @var string
      */
-    protected $dateFormat = 'd-m-Y H:i:s';
+    //protected $dateFormat = 'd-m-Y H:i:s';
 
     /**
      * To ckeck whether passed user is admin or not

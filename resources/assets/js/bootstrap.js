@@ -44,5 +44,5 @@ import Echo from "laravel-echo"
     //key: '192be8e9602ea0b049cc'
 
     broadcaster: 'socket.io',
-    key: 'http://127.0.0.1:6001'
+    key: 'http://blog.local:6001'
 });*/

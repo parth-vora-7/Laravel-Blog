@@ -5599,6 +5599,10 @@ $(function () {
 			},
 			error: function(xhr, status, error)
 			{
+				if($('.ajax-content').length) {
+					$(form).closest('.comment-container').find('.ajax-content').html(result);
+				}
+				return;
 				console.log(xhr);
 				var errorsHTML = '';
 				var errorMsgs = JSON.parse(xhr.responseText);
@@ -5638,6 +5642,9 @@ $(function () {
 			},
 			error: function(xhr, status, error)
 			{
+				if($('.ajax-content').length) {
+					$(form).parents('.comment-container').eq(1).find('.ajax-content').html(result);
+				}
 				var errorsHTML = '';
 				var errorMsgs = JSON.parse(xhr.responseText);
 				if(errorContainer.length && xhr.status == 422) {

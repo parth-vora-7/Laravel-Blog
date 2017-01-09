@@ -1021,16 +1021,6 @@ article blockquote {
 article form, .comment .comment-delete-form {
     float: right;
 }
-article .delete-btn,
-.comment .delete-btn {
-    border: 0;
-    padding: 0;
-    color: #fed136;
-}
-article .delete-btn:hover,
-.comment .delete-btn:hover {
-    color: #fed136;
-}
 .blog-footer {
     margin: 0 15px;
     clear: both;

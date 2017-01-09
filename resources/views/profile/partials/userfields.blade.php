@@ -184,7 +184,6 @@
             @endif
         </div>
     </div>
-
     @endif
 
     <div class="form-group{{ $errors->has('avatar') ? ' has-error' : '' }}">
@@ -203,8 +202,34 @@
         </div>
     </div>
 
-    <div class="form-group">
-        <div class="col-md-6 col-md-offset-4">
-            {!! Form::submit($btntitle, ['class' => 'btn btn-primary']) !!}
+    @if(!isset($user))
+    <div class="form-group{{ $errors->has('subscription') ? ' has-error' : '' }}">
+        <label for="subscription" class="col-md-4 control-label">Select a subscription</label>
+        <div class="col-md-6">
+            {!! Form::select('subscription', ['weekly' => 'Weekly (1000)', 'monthly' => 'Monthly (5000)', 'yearly' => 'yearly (100000)'], NULL, ['class' => 'form-control']) !!}
+
+            @if ($errors->has('subscription'))
+            <span class="help-block">
+                <strong>{{ $errors->first('subscription') }}</strong>
+            </span>
+            @endif
         </div>
     </div>
+    @endif
+
+    <div class="form-group">
+        <div class="col-md-6 col-md-offset-4">
+            @if(!isset($user))
+        {{--    <script
+            src="https://checkout.stripe.com/checkout.js" class="stripe-button"
+            data-key="{{ config('services.stripe.key') }}"
+            data-amount="1000"
+            data-name="{{ config('app.name') }}"
+            data-description=""
+            data-image="https://stripe.com/img/documentation/checkout/marketplace.png"
+            data-locale="auto">
+        </script> --}}
+        @endif
+        {!! Form::submit($btntitle, ['class' => 'btn btn-primary']) !!}
+    </div>
+</div>

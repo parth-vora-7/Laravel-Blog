@@ -22,13 +22,15 @@
 							</div>
 							<div class="blog-actions">
 								@can('update', $blog)
-								<em><a href="{{ route('blog.edit', $blog) }}">Edit</a></em>
+								<em><a href="{{ route('blog.edit', $blog) }}" class="btn btn-info">Edit</a></em>
 								@endcan
 								@can('delete', $blog)
+								<em>
 								{!! Form::open(['route' => ['blog.destroy', $blog], 'method' => 'POST', 'role' => "form"]) !!}
-								<em>{!! Form::submit('Delete', ['class' => 'btn-link delete-btn']) !!}</em>
+								{!! Form::submit('Delete', ['class' => 'btn btn-danger delete-btn']) !!}
 								{{ method_field('DELETE') }}
 								{!! Form::close() !!}
+								</em>
 								@endcan
 							</div>
 						</div>    

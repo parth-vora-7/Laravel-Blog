@@ -10,8 +10,8 @@
 		}
 	},
 	"devMode": false,
-	"host": "127.0.0.1",
-	"port": "6001",
+	"host": "http://blog.local",
+	"port": "",
 	"referrers": [],
 	"socketio": {},
 	"sslCertPath": "",

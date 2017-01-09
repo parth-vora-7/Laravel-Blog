@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Auth;
 
+use DB;
 use App\User;
 use Validator;
 use Storage;
@@ -95,35 +96,40 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-        $org_avatar_source = '';
+        $org_avatar_source = null;
         $avatars_org_dir = 'public/avatars/origional';
         Storage::makeDirectory($avatars_org_dir);
-
-        if (isset($data['avatar'])) {
+        
+        if (!empty($data['avatar'])) {
             if($avatar_file = $data['avatar']->store($avatars_org_dir)) // Upload avatar
             {
                 $org_avatar_source = str_replace ('public', 'storage', $avatar_file);
             }
         }
 
-        $user = User::create([
+        $user_info = [
             'name' => $data['name'],
             'username' => $data['username'],
             'email' => $data['email'],
             'password' => bcrypt($data['password']),
-            'contact_no' => isset($data['contact_no']) ? $data['contact_no'] : '',
-            'gender' => isset($data['gender']) ? $data['gender'] : '',
-            'country' => isset($data['country']) ? $data['country'] : '',
-            'hobbies' => isset($data['hobbies']) ? $data['hobbies'] : '',
-            'about_me' => isset($data['about_me']) ? $data['about_me'] : '',
-            'date_of_birth' => isset($data['date_of_birth']) ? $data['date_of_birth'] : '',
+            'contact_no' => !empty($data['contact_no']) ? $data['contact_no'] : null,
+            'gender' => !empty($data['gender']) ? $data['gender'] : null,
+            'country' => !empty($data['country']) ? $data['country'] : null,
+            'hobbies' => !empty($data['hobbies']) ? $data['hobbies'] : null,
+            'about_me' => !empty($data['about_me']) ? $data['about_me'] : null,
+            'date_of_birth' => !empty($data['date_of_birth']) ? $data['date_of_birth'] : null,
             'avatar' => $org_avatar_source,
             'user_type' => 'blogger',
-            'social_id' => NULL,
+            'social_id' => null,
             'registration_type' => 'conventional',
-            'deleted_at' => NULL
-        ]);  
+            'deleted_at' => null
+        ];
 
+        //DB::transaction(function() use ($user_info, $data) {
+            $user = User::create($user_info);
+           // $user->newSubscription('weekly', 'weekly')->create($data['stripeToken']);
+        //});
+        
         if($user) {
             UserVerification::generate($user);
             UserVerification::sendQueue($user, 'E-mail verification');

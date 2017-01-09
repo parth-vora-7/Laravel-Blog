@@ -39,43 +39,11 @@ $(function () {
 		cursor: true
 	});
 
-	/*$(document).on('submit', 'form.add-comment', function(e) {
-		alert('ss');
-		e.preventDefault();
-		var form = $(this);
-		var msgContainer = $(form.find('.alert'));
-		var formData = $(this).serialize();
-		var action = $(this).attr('action');
-		var method = $(this).attr('method');
-		$.ajax({
-			type: method,
-			url: action,
-			data: formData,
-			success: function(result)
-			{
-				if($('.ajax-content').length) {
-					$('.ajax-content').html(result);
-					form.find('text, textarea').val(null);
-					msgContainer.addClass('hidden');
-				}
-			},
-			error: function(xhr, status, error)
-			{
-				var errorsHTML = '';
-				var errorMsgs = JSON.parse(xhr.responseText);
-				if(msgContainer.length && xhr.status == 422) {
-					msgContainer.removeClass('alert-success').addClass('alert-danger');
-					msgContainer.removeClass('hidden');
-					$.each(errorMsgs, function(field, errors) {
-						$.each(errors, function(index, error) {
-							errorsHTML = errorsHTML + '<li>' + error + '</li>';
-						}); 
-					}); 
-					msgContainer.html(errorsHTML);
-				}
-			}
+	function alertFadeOut() {
+		$(".alert-success").fadeTo(2000, 500).slideUp(500, function(){
+			$(".alert-success").slideUp(500);
 		});
-	});		*/
+	}
 
 	$(document).on('submit', '.ajax-submit', function(e) {
 		var form = $(this);
@@ -90,64 +58,36 @@ $(function () {
 			data: formData,
 			success: function(result)
 			{
-				if($('.ajax-content').length) {
-					$(form).closest('.comment-container').find('.ajax-content').html(result);
-					form.find('text, textarea').val(null);
-					errorContainer.find('.alert-danger').remove('</p>');
-					errorContainer.addClass('hidden');
+				if(form.hasClass('fcomment')) {
+					if($('.ajax-content').length) {
+						if(form.hasClass('comment-add-form')) {
+							$(form).closest('.comment-container').find('.ajax-content').html(result).slideDown();
+						} else if (form.hasClass('comment-edit-form') || form.hasClass('comment-delete-form')) {
+							$(form).parents('.comment-container').eq(1).find('.ajax-content').html(result);	
+						}
+						alertFadeOut();
+						form.find('text, textarea').val(null);
+						errorContainer.find('p').remove();
+						errorContainer.addClass('hidden');
+					}
 				}
 			},
 			error: function(xhr, status, error)
 			{
-				console.log(xhr);
-				var errorsHTML = '';
-				var errorMsgs = JSON.parse(xhr.responseText);
-				if(errorContainer.length && xhr.status == 422) {
-					errorContainer.removeClass('hidden');
-					$.each(errorMsgs, function(field, errors) {
-						$.each(errors, function(index, error) {
-							errorsHTML = errorsHTML + '<p>' + error + '</p>';
-						});
-					}); 
-					errorContainer.removeClass('.hidden');
-					errorContainer.find('.alert-danger').append(errorsHTML);
-				}
-			}
-		});
-	});
-
-	$(document).on('submit', '.ajax-submit.comment-edit-form, .ajax-submit.comment-delete-form', function(e) {
-		var form = $(this);
-		var errorContainer = $(form.find('.alert-danger'));
-		e.preventDefault();
-		var formData = $(this).serialize();
-		var action = $(this).attr('action');
-		var method = $(this).attr('method');
-		$.ajax({
-			type: method,
-			url: action,
-			data: formData,
-			success: function(result)
-			{
-				if($('.ajax-content').length) {
-					$(form).parents('.comment-container').eq(1).find('.ajax-content').html(result);
-					form.find('text, textarea').val(null);
-					errorContainer.html('<ul></ul>');
-					errorContainer.addClass('hidden');
-				}
-			},
-			error: function(xhr, status, error)
-			{
-				var errorsHTML = '';
-				var errorMsgs = JSON.parse(xhr.responseText);
-				if(errorContainer.length && xhr.status == 422) {
-					errorContainer.removeClass('hidden');
-					$.each(errorMsgs, function(field, errors) {
-						$.each(errors, function(index, error) {
-							errorsHTML = errorsHTML + '<li>' + error + '</li>';
-						});
-					}); 
-					errorContainer.html(errorsHTML);
+				if(form.hasClass('fcomment')) {
+					var errorsHTML = '';
+					var errorMsgs = JSON.parse(xhr.responseText);
+					if(errorContainer.length && xhr.status == 422) {
+						errorContainer.removeClass('hidden');
+						$.each(errorMsgs, function(field, errors) {
+							$.each(errors, function(index, error) {
+								errorsHTML = errorsHTML + '<p>' + error + '</p>';
+							});
+						}); 
+						errorContainer.removeClass('.hidden');
+						errorContainer.find('p').remove();
+						errorContainer.find('.alert-danger').append(errorsHTML);
+					}
 				}
 			}
 		});
@@ -194,8 +134,10 @@ $(function () {
 		if($(this).hasClass('comment-collapse')) {
 			var action = $(this).attr('href');
 			$(this).closest('.comment-container').find('.ajax-content').load(action);
+			$(this).find('i').removeClass('fa-arrow-down').addClass('fa-arrow-up');
 		} else {
 			$(this).closest('.comment-container').find('.ajax-content').html(null);
+			$(this).find('i').removeClass('fa-arrow-up').addClass('fa-arrow-down');
 		}
 		$(this).toggleClass('comment-collapse');
 	});
