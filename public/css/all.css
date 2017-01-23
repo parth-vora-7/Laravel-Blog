@@ -1024,6 +1024,7 @@ article form, .comment .comment-delete-form {
 .blog-footer {
     margin: 0 15px;
     clear: both;
+    padding-bottom: 50px;
 }
 .blog-info {
     float: left;
@@ -1070,5 +1071,8 @@ section#blog-list {
 }
 .ajax-pagination .pagination {
     margin: 0;
+}
+.current-blog-thumb {
+    margin-right: 20px;
 }
 /*# sourceMappingURL=all.css.map */

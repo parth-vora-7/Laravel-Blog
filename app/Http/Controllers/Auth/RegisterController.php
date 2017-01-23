@@ -12,8 +12,6 @@ use App\Http\Controllers\ImageThumbController;
 use App\Notifications\SignupComplete;
 use Illuminate\Http\Request;
 use Illuminate\Auth\Events\Registered;
-use Jrean\UserVerification\Traits\VerifiesUsers;
-use Jrean\UserVerification\Facades\UserVerification;
 
 class RegisterController extends Controller
 {
@@ -29,7 +27,6 @@ class RegisterController extends Controller
     */
 
     use RegistersUsers;
-    use VerifiesUsers;
 
     /**
      * Where to redirect users after login / registration.
@@ -127,15 +124,12 @@ class RegisterController extends Controller
 
         //DB::transaction(function() use ($user_info, $data) {
             $user = User::create($user_info);
-           // $user->newSubscription('weekly', 'weekly')->create($data['stripeToken']);
+            //$user->newSubscription('weekly', 'weekly')->create($data['stripeToken']);
         //});
         
         if($user) {
-            UserVerification::generate($user);
-            UserVerification::sendQueue($user, 'E-mail verification');
-
             flash('Please check your inbox and verify your email to login.', 'success')->important();
-            $user->notify(new SignupComplete($user));
+            //$user->notify(new SignupComplete($user)); // Send to admin
             return $user;
         }  else {
             return false;

@@ -165,13 +165,6 @@
     </div>
 
     @if(isset($user))
-    <div class="form-group">
-        <label for="avatar" class="col-md-4 control-label">Current profile pic</label>
-        <div class="col-md-6">
-            <img src="{{ asset(Helper::getImageThumb($user->avatar, 70, 70)) }}" />  
-        </div>
-    </div>
-
     <div class="form-group{{ $errors->has('slack_webhook_url') ? ' has-error' : '' }}">
         <label for="slack_webhook_url" class="col-md-4 control-label">Slack webhook url</label>
         <div class="col-md-6">
@@ -186,8 +179,17 @@
     </div>
     @endif
 
+    @if(isset($user->avatar))
+    <div class="form-group">
+        <label for="avatar" class="col-md-4 control-label">Current profile pic</label>
+        <div class="col-md-6">
+            <img src="{{ asset(Helper::getImageThumb($user->avatar, 70, 70)) }}" />  
+        </div>
+    </div>
+    @endif   
+
     <div class="form-group{{ $errors->has('avatar') ? ' has-error' : '' }}">
-        <label for="avatar" class="col-md-4 control-label">Select new profile pic</label>
+        <label for="avatar" class="col-md-4 control-label">Profile pic</label>
         <div class="col-md-6">
             @if(isset($user->avatar))
             {!! Form::file('avatar', ['class' => 'form-control']) !!}
@@ -204,7 +206,7 @@
 
     @if(!isset($user))
     <div class="form-group{{ $errors->has('subscription') ? ' has-error' : '' }}">
-        <label for="subscription" class="col-md-4 control-label">Select a subscription</label>
+        <label for="subscription" class="col-md-4 control-label">Subscription</label>
         <div class="col-md-6">
             {!! Form::select('subscription', ['weekly' => 'Weekly (1000)', 'monthly' => 'Monthly (5000)', 'yearly' => 'yearly (100000)'], NULL, ['class' => 'form-control']) !!}
 
@@ -220,7 +222,7 @@
     <div class="form-group">
         <div class="col-md-6 col-md-offset-4">
             @if(!isset($user))
-        {{--    <script
+        {{--<script
             src="https://checkout.stripe.com/checkout.js" class="stripe-button"
             data-key="{{ config('services.stripe.key') }}"
             data-amount="1000"
@@ -228,7 +230,7 @@
             data-description=""
             data-image="https://stripe.com/img/documentation/checkout/marketplace.png"
             data-locale="auto">
-        </script> --}}
+        </script>--}}
         @endif
         {!! Form::submit($btntitle, ['class' => 'btn btn-primary']) !!}
     </div>

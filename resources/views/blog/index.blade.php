@@ -22,13 +22,13 @@
                             <p>Posted by: <em>{{ $blog->user->name or 'Anonymous' }}</em><span>on</span><em>{{ $blog->published_on }}</em></p>
                         </div>
                         <div class="blog-actions">
-                            <em><a href="{{ route('blog.show', $blog) }}">Read</a></em>
+                            <em><a href="{{ route('blog.show', $blog) }}" class="btn btn-success">Read</a></em>
                             @can('update', $blog)
-                            <em><a href="{{ route('blog.edit', $blog) }}">Edit</a></em>
+                            <em><a href="{{ route('blog.edit', $blog) }}" class="btn btn-info">Edit</a></em>
                             @endcan
                             @can('update', $blog)
                             {!! Form::open(['route' => ['blog.destroy', $blog], 'method' => 'POST', 'role' => "form"]) !!}
-                            <em>{!! Form::submit('Delete', ['class' => 'btn-link delete-btn']) !!}</em>
+                            <em>{!! Form::submit('Delete', ['class' => 'btn btn-danger delete-btn']) !!}</em>
                             {{ method_field('DELETE') }}
                             {!! Form::close() !!}
                             @endcan

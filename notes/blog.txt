@@ -5,13 +5,13 @@
 5) Blog add/edit/delete --
 6) Blog tagging feature --
 7) Blog comment feature --
-8) Notifications on new blog post(via Email, SMS and Popup)
+8) Notifications on new blog post(via Email, SMS, Slack)
 9) Tag pages (Sidebar) --
-4) User verification and validate the e-mail. - buggy
+4) User verification and validate the e-mail. - On hold
 5) Comment notification using socket - buggy
 11) Searching
-10) Subscription/Payment integration
-12) Multilevel commens
+10) Subscription/Payment integration -
+12) Multilevel commens --
 11) Like/Dislike on blog/comment
 13) Webservice
 14) Localization
@@ -20,6 +20,8 @@
 17) Soft delete
 18) Multiauth
 19) Post on social media
+20) Live feed for blogs
+21) Login with email or username
 
 Admin panel:
 1) Admin theme integration

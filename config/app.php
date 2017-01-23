@@ -174,8 +174,6 @@ return [
         Laracasts\Flash\FlashServiceProvider::class,
         Jenssegers\Mongodb\MongodbServiceProvider::class,
         Jenssegers\Mongodb\MongodbQueueServiceProvider::class,
-        Jrean\UserVerification\UserVerificationServiceProvider::class,
-
 
         /*
          * Application Service Providers...

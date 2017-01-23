@@ -4,26 +4,24 @@ namespace App;
 
 use Illuminate\Notifications\Notifiable;
 
+use Moloquent;
 use Illuminate\Auth\Authenticatable;
 use Illuminate\Auth\Passwords\CanResetPassword;
 use Illuminate\Foundation\Auth\Access\Authorizable;
 use Illuminate\Contracts\Auth\Authenticatable as AuthenticatableContract;
-use Illuminate\Contracts\Auth\Access\Authorizable as AuthorizableContract;
 use Illuminate\Contracts\Auth\CanResetPassword as CanResetPasswordContract;
+use Illuminate\Contracts\Auth\Access\Authorizable as AuthorizableContract;
+
 use Jenssegers\Mongodb\Eloquent\SoftDeletes;
 use Laravel\Cashier\Billable;
 use Carbon\Carbon;
-use Jrean\UserVerification\Traits\UserVerification;
 
-
-use Jenssegers\Mongodb\Eloquent\Model as Eloquent;
-
-class User extends Eloquent implements
+class User extends Moloquent implements
     AuthenticatableContract,
     AuthorizableContract,
     CanResetPasswordContract
 {
-    use Notifiable, Authenticatable, Authorizable, CanResetPassword, SoftDeletes, Billable, UserVerification;
+    use Notifiable, Authenticatable, Authorizable, CanResetPassword, SoftDeletes, Billable;
 
     /**
      * The attributes that are mass assignable.
@@ -75,7 +73,6 @@ class User extends Eloquent implements
     /**
      * To ckeck whether passed user is admin or not
      */
-
     public function isAdmin()
     {
         return ($this->user_type == 'admin') ? true : false;
@@ -87,7 +84,6 @@ class User extends Eloquent implements
      * @var $value string
      * @return Carbon
      */
-
     public function getDateOfBirthAttribute($value)
     {
         return Carbon::parse($value)->format('d-m-Y H:i:s');

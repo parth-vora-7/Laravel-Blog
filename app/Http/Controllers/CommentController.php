@@ -7,6 +7,7 @@ use App\Comment;
 use Illuminate\Http\Request;
 use App\Http\Requests\CommentRequest;
 use App\Notifications\CommentPostNotification;
+use App\Events\NewCommentEvent;
 
 class CommentController extends Controller
 {
@@ -34,6 +35,7 @@ class CommentController extends Controller
             if($blog->user) {
                //$blog->user->notify(new CommentPostNotification($blog, $comment));
             }
+            event(new NewCommentEvent($comment));
             $messages[] = [
             'message' => 'Your comment has been successfully posted.',
             'class' => 'success'

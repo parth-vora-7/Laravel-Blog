@@ -18,3 +18,15 @@ require('./bootstrap');
 const app = new Vue({
     el: '#app'
 });*/
+
+import Echo from "laravel-echo"
+
+window.Echo = new Echo({
+    broadcaster: 'socket.io',
+    host: 'http://blog.local:6001'
+});
+
+window.Echo.channel('new-comment')
+    .listen('NewCommentEvent', (data) => {
+    	console.log(data);
+});

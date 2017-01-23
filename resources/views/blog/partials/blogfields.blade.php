@@ -56,19 +56,24 @@
 </div>
 
 @if(isset($blog))
-<div class="form-group">
-    <label for="blog_image" class="col-md-2 col-md-offset-1 control-label">Current blog pic</label>
+{{--<div class="form-group">
+    <label for="blog_image" class="col-md-2 col-md-offset-1 control-label">Current blog image</label>
     <div class="col-md-8">
         <img src="{{ asset(Helper::getImageThumb($blog->blog_image, 70, 70)) }}" />  
     </div>
-</div>
+</div>--}}
 @endif
 
 <div class="form-group{{ $errors->has('blog_image') ? ' has-error' : '' }}">
-    <label for="avatar" class="col-md-2 col-md-offset-1 control-label">Select new blog pic</label>
+    <label for="avatar" class="col-md-2 col-md-offset-1 control-label">Blog image</label>
     <div class="col-md-8">
         @if(isset($blog->blog_image))
+        <div class="pull-left current-blog-thumb">
+        <img src="{{ asset(Helper::getImageThumb($blog->blog_image, 70, 70)) }}" />  
+        </div>
+        <div class="pull-left">
         {!! Form::file('blog_image', ['class' => 'form-control']) !!}
+        </div>
         @else
         {!! Form::file('blog_image', ['class' => 'form-control', 'required' => 'required']) !!}
         @endif

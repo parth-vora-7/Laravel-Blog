@@ -1,7 +1,7 @@
 {
-	"appKey": "n64amodnphsetbsl6o3ke29krjh53dc74ubcrekoe91a3nqi38ckohcg1ekd",
 	"authHost": null,
 	"authEndpoint": "/broadcasting/auth",
+	"clients": [],
 	"database": "redis",
 	"databaseConfig": {
 		"redis": {},
@@ -9,10 +9,10 @@
 			"databasePath": "/database/laravel-echo-server.sqlite"
 		}
 	},
-	"devMode": false,
-	"host": "http://blog.local",
-	"port": "",
-	"referrers": [],
+	"devMode": true,
+	"host": "blog.local",
+	"port": "6001",
+	"protocol": "http",
 	"socketio": {},
 	"sslCertPath": "",
 	"sslKeyPath": ""
