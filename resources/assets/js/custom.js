@@ -1,7 +1,9 @@
 $(function () {
+	var socketId = Echo.socketId();
 	$.ajaxSetup({
 		headers: {
-			'X-CSRF-TOKEN': window.Laravel.csrfToken
+			'X-CSRF-TOKEN': window.Laravel.csrfToken,
+			'X-Socket-ID': socketId
 		}
 	});
 

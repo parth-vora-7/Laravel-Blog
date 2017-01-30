@@ -28,5 +28,8 @@ window.Echo = new Echo({
 
 window.Echo.channel('new-comment')
     .listen('NewCommentEvent', (data) => {
-    	console.log(data);
+    	var ele = $('.comment-container:first h3');
+    	if(ele.length) {
+			ele.after('<p class="text-center text-warning">A new comment has been posted. Please reload the page to view it.</p>');
+    	}
 });

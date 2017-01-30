@@ -5499,9 +5499,11 @@ A(a,!1,!0)}else B&&(/ut|nd/.test(d)?(h[_remove](v),e[_remove](w)):(h[_add](v),e[
 b[_type],e=/wn|up/.test(d)?t:v;if(!c[n]){if(d==_click)A(a,!1,!0);else{if(/wn|er|in/.test(d))h[_add](e);else h[_remove](e+" "+t);if(z.length&&B&&e==v)z[/ut|nd/.test(d)?_remove:_add](w)}if(_mobile)b.stopPropagation();else return!1}})})}})(window.jQuery||window.Zepto);
 
 $(function () {
+	var socketId = Echo.socketId();
 	$.ajaxSetup({
 		headers: {
-			'X-CSRF-TOKEN': window.Laravel.csrfToken
+			'X-CSRF-TOKEN': window.Laravel.csrfToken,
+			'X-Socket-ID': socketId
 		}
 	});
 

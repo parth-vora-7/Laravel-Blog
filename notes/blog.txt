@@ -58,17 +58,3 @@ db.users.update({_id:ObjectId("583af27b0fe601137c00422c")},{$set:{"user_type":"a
 
 
 --------------------------------------------------------
-
-Multilevel comment:
-
-Common between comment and sub-comment
-Both can have another comments
-Both can be edited and deleted
-
-
-create a partial with a comment form and comments
-
-pass the blog id and blog's first level comment from the controller method 
-
-when clicking on the comment link of a comment, make AJAX call, get the sub-comments and return the same partial view
-

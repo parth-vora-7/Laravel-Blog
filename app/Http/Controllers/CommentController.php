@@ -35,7 +35,7 @@ class CommentController extends Controller
             if($blog->user) {
                //$blog->user->notify(new CommentPostNotification($blog, $comment));
             }
-            event(new NewCommentEvent($comment));
+            broadcast(new NewCommentEvent($comment))->toOthers();
             $messages[] = [
             'message' => 'Your comment has been successfully posted.',
             'class' => 'success'
